@@ -3,6 +3,9 @@
 //
 const navbarMenu = document.querySelector("#navigation #navbar-menu");
 const hamburgerMenu = document.querySelector("#navigation .hamburger-menu");
+const serviceMenu = document.querySelector("#navigation .dropdown");
+const about = document.querySelector('#About\\ Us')
+const contact = document.querySelector('#Contact')
 
 hamburgerMenu.addEventListener('click', function() {
     const isNavOpen = navbarMenu.classList.contains("open");
@@ -14,5 +17,23 @@ hamburgerMenu.addEventListener('click', function() {
         hamburgerMenu.setAttribute("aria-expanded", false);
         hamburgerMenu.classList.remove("clicked");
         navbarMenu.classList.remove("open");
+    }
+});
+
+serviceMenu.addEventListener('click', function() {
+    const isServiceOpen = serviceMenu.classList.contains("open");
+    if (!isServiceOpen) {
+        serviceMenu.setAttribute("aria-expanded", true);
+        serviceMenu.classList.add("open");
+        about.style.display = 'none'
+        contact.style.display = 'none'
+
+    } else {
+        serviceMenu.setAttribute("aria-expanded", false);
+        serviceMenu.classList.remove("open");
+        about.style.display = 'visible'
+        contact.style.display = 'visible'
+
+
     }
 });

@@ -30,7 +30,7 @@
 <nav id="navbar-menu" aria-label="main navigation">
     <ul>
         {%- for entry in navPages %}
-            <li class="{% if entry.title == 'Services' %}dropdown{% endif %}">
+            <li class="{% if entry.title == 'Services' %}dropdown{% endif %}" id="{{ entry.title }}" >
                 {% if entry.title == 'Services' %}
                     <a class="dropdown-toggle" role="button" tabindex="0">
                         {{ entry.title }}
