@@ -27,20 +27,32 @@
         </button>
 
         <!--Main Nav-->
-        <nav id="navbar-menu" aria-label="main navigation">
-            <ul>
-                {%- for entry in navPages %}
-                    <li>
-                        <a 
+<nav id="navbar-menu" aria-label="main navigation">
+    <ul>
+        {%- for entry in navPages %}
+            <li class="{% if entry.title == 'Services' %}dropdown{% endif %}">
+                {% if entry.title == 'Services' %}
+                    <a class="dropdown-toggle" role="button" tabindex="0">
+                        {{ entry.title }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/shoreline/">Shoreline Stabilization</a></li>
+                        <li><a href="/hardscapes/">Hardscapes</a></li>
+                        <li><a href="/lawnwork/">Lawn Work & Irrigation Systems</a></li>
+                        <li><a href="/excavation/">Excavation, Demolition & Site Prep</a></li>
+                    </ul>
+                {% else %}
+                    <a 
                         {% if entry.url == page.url %} class="active" {% endif %}
                         href="{{ entry.url }}"
                     >
-                            {{ entry.title }}
-                        </a>
-                    </li>
-                {%- endfor %}
-            </ul>
-        </nav>
+                        {{ entry.title }}
+                    </a>
+                {% endif %}
+            </li>
+        {%- endfor %}
+    </ul>
+</nav>
 
         <!--Dark Mode toggle-->
         <button id="dark-mode-toggle">

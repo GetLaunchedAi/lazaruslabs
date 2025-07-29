@@ -155,6 +155,62 @@
 /*-- -------------------------- -->
 <---         Navigation         -->
 <--- -------------------------- -*/
+
+/* Dropdown menu hidden by default */
+
+.dropdown-toggle {
+  anchor-name: --dropdown;
+}
+.dropdown-menu {
+  position: absolute;
+  position-anchor: --dropdown;
+  top: 2.5rem;
+  min-width: 200px;
+  background-color: var(--primary);
+  border: 1px solid #ddd;
+  display: none !important;
+  flex-direction: column;
+  z-index: 9999;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex !important;
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu li a {
+  padding: 0.75rem 1rem;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+}
+
+/* Show dropdown on hover (desktop only) */
+@media (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+}
+
+/* Responsive (mobile): show dropdown when toggled (class 'open' is added via JS) */
+@media (max-width: 767px) {
+  .nav-list {
+    flex-direction: column;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+}
+
 /* Mobile - Top Drop Down */
 @media only screen and (max-width: 1023px) {
   #navigation {

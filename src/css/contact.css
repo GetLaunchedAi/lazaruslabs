@@ -319,3 +319,22 @@
     opacity: .5;
   }
 }
+
+/* Default Light Mode */
+.cs-right-section {
+  color: #000 !important;
+}
+
+.cs-right-section .cs-header,
+.cs-right-section .cs-link {
+  color: #000 ;
+}
+/* Dark Mode Overrides */
+body.dark-mode .cs-right-section {
+  color: #fff !important;
+}
+
+body.dark-mode .cs-right-section .cs-header,
+body.dark-mode .cs-right-section .cs-link {
+  color: #fff;
+}
