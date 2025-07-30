@@ -192,7 +192,7 @@
         max-width: 80rem;
         margin: auto;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
         /* 40px - 64px */
         gap: clamp(2.5rem, 4vw, 4rem);
@@ -303,7 +303,7 @@
     }
     #content-page-1402 .cs-image-group {
         width: 100%;
-        display: none;
+        display: flex;
         flex-direction: column;
         /* 16px - 20px */
         gap: clamp(1rem, 2.6vw, 1.25rem);
