@@ -198,7 +198,7 @@
 }
 
 /* Responsive (mobile): show dropdown when toggled (class 'open' is added via JS) */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   #navigation #navbar-menu {
     overflow: visible !important;
   }
@@ -223,7 +223,7 @@
   position: relative;
   width: 100%;
   padding: 1rem;
-  background-color: #1a1a1a; /* or var(--dark) */
+  background-color: var(--primary); /* or var(--dark) */
   border-radius: 0.5rem;
   gap: 0.75rem;
   z-index: 9999;
@@ -231,7 +231,9 @@
     overflow: visible;
 
 }
-
+body.dark-mode #navigation #navbar-menu .dropdown.open .dropdown-menu {
+    background-color: var(--medium);
+}
 .dropdown-menu li a {
   color: #ffffff;
   text-align: center;

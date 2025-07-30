@@ -22,61 +22,83 @@ eleventyNavigation:
   {% image './src/images/bannerimg.jpg', 'cabinets', '', 'lazy', '(max-width: 400px) 400px, (max-width: 850px) 850px,
   1920px'%}
 </section>
-
 <!-- ============================================ -->
 <!--                Contact Form                  -->
 <!-- ============================================ -->
 
-<section id="cs-contact">
-  <div class="cs-container">
-    <form id="cs-form" name="Contact Form" method="post">
-      <div class="cs-content">
-        <span class="cs-topper">Contact</span>
-        <h2 class="cs-title">Get in Touch</h2>
-        <p class="cs-text">
-          Whether you’re ready to schedule a service or just have a few questions, we’re here to help. Reach out today
-          to learn how New Leaf Landscaping can transform your outdoor space with professional, reliable care. Our team
-          is happy to discuss your project, provide a free estimate, and walk you through your options—from shoreline
-          stabilization to lawn maintenance and irrigation.
-
-
-        </p>
-      </div>
-      <label>
-        Name
-        <input required type="text" id="name" name="name" placeholder="Name">
-      </label>
-      <label>
-        Email
-        <input required type="text" id="email" name="email" placeholder="Email">
-      </label>
-      <label>
-        Phone
-        <input required type="text" id="phone" name="phone" placeholder="Phone">
-      </label>
-      <label>
-        How Did You Find Us
-        <input type="text" id="find" name="find-us" placeholder="How did you find us?">
-      </label>
-      <label class="cs-label-message">
-        Message
-        <textarea required name="Message" id="message" placeholder="Write message..."></textarea>
-      </label>
-      <button class="cs-button-solid" type="submit">Submit Message</button>
-    </form>
-    <div class="cs-right-section">
-      <!--Email-->
-      <span class="cs-header">Email</span>
-      <a class="cs-link" href="mailto:support@yourdomain.com">support@yourdomain.com</a>
-      <!--Phone-->
-      <span class="cs-header">Phone</span>
-      <a class="cs-link" href="tel:219-555-1234">(219) 555-1234</a>
-      <!--Address-->
-      <span class="cs-header">Address</span>
-      <a class="cs-link" href="">2553 Woodbridge Lane, <span class="cs-block">Boston Ware 120</span></a>
-
-      <!-- Background Image-->
-      {% image './src/images/skyscraper.jpg', 'building', '', 'lazy'%}
+<section id="cs-contact-242">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Here To Help</span>
+            <h2 class="cs-title">Contact Us</h2>
+            <p class="cs-text">
+                Whether you're ready to start your next landscaping project or just have a few questions, we're
+            </p>
+        </div>
+        <!-- Form -->
+        <form id="cs-form-242" name="Contact Form" method="post">
+            <label class="cs-label">
+                Name
+                <input class="cs-input" required type="text" id="name-242" name="name" placeholder="John/Jane Doe">
+            </label>
+            <label class="cs-label">
+                Email
+                <input class="cs-input" required type="text" id="email-242" name="email" placeholder="name@company.com">
+            </label>
+            <label class="cs-label">
+                Phone
+                <input class="cs-input" required type="text" id="phone-242" name="phone" placeholder="+1 (206) 987-6543">
+            </label>
+            <label class="cs-label">
+                How Did You Find Us
+                <input class="cs-input" type="text" id="find-242" name="find-us" placeholder="Social Media, Family, Friend...">
+            </label>
+            <label class="cs-label cs-label-message">
+                Message
+                <textarea class="cs-input cs-textarea" required name="Message" id="message-242" placeholder="Hello, I’m interested in..."></textarea>
+            </label>
+            <button class="cs-button-solid cs-submit" type="submit">Submit Message Now</button>
+        </form>
+        <!-- Contact Info -->
+        <div class="cs-right-section">
+            <ul class="cs-ul">
+                <li class="cs-li">
+                    <picture class="cs-icon-wrapper">
+                        <img aria-hidden="true" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/mail.svg" alt="mail icon" class="cs-icon" width="36" height="36" decoding="async">
+                    </picture>
+                    <div class="cs-flex-group">
+                        <span class="cs-header">Email</span>
+                        <a href="mailto:support@yourdomain.com" class="cs-link">support@yourdomain.com</a>
+                    </div>
+                </li>
+                <li class="cs-li">
+                    <picture class="cs-icon-wrapper">
+                        <img aria-hidden="true" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/phone.svg" alt="phone icon" class="cs-icon" width="36" height="36" decoding="async">
+                    </picture>
+                    <div class="cs-flex-group">
+                        <span class="cs-header">Phone</span>
+                        <a href="tel:206-987-6543" class="cs-link">(269) 462-0966</a>
+                    </div>
+                </li>
+                <li class="cs-li">
+                    <picture class="cs-icon-wrapper">
+                        <img aria-hidden="true" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/pin.svg" alt="address icon" class="cs-icon" width="36" height="36" decoding="async">
+                    </picture>
+                    <div class="cs-flex-group">
+                        <span class="cs-header">Location</span>
+                        <a href="" class="cs-link">Dowagiac, Mi</a>
+                    </div>
+                </li>
+            </ul>
+            <!-- Picture -->
+            <picture class="cs-picture">
+                <source media="(max-width: 600px)" srcset="/images/newleafmap.png">
+                <source media="(min-width: 601px)" srcset="/images/newleafmap.png">
+                <img class="cs-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/newleafmap.png" alt="google map" width="462" height="438">
+            </picture>
+        </div>
     </div>
+</section>
+                                
   </div>
 </section>
