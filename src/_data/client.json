@@ -1,15 +1,15 @@
 {
-  "name": "New Leaf Complete Landscape Services",
-  "email": "hello@oakharbor.com",
-  "phone": "555-779-4407",
-  "phoneFormatted": "(555) 779-4407",
+  "name": "AIMAI Mobile Sound Installation",
+  "email": "mobilesoundinstalls@gmail.com",
+  "phone": " 734-373-3912",
+  "phoneFormatted": "(734) 373-3912",
   "address": {
     "lineOne": "First Address Line",
     "lineTwo": "Second Address Line, If Needed",
-    "city": "Denver",
-    "county": "CO",
-    "postcode": "80206",
-    "mapLink": "https://goo.gl/maps/UAQn4vuGDiwv7DV39"
+    "city": "Wyandotte",
+    "county": "Mi",
+    "postcode": "48192",
+    "mapLink": "https://maps.app.goo.gl/ZhePbTjskM2YksQh6"
   },
   "domain": "www.website.com"
 }

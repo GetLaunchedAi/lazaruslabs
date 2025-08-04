@@ -1,11 +1,11 @@
 ---
-layout: 'base.html'
-description: 'Meta description for the page'
-metaTitle: 'New Leaf Complete Landscape Services'
-tagTitle: 'Projects'
-preloadImg: '/images/cabinets2-1920w.webp'
-preloadCSS: '/css/projects.css'
-permalink: 'projects/'
+layout: "base.html"
+description: "Meta description for the page"
+metaTitle: "AIMAI Mobile Sound Installation"
+tagTitle: "Projects"
+preloadImg: "/images/cabinets2-1920w.webp"
+preloadCSS: "/css/projects.css"
+permalink: "projects/"
 eleventyNavigation:
 key: Projects
 order: 300
@@ -19,8 +19,8 @@ order: 300
 
 <section id="int-hero">
   <h1 id="home-h">Our Projects</h1>
-  {% image './src/images/cabinets2.jpg', 'cabinets', '', 'lazy', '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%}
-
+  {% image './src/images/projects_banner.png', 'car engine', '', 'lazy', '(max-width:
+  400px) 400px, (max-width: 850px) 850px, 1920px'%}
 </section>
 
 <!-- ============================================ -->
@@ -32,23 +32,32 @@ order: 300
     <div class="cs-image-group">
       <!-- Row 1-->
       <div class="cs-row cs-row-1">
-        {% image './src/images/portfolio/port1.jpg', 'new hallway', 'cs-picture cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port4.jpg', 'new home construction', 'cs-picture cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port7.jpg', 'building a new wall', 'cs-picture cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
+        {% image './src/images/portfolio/project_1.webp', 'project_1', 'cs-picture
+        cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_4.webp', 'project_4', 'cs-picture
+        cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_7.webp', 'project_7', 'cs-picture
+        cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
         <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
       </div>
       <!-- Row 2 -->
       <div class="cs-row cs-row-2">
-        {% image './src/images/portfolio/port2.jpg', 'new kitchen', 'cs-picture cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port5.jpg', 'apartment addition', 'cs-picture cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port8.jpg', 'kew kitchen cabinets', 'cs-picture cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
+        {% image './src/images/portfolio/project_2.webp', 'project_2', 'cs-picture
+        cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_5.webp', 'project_5', 'cs-picture
+        cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_8.webp', 'project_8', 'cs-picture
+        cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
         <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
       </div>
       <!-- Row 3 -->
       <div class="cs-row cs-row-3">
-        {% image './src/images/portfolio/port3.jpg', 'new kitchen', 'cs-picture cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port6.jpg', 'apartment addition', 'cs-picture cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%}
-        {% image './src/images/portfolio/port9.jpg', 'kew kitchen cabinets', 'cs-picture cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
+        {% image './src/images/portfolio/project_3.webp', 'project_3', 'cs-picture
+        cs-picture-1', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_6.webp', 'project_6', 'cs-picture
+        cs-picture-2', 'lazy', '(max-width: 600px) 200px, 400px'%} {% image
+        './src/images/portfolio/project_9.webp', 'project_9', 'cs-picture
+        cs-picture-3', 'lazy', '(max-width: 600px) 200px, 400px'%}
 
         <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
       </div>
@@ -63,11 +72,16 @@ order: 300
 
 <section id="cta">
   <div class="container">
-    <h2 class="title">Get It Done <br> With Us Today</h2>
+    <h2 class="title">
+      Get It Done <br />
+      With Us Today
+    </h2>
     <p>
-            Say something catchy, informative, and encouraging to click the button to go to the contact page.  I like to add these to the bottom of all pages.
-        </p>
-    <a href="/contact.html" class="button-solid">Free Estimate</a>
+      Say something catchy, informative, and encouraging to click the button to
+      go to the contact page. I like to add these to the bottom of all pages.
+    </p>
+    <a href="/contact/" class="button-solid">Free Estimate</a>
   </div>
-  {% image './src/images/cabinets2.jpg', 'kitchen cabinets', '', 'lazy', '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%}
+  {% image './src/images/cabinets2.jpg', 'kitchen cabinets', '', 'lazy',
+  '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%}
 </section>
