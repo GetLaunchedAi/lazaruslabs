@@ -41,43 +41,126 @@ eleventyNavigation:
       <h2 class="cs-title">About AIMAI</h2>
       <p class="cs-text">
         AIMAI Auto Electronic Solutions was founded by Isaiah D. Alexander, a
-        passionate and self-taught technician from Inkster, Michigan. With
-        hands-on experience dating back to childhood and formal training from
-        ITT Technical Institute, Isaiah turned a lifelong fascination with
-        electronics into a thriving mobile installation business. After
-        overcoming personal setbacks, he launched AIMAI in 2022 and has since
-        serviced thousands of vehicles and heavy equipment—from sedans and
-        semi-trucks to generators and farm machinery.
+        passionate and self-taught technician from Inkster, Michigan. With early
+        hands-on experience and formal education from ITT Technical Institute,
+        Isaiah transformed his lifelong passion for electronics into a
+        successful mobile installation business. After facing and overcoming
+        adversity, he officially launched AIMAI in 2022 and has since serviced
+        thousands of vehicles and heavy equipment—from daily drivers and
+        commercial fleets to generators and agricultural machinery.
       </p>
       <p class="cs-text">
-        Backed by MECP certifications and years of real-world problem solving,
-        Isaiah now leads installations for national brands and trains the next
-        generation of technicians. His mission: engineer trust, restore
-        confidence, and bring intelligent solutions to anything with a battery
-        and motor.
+        Supported by MECP certifications and extensive field experience, Isaiah
+        now leads installations for national brands and mentors the next wave of
+        technicians. His mission: engineer trust, restore confidence, and
+        deliver intelligent solutions for anything powered by a battery and
+        motor.
       </p>
 
       <div class="cs-flex-group">
-  <p class="cs-flex-p">
-    I’m Isaiah D. Alexander, founder of AIMAI Auto Electronic Solutions. I’ve spent decades turning a passion for electronics into a full-scale mobile installation service. From humble beginnings and hands-on experience as a kid to earning technical certifications and leading national installs, I’ve built this business to deliver precision, reliability, and innovation to every job.
-  </p>
-  <span class="cs-name">Isaiah D. Alexander</span>
-  <span class="cs-job">Founder & Lead Technician</span>
-  <img
-    class="cs-quote-icon"
-    loading="lazy"
-    decoding="async"
-    src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
-    alt="gavel"
-    width="136"
-    height="77"
-  />
-</div>
+        <p class="cs-flex-p">
+          I’m Isaiah D. Alexander, founder of AIMAI Auto Electronic Solutions.
+          I’ve spent decades turning a passion for electronics into a full-scale
+          mobile installation service. From humble beginnings and hands-on
+          experience as a kid to earning technical certifications and leading
+          national installs, I’ve built this business to deliver precision,
+          reliability, and innovation to every job.
+        </p>
+        <span class="cs-name">Isaiah D. Alexander</span>
+        <span class="cs-job">Founder & Lead Technician</span>
+        <img
+          class="cs-quote-icon"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
+          alt="gavel"
+          width="136"
+          height="77"
+        />
+      </div>
 
       <!-- <a href="/about" class="button-solid">More About Us</a> -->
     </div>
   </div>
 </section>
+
+<!-- ============================================ -->
+<!--                    FAQ                       -->
+<!-- ============================================ -->
+
+<section id="faq-326">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">FAQs</span>
+            <h2 class="cs-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="cs-flex-group">
+            <ul class="cs-faq-group">
+                <li class="cs-faq-item active">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What kinds of vehicles and machines do you work on?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        AIMAI services a wide range of vehicles and equipment including cars, trucks, SUVs, semis, heavy-duty machinery, generators, and agricultural equipment—anything powered by a battery and motor.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            Do you provide mobile installation?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        Yes. AIMAI is a fully mobile service. We come to your location to handle installations, diagnostics, upgrades, and emergency support, saving you time and eliminating shop delays.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            Are your technicians certified?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        Yes. Our founder, Isaiah D. Alexander, holds MECP certifications and leads with more than a decade of hands-on electronic installation and diagnostic experience.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What types of services do you specialize in?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        We specialize in GPS tracking, dashcams, multimedia upgrades, remote starters, audio systems, fleet tech, diagnostics, and more. All solutions are tailored to your exact vehicle and use case.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What makes AIMAI different from other installers?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        AIMAI was built on resilience, trust, and real-world expertise. With thousands of installs and a passion-driven founder, we deliver reliable, intelligent solutions—not one-size-fits-all installs.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+  const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
+    for (const item of faqItems) {
+        const onClick = () => {
+        item.classList.toggle('active')
+    }
+    item.addEventListener('click', onClick)
+    }
+</script>
+
 
 <!-- ============================================ -->
 <!--             Final Call to Action             -->
