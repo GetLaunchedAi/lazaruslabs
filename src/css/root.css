@@ -4,9 +4,9 @@
 /* Mobile */
 @media only screen and (min-width: 0em) {
   :root {
-    --primary: #0072ce; /* Electric Blue */
-    --primaryShade: #0091ff; /* Chrome Blue */
-    --primaryDark: #003c71; /* Deep Sonic */
+    --primary: #4b494a; /* Charcoal Gray */
+    --primaryShade: #6f6e70; /* Soft Graphite */
+    --primaryDark: #2f2e2f; /* Deep Charcoal */
     --bodyTextColor: #4e4b66;
     --bodyTextColorWhite: #fafbfc;
     --headerColor: #1a1a1a;

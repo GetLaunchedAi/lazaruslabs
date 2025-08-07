@@ -1,14 +1,14 @@
 {
-  "name": "AIMAI Mobile Sound Installation",
-  "email": "mobilesoundinstalls@gmail.com",
-  "phone": " 734-373-3912",
-  "phoneFormatted": "(734) 373-3912",
+  "name": "Midwest Flooring Suppliers",
+  "email": "Pbisimwa7@gmail.com",
+  "phone": "616-589-3768",
+  "phoneFormatted": "(616) 589-3768",
   "address": {
     "lineOne": "First Address Line",
     "lineTwo": "Second Address Line, If Needed",
-    "city": "Wyandotte",
-    "county": "Mi",
-    "postcode": "48192",
+    "city": "",
+    "county": "",
+    "postcode": "",
     "mapLink": "https://maps.app.goo.gl/ZhePbTjskM2YksQh6"
   },
   "domain": "www.website.com"
