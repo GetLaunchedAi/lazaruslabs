@@ -1,11 +1,11 @@
 ---
-layout: 'base.html'
-description: 'Midwest Flooring Suppliers offers premium flooring solutions for residential and commercial spaces, with expert support and fast delivery throughout the Midwest.'
-metaTitle: 'Premium Flooring Solutions | Midwest Flooring Suppliers'
-tagTitle: 'Home - Midwest Flooring Experts'
-preloadImg: '/images/bannerimg.png'
-preloadCSS: '/css/local.css'
-permalink: '/'
+layout: "base.html"
+description: "Midwest Flooring Suppliers offers premium flooring solutions for residential and commercial spaces, with expert support and fast delivery throughout the Midwest."
+metaTitle: "Premium Flooring Solutions | Midwest Flooring Suppliers"
+tagTitle: "Home - Midwest Flooring Experts"
+preloadImg: "/images/bannerimg.png"
+preloadCSS: "/css/local.css"
+permalink: "/"
 eleventyNavigation:
   key: Home
   order: 100
@@ -19,27 +19,42 @@ eleventyNavigation:
 
 <section id="hero">
   <video autoplay muted loop playsinline class="cs-picture">
-    <source src="/images/hero_vid.mp4" type="video/mp4" autoplay muted loop playsinline />
+    <source
+      src="/images/hero_vid.mp4"
+      type="video/mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+    />
     Your browser does not support the video tag.
   </video>
   <div class="cs-overlay"></div>
   <div class="cs-container">
     <div class="cs-flex-group">
-  <span class="cs-topper">Quality. Style. Durability</span>
-  <h1 class="cs-title">Transform Your Space with Premium Flooring</h1>
-  <p class="cs-text">
-    At Midwest Flooring Suppliers, we provide high-quality vinyl, laminate, hardwood, and tile flooring solutions designed to elevate any space. With expert guidance, exceptional materials, and a commitment to excellence, we help you create interiors that are as durable as they are beautiful.
-  </p>
-  <a href="/vinyl-flooring/" class="cs-button-solid">Explore Flooring</a>
-  <a href="/about/" class="cs-button-transparent">
-    <img class="cs-img" loading="lazy" decoding="async"
-      src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg" alt="play icon" width="17" height="17" />
-    Learn More
-  </a>
-</div>
-
-
-
+      <span class="cs-topper">Quality. Style. Durability</span>
+      <h1 class="cs-title">Transform Your Space with Premium Flooring</h1>
+      <p class="cs-text">
+        At Midwest Flooring Suppliers, we provide high-quality vinyl, laminate,
+        hardwood, and tile flooring solutions designed to elevate any space.
+        With expert guidance, exceptional materials, and a commitment to
+        excellence, we help you create interiors that are as durable as they are
+        beautiful.
+      </p>
+      <a href="/vinyl-flooring/" class="cs-button-solid">Explore Flooring</a>
+      <a href="/about/" class="cs-button-transparent">
+        <img
+          class="cs-img"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg"
+          alt="play icon"
+          width="17"
+          height="17"
+        />
+        Learn More
+      </a>
+    </div>
   </div>
 
   <!-- Background Image -->
@@ -54,32 +69,56 @@ eleventyNavigation:
   <!-- Get Icons From flaticon.com -->
   <div class="card">
     <picture>
-      <img aria-hidden="true" decoding="async" src="/assets/svgs/service_1.svg" alt="flooring icon" width="48" height="48" />
+      <img
+        aria-hidden="true"
+        decoding="async"
+        src="/assets/svgs/service_1.svg"
+        alt="flooring icon"
+        width="48"
+        height="48"
+      />
     </picture>
     <h2>Vinyl & Laminate</h2>
-    <p>Upgrade your floors with durable, stylish vinyl and laminate options—enhancing beauty, function, comfort, and value instantly.
+    <p>
+      Upgrade your floors with durable, stylish vinyl and laminate
+      options—enhancing beauty, function, comfort, and value instantly.
     </p>
   </div>
   <div class="card">
     <picture>
-      <img aria-hidden="true" decoding="async" src="/assets/svgs/service_2.svg" alt="flooring icon" width="48" height="48" />
+      <img
+        aria-hidden="true"
+        decoding="async"
+        src="/assets/svgs/service_2.svg"
+        alt="flooring icon"
+        width="48"
+        height="48"
+      />
     </picture>
     <h2>Hardwood & Tile</h2>
-    <p>Bring timeless elegance with hardwood or tile flooring that boosts durability, style, and appeal for homes or businesses daily.
+    <p>
+      Bring timeless elegance with hardwood or tile flooring that boosts
+      durability, style, and appeal for homes or businesses daily.
     </p>
   </div>
   <div class="card">
     <picture>
-      <img aria-hidden="true" decoding="async" src="/assets/svgs/service_3.svg" alt="flooring icon" width="48" height="48" />
+      <img
+        aria-hidden="true"
+        decoding="async"
+        src="/assets/svgs/service_3.svg"
+        alt="flooring icon"
+        width="48"
+        height="48"
+      />
     </picture>
     <h2>Repairs & Installation</h2>
-    <p>Get flawless results through expert installation and repairs that fix uneven floors, damage, or wear in your flooring system.
+    <p>
+      Get flawless results through expert installation and repairs that fix
+      uneven floors, damage, or wear in your flooring system.
     </p>
   </div>
 </section>
-
-
-
 
 <!-- ============================================ -->
 <!--                 Side By Side                 -->
@@ -89,32 +128,50 @@ eleventyNavigation:
   <div class="cs-container">
     <!-- Left Image Section -->
     <div class="cs-left">
-      {% image './src/images/about_img_0.png', 'flooring', 'cs-picture cs-picture1', 'lazy'%}
-      {% image './src/images/about_img_1.png', 'flooring', 'cs-picture cs-picture2', 'lazy'%}
+      {% image './src/images/about_img_0.png', 'flooring', 'cs-picture
+      cs-picture1', 'lazy'%} {% image './src/images/about_img_1.png',
+      'flooring', 'cs-picture cs-picture2', 'lazy'%}
     </div>
     <!-- Right Content Section-->
     <div class="cs-right">
-  <span class="cs-topper">About Us</span>
-  <h2 class="cs-title">About Midwest Flooring Suppliers</h2>
-  <p class="cs-text">
-    At Midwest Flooring Suppliers, we are your trusted source for premium flooring solutions, dedicated to enhancing the beauty, comfort, and durability of residential and commercial spaces. With a strong focus on quality materials and expert service, we specialize in vinyl, laminate, hardwood, and tile products designed to meet diverse styles and performance needs.
-  </p>
-  <p class="cs-text">
-    Our mission is to help you create spaces that inspire, offering top-notch products, professional guidance, and exceptional craftsmanship. Whether you’re upgrading your home, renovating a business, or tackling a large-scale development, our experienced team is committed to delivering results that stand the test of time.
-  </p>
-  <div class="cs-flex-group">
-    <p class="cs-flex-p">
-      My name is Patrick Bisimwa, a proud flooring professional with a passion for transforming interiors. I’ve spent years mastering my craft, driven by a hands-on approach and a deep commitment to customer satisfaction. From early projects to large-scale installations, my goal has always been the same—to provide floors that combine beauty, function, and lasting value.
-    </p>
-    <span class="cs-name">Patrick Bisimwa</span>
-    <span class="cs-job">Owner</span>
-    <img class="cs-quote-icon" loading="lazy" decoding="async"
-      src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg" alt="quote icon" width="136"
-      height="77" />
-  </div>
-  <a href="/about" class="button-solid">More About Us</a>
-</div>
-
+      <span class="cs-topper">About Us</span>
+      <h2 class="cs-title">About Midwest Flooring Suppliers</h2>
+      <p class="cs-text">
+        At Midwest Flooring Suppliers, we’re a family-owned business committed
+        to making premium flooring more accessible and affordable. By sourcing
+        directly from manufacturers, we’re able to offer our customers up to 40%
+        savings compared to big-box stores—without compromising on quality or
+        style.
+      </p>
+      <p class="cs-text">
+        We believe in doing things the right way. That’s why all of our
+        installations are handled in-house—never subcontracted—ensuring
+        accountability, consistency, and craftsmanship you can count on. Whether
+        you're updating a single room or managing a large commercial project,
+        our team is here to deliver lasting value.
+      </p>
+      <div class="cs-flex-group">
+        <p class="cs-flex-p">
+          My name is Patrick Bisimwa, founder of Midwest Flooring Suppliers. I
+          started this company to offer honest pricing, personal service, and
+          dependable results. From my early renovation work to leading
+          full-scale installs, I’ve always focused on building trust—and we
+          bring that same mindset to every job we take on.
+        </p>
+        <span class="cs-name">Patrick Bisimwa</span>
+        <span class="cs-job">Owner</span>
+        <img
+          class="cs-quote-icon"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
+          alt="quote icon"
+          width="136"
+          height="77"
+        />
+      </div>
+      <a href="/about" class="button-solid">More About Us</a>
+    </div>
   </div>
 </section>
 
@@ -126,32 +183,47 @@ eleventyNavigation:
   <div class="cs-container">
     <!-- Left Image Section -->
     <div class="cs-left">
-      {% image './src/images/featured_img_0.png', 'flooring', 'cs-picture cs-picture1', 'lazy'%}
-      {% image './src/images/featured_img_1.png', 'flooring', 'cs-picture cs-picture2', 'lazy'%}
+      {% image './src/images/featured_img_0.png', 'flooring', 'cs-picture
+      cs-picture1', 'lazy'%} {% image './src/images/featured_img_1.png',
+      'flooring', 'cs-picture cs-picture2', 'lazy'%}
     </div>
     <!-- Right Content Section-->
     <div class="cs-right">
-  <span class="cs-topper">SEO Ranking</span>
-  <h2 class="cs-title">Midwest Flooring Suppliers</h2>
-  <p class="cs-text">
-    At Midwest Flooring Suppliers, we specialize in providing premium flooring solutions that elevate the style, comfort, and durability of your space. From luxury vinyl planks and elegant hardwood to versatile laminate and timeless tile, our team sources and supplies products that match your vision while delivering exceptional value and performance.
-  </p>
-  <p class="cs-text">
-    With over a decade of industry expertise, we bring product knowledge, quality assurance, and customer-focused service to every project. Whether you’re renovating a home, fitting out a commercial space, or completing a large-scale development, we provide flooring options that are built to last and designed to impress.
-    <br/>
-    <br/>
-    Our product range serves homeowners, contractors, property managers, and designers. Every order is handled with care to ensure precise specifications, reliable delivery, and materials that perform in real-world conditions. From water-resistant vinyl to durable tile and engineered wood, Midwest Flooring Suppliers delivers solutions that stand the test of time.
-    <br/>
-    <br/>
-    Boost the beauty, functionality, and value of your property—trust Midwest Flooring Suppliers to bring your flooring vision to life with premium products and expert guidance.
-  </p>
-  <a href="/vinyl-flooring/" class="button-solid">Learn More About Our Services →</a>
-</div>
-
+      <span class="cs-topper">SEO Ranking</span>
+      <h2 class="cs-title">Midwest Flooring Suppliers</h2>
+      <p class="cs-text">
+        At Midwest Flooring Suppliers, we specialize in providing premium
+        flooring solutions that elevate the style, comfort, and durability of
+        your space. From luxury vinyl planks and elegant hardwood to versatile
+        laminate and timeless tile, our team sources and supplies products that
+        match your vision while delivering exceptional value and performance.
+      </p>
+      <p class="cs-text">
+        With over a decade of industry expertise, we bring product knowledge,
+        quality assurance, and customer-focused service to every project.
+        Whether you’re renovating a home, fitting out a commercial space, or
+        completing a large-scale development, we provide flooring options that
+        are built to last and designed to impress.
+        <br />
+        <br />
+        Our product range serves homeowners, contractors, property managers, and
+        designers. Every order is handled with care to ensure precise
+        specifications, reliable delivery, and materials that perform in
+        real-world conditions. From water-resistant vinyl to durable tile and
+        engineered wood, Midwest Flooring Suppliers delivers solutions that
+        stand the test of time.
+        <br />
+        <br />
+        Boost the beauty, functionality, and value of your property—trust
+        Midwest Flooring Suppliers to bring your flooring vision to life with
+        premium products and expert guidance.
+      </p>
+      <a href="/vinyl-flooring/" class="button-solid"
+        >Learn More About Our Services →</a
+      >
+    </div>
   </div>
 </section>
-
-
 
 <!-- ============================================ -->
 <!--                   Reviews                    -->
@@ -162,7 +234,12 @@ eleventyNavigation:
     <span class="cs-topper">Our Reviews</span>
     <h2 class="cs-title">Words From Our Customers</h2>
     <p class="cs-text">
-      We take pride in delivering premium flooring products and outstanding customer service — and our clients agree. From luxury vinyl and hardwood to laminate and tile, we’ve helped homeowners, contractors, and businesses transform their spaces with durable, stylish, and expertly supplied flooring. Here’s what customers are saying about working with Midwest Flooring Suppliers.
+      We take pride in delivering premium flooring products and outstanding
+      customer service — and our clients agree. From luxury vinyl and hardwood
+      to laminate and tile, we’ve helped homeowners, contractors, and businesses
+      transform their spaces with durable, stylish, and expertly supplied
+      flooring. Here’s what customers are saying about working with Midwest
+      Flooring Suppliers.
     </p>
     <ul class="cs-card-group">
       <!-- Review 1 -->
@@ -171,14 +248,25 @@ eleventyNavigation:
           src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile5.png" alt="profile picture" width="80"
           height="80" /> -->
         <p class="cs-item-p">
-          Midwest Flooring Suppliers was incredible to work with! They helped me choose the perfect vinyl flooring for my home, and the quality is outstanding. Fast delivery, great prices, and truly helpful advice from start to finish.
+          Midwest Flooring Suppliers was incredible to work with! They helped me
+          choose the perfect vinyl flooring for my home, and the quality is
+          outstanding. Fast delivery, great prices, and truly helpful advice
+          from start to finish.
         </p>
         <span class="cs-reviewer">
           Sarah L.
           <span class="cs-desc">Customer</span>
         </span>
-        <img class="cs-item-stars" aria-hidden="true" loading="lazy" decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg" alt="stars" width="96" height="16" />
+        <img
+          class="cs-item-stars"
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
+          alt="stars"
+          width="96"
+          height="16"
+        />
       </li>
       <!-- Review 2 -->
       <li class="cs-item">
@@ -186,14 +274,25 @@ eleventyNavigation:
           src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile-4.png" alt="profile picture" width="80"
           height="80" /> -->
         <p class="cs-item-p">
-          I couldn’t be happier with my new hardwood floors! The team made the selection process easy, offered great recommendations, and delivered on time. Excellent customer service and high-quality products — highly recommended.
+          I couldn’t be happier with my new hardwood floors! The team made the
+          selection process easy, offered great recommendations, and delivered
+          on time. Excellent customer service and high-quality products — highly
+          recommended.
         </p>
         <span class="cs-reviewer">
           James P.
           <span class="cs-desc">Customer</span>
         </span>
-        <img class="cs-item-stars" aria-hidden="true" loading="lazy" decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg" alt="stars" width="96" height="16" />
+        <img
+          class="cs-item-stars"
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
+          alt="stars"
+          width="96"
+          height="16"
+        />
       </li>
     </ul>
     <!-- <a aria-label="read more reviews" href="/reviews" class="button-solid">Read More</a> -->
@@ -211,28 +310,24 @@ eleventyNavigation:
       With Us Today
     </h2>
     <p>
-      Big ideas start with a simple conversation. Reach out today and let’s get your project on the books.
+      Big ideas start with a simple conversation. Reach out today and let’s get
+      your project on the books.
     </p>
     <a href="/contact/" class="button-solid">Contact Us</a>
   </div>
-  {% image './src/images/final_home_img.png', 'vinyl flooring', '', 'lazy', '(max-width: 400px) 400px, (max-width:
-  850px)
-  850px, 1920px'%}
+  {% image './src/images/final_home_img.png', 'vinyl flooring', '', 'lazy',
+  '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%}
 </section>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
-    window
-      .netlifyIdentity
-      .on('init', (user) => {
-        if (!user) {
-          window
-            .netlifyIdentity
-            .on('login', () => {
-              document.location.href = '/admin/';
-            });
-        }
-      });
+    window.netlifyIdentity.on("init", (user) => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
   }
 </script>
