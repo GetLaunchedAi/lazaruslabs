@@ -233,7 +233,7 @@ layout: 'base.html'
 description: "Meta description for the page"
 metaTitle: 'Midwest Flooring Suppliers'
 tagTitle: 'About'
-preloadImg: '/images/cabinets2-1920w.webp'
+preloadImg: '/images/bannerimg.png'
 preloadCSS: '/css/about.css'
 permalink: 'folder/page'
 eleventyNavigation:
