@@ -1,0 +1,108 @@
+:root{
+  --card-bg:#fff;
+  --card-border:#e9e9e9;
+  --card-radius:14px;
+  --shadow:0 6px 18px rgba(0,0,0,.06);
+  --shadow-hover:0 10px 24px rgba(0,0,0,.10);
+  --text:#1e1e1e;
+  --muted:#6b7280;
+  --brand:#0d6efd; /* tweak to your brand */
+}
+
+/* Grid container */
+#catalog.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  align-items:start;
+}
+
+/* Make the “Products found” line span full width */
+#catalog > p:first-child{
+  grid-column:1 / -1;
+  margin: 0 0 .25rem;
+  color: var(--muted);
+  font-size:.95rem;
+}
+
+/* Card */
+.product-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:var(--card-radius);
+  padding:14px;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.product-card:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-hover);
+  border-color:#ddd;
+}
+
+/* Image: keep it tidy and consistent */
+.product-card img{
+  display:block;
+  width:100%;
+  aspect-ratio: 1 / 1;        /* square thumbs */
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* Title */
+.product-card h3{
+  font-size: clamp(1rem, 1.2vw + .6rem, 1.15rem);
+  line-height:1.25;
+  margin:0 0 .35rem;
+}
+.product-card h3 a{
+  color:var(--text);
+  text-decoration:none;
+}
+.product-card h3 a:hover{
+  text-decoration:underline;
+}
+
+/* Price & description */
+.product-card .price{
+  font-weight:700;
+  margin:.15rem 0 .35rem;
+}
+.product-card .desc{
+  color:var(--muted);
+  font-size:.95rem;
+  line-height:1.4;
+  min-height: 2.6em; /* keeps rows even when desc lines differ */
+}
+
+/* Button (Snipcart add) */
+.snipcart-add-item{
+  display:inline-block;
+  margin-top:.5rem;
+  padding:.55rem .85rem;
+  border-radius:10px;
+  border:1px solid transparent;
+  background:var(--brand);
+  color:#fff;
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+  transition: filter .15s ease, transform .05s ease, box-shadow .15s ease;
+  box-shadow: 0 2px 0 rgba(0,0,0,.06);
+}
+.snipcart-add-item:hover{ filter:brightness(1.05); }
+.snipcart-add-item:active{ transform: translateY(1px); }
+
+/* Small screens: a bit more breathing room */
+@media (max-width: 480px){
+  .product-card{ padding:12px; }
+  #catalog.grid{ gap:14px; }
+}
+
+/* Larger screens: slightly wider cards before wrapping */
+@media (min-width: 900px){
+  #catalog.grid{
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
