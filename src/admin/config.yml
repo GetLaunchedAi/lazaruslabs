@@ -30,7 +30,7 @@ collections:
 
   - name: "products"
     label: "Products"
-    folder: "Midwest-Flooring-Suppliers/src/products/items"   # <— changed
+    folder: "src/products/items"   # <— changed
     create: true
     slug: "{{sku}}"
     fields:
