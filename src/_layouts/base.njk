@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title or tagTitle or "Site" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {# Snipcart (only once per site) #}
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.6.0/default/snipcart.css" />
+  <script async src="https://cdn.snipcart.com/themes/v3.6.0/default/snipcart.js"></script>
+</head>
+<body>
+  {% include "partials/header.njk" ignore missing %}
+
+  {{ content | safe }}
+
+  {% include "partials/footer.njk" ignore missing %}
+
+  <div id="snipcart" hidden
+       data-api-key="YOUR_PUBLIC_API_KEY"
+       data-config-add-product-behavior="none"></div>
+</body>
+</html>

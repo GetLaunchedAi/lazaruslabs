@@ -1,0 +1,6 @@
+{
+  "name": "decap-github-oauth",
+  "private": true,
+  "type": "module",
+  "dependencies": { "node-fetch": "^3.3.2" }
+}

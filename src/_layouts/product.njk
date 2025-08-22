@@ -1,0 +1,30 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<article class="product-page">
+  <img src="{{ image }}" alt="{{ imageAlt or title }}" loading="lazy" />
+  <h1>{{ title }}</h1>
+
+  <p class="price">${{ price | round(2) }}</p>
+  <p class="desc">{{ description }}</p>
+
+  <button
+    type="button"
+    class="snipcart-add-item"
+    data-item-id="{{ sku }}"
+    data-item-name="{{ title | escape }}"
+    data-item-price="{{ price }}"
+    data-item-url="{{ permalink }}"
+    data-item-image="{{ image }}"
+    data-item-description="{{ description | escape }}"
+    {% if stock %}data-item-max-quantity="{{ stock }}"{% endif %}>
+    Add to cart
+  </button>
+
+  {% if content %}
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+</article>
+{% endblock %}

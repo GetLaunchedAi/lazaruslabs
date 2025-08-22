@@ -1,0 +1,32 @@
+---
+title: "Shop"
+layout: "base.njk"
+permalink: "/products/"
+---
+<section class="grid" id="catalog">
+  {% for p in collections.products | reverse %}
+    {% if p.data.active %}
+    <article class="product-card">
+      <a href="{{ p.url }}">
+        <img src="{{ p.data.image }}" alt="{{ p.data.imageAlt or p.data.title }}" loading="lazy" />
+      </a>
+      <h3><a href="{{ p.url }}">{{ p.data.title }}</a></h3>
+      <p class="price">${{ p.data.price | round(2) }}</p>
+      <p class="desc">{{ p.data.description }}</p>
+
+      <button
+        type="button"
+        class="snipcart-add-item"
+        data-item-id="{{ p.data.sku }}"
+        data-item-name="{{ p.data.title | escape }}"
+        data-item-price="{{ p.data.price }}"
+        data-item-url="{{ p.url }}"
+        data-item-image="{{ p.data.image }}"
+        data-item-description="{{ p.data.description | escape }}"
+        {% if p.data.stock %}data-item-max-quantity="{{ p.data.stock }}"{% endif %}>
+        Add to cart
+      </button>
+    </article>
+    {% endif %}
+  {% endfor %}
+</section>
