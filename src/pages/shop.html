@@ -47,8 +47,46 @@ eleventyNavigation:
             <button class="snipcart-checkout">Click here to checkout</button>
             <span class="snipcart-items-count"></span>
             <span class="snipcart-total-price"></span>
+            Products found: {{ collections.products | length }}
+{% for p in collections.products %}
+  <div>{{ p.inputPath }}</div>
+{% endfor %}
+
         </div>
-        <section id="catalog" class="grid"></section>
+    <section id="catalog" class="grid">
+  <p>Products found: {{ collections.products | length }}</p>
+
+  {% for p in collections.products %}
+    <div style="font-size:.9rem;color:#666;margin:.25rem 0">DEBUG: {{ p.inputPath }}</div>
+
+    <article class="product-card" style="border:1px solid #eee;padding:12px;border-radius:8px">
+      <a href="{{ p.url }}">
+        <img src="{{ p.data.image or '/images/placeholder.jpg' }}"
+             alt="{{ p.data.imageAlt or p.data.title or p.fileSlug }}"
+             loading="lazy" />
+      </a>
+
+      <h3><a href="{{ p.url }}">{{ p.data.title or p.fileSlug }}</a></h3>
+      <p class="price">${{ (p.data.price or 0) | round(2) }}</p>
+      <p class="desc">{{ p.data.description or '' }}</p>
+
+      <button
+        class="snipcart-add-item"
+        data-item-id="{{ p.data.sku or p.fileSlug }}"
+        data-item-name="{{ (p.data.title or p.fileSlug) | escape }}"
+        data-item-price="{{ p.data.price or 0 }}"
+        data-item-url="{{ p.url }}"
+        data-item-image="{{ p.data.image or '' }}"
+        data-item-description="{{ (p.data.description or '') | escape }}">
+        Add to cart
+      </button>
+    </article>
+  {% endfor %}
+</section>
+<button onclick="window.location.href='/admin'" href="/admin">admin</button>
+
+
+
 
         <!-- Contact Info -->
         <div class="cs-right-section">
@@ -150,57 +188,4 @@ eleventyNavigation:
     </div>
 </section>
 </div>
-<script>
-(async function () {
-  const mount = document.getElementById('catalog');
-  if (!mount) return;
-
-  try {
-    const res = await fetch('/api/products', { cache: 'no-store' });
-    if (!res.ok) throw new Error('Failed to load products');
-    const items = await res.json();
-
-    if (!Array.isArray(items) || items.length === 0) {
-      mount.innerHTML = '<p>No products available right now.</p>';
-      return;
-    }
-
-    mount.innerHTML = items.map(p => {
-      const id = p.userDefinedId || p.id;
-      const name = escapeHtml(p.name || '');
-      const price = Number(p.price || 0).toFixed(2);
-      const url = attr(p.url || '/');
-      const img = attr(p.image || '/images/placeholder.jpg');
-      const desc = escapeHtml(p.description || '');
-
-      return `
-        <article class="product-card">
-          <img src="${img}" alt="${name}" loading="lazy" />
-          <h3>${name}</h3>
-          <p class="price">$${price}</p>
-          <p class="desc">${desc}</p>
-          <button
-            type="button"
-            class="snipcart-add-item"
-            data-item-id="${attr(id)}"
-            data-item-name="${attr(name)}"
-            data-item-price="${attr(price)}"
-            data-item-url="${url}"
-            data-item-image="${img}"
-            data-item-description="${attr(desc)}">
-            Add to cart
-          </button>
-        </article>
-      `;
-    }).join('');
-  } catch (err) {
-    console.error(err);
-    mount.innerHTML = '<p>There was a problem loading products.</p>';
-  }
-
-  function escapeHtml(s=''){return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-  function attr(s=''){return String(s).replace(/"/g, '&quot;');}
-})();
-</script>
-
 </section>

@@ -1,12 +1,9 @@
 backend:
-  name: github
-  repo: YOUR_GH_USER/YOUR_REPO
+  name: git-gateway
   branch: main   # or master
-  base_url: https://midwest-flooring-suppliers-pzpx2dlgs.vercel.app
-  auth_endpoint: /api/auth
 
 
-local_backend: true
+local_backend: false
 logo_url: https://d33wubrfki0l68.cloudfront.net/c89899bad974606ce0e0f5d5a95842dc787dcb56/7fe98/assets/images/logo-blue.png
 
 # Global media folder used by blog; products will override with their own
@@ -31,22 +28,15 @@ collections:
       - { label: 'Image Caption', name: 'imageAlt', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
 
-  - name: 'products'
-    label: 'Products'
-    folder: 'src/products'
+  - name: "products"
+    label: "Products"
+    folder: "Midwest-Flooring-Suppliers/src/products/items"   # <— changed
     create: true
-    slug: '{{sku}}'
-    media_folder: 'public/images/products'
-    public_folder: '/images/products'
+    slug: "{{sku}}"
     fields:
-      - { label: 'SKU', name: 'sku', widget: 'string' }
-      - { label: 'Product Name', name: 'title', widget: 'string' }
-      - { label: 'Title Tag (optional)', name: 'titleTag', widget: 'string', required: false }
-      - { label: 'Short Description', name: 'description', widget: 'text' }
-      - { label: 'Price', name: 'price', widget: 'number', value_type: 'float', min: 0 }
-      - { label: 'Image', name: 'image', widget: 'image' }
-      - { label: 'Image Alt', name: 'imageAlt', widget: 'string' }
-      - { label: 'Active', name: 'active', widget: 'boolean', default: true }
-      - { label: 'Max Quantity (optional)', name: 'stock', widget: 'number', required: false }
-      - { label: 'Tags', name: 'tags', widget: 'list', default: ['products'] }
-      - { label: 'Body (optional long description)', name: 'body', widget: 'markdown', required: false }
+      - { label: "SKU", name: "sku", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number", value_type: "float" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Active", name: "active", widget: "boolean", default: true }

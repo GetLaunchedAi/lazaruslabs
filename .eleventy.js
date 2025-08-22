@@ -8,9 +8,9 @@ const path = require('path');
 // CHANGE DEFAULT MEDIA QUERIES AND WIDTHS
 async function imageShortcode(src, alt, className, loading, sizes = '(max-width: 600px) 400px, 850px') {
   // don't pass an alt? chuck it out. passing an empty string is okay though
-  if (alt === undefined) {
-    throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
-  }
+  // if (alt === undefined) {
+  //   throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
+  // }
 
   // create the metadata for an optimised image
   let metadata = await Image(`${src}`, {
@@ -49,6 +49,13 @@ async function imageShortcode(src, alt, className, loading, sizes = '(max-width:
 }
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addCollection("products", (collectionApi) => {
+  // Pick up any product file in src/products/items with common extensions
+  return collectionApi.getFilteredByGlob("src/products/items/**/*.{md,njk,html}");
+});
+
+eleventyConfig.addWatchTarget("src/products/items"); // ensure watcher sees new files
+
   // adds the navigation plugin for easy navs
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
@@ -59,6 +66,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('./src/_redirects');
   eleventyConfig.addPassthroughCopy({ './src/robots.txt': '/robots.txt' });
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" }); // copies to /admin
 
   // open on npm start and watch CSS files for changes - doesn't trigger 11ty rebuild
   eleventyConfig.setBrowserSyncConfig({
@@ -84,5 +92,6 @@ module.exports = function (eleventyConfig) {
     },
     // allows .html files to contain nunjucks templating language
     htmlTemplateEngine: 'njk',
+    markdownTemplateEngine: "njk"
   };
 };
