@@ -1,0 +1,157 @@
+---
+pagination:
+  data: products
+  size: 1
+  alias: product
+permalink: "/products/{{ product.slug }}/index.html"
+eleventyComputed:
+  title: "{{ product.name }}"
+layout: "base.html"
+---
+
+<article class="product">
+  <div class="product-grid">
+    <div class="media">
+      <img src="{{ product.image }}" alt="{{ product.name }}">
+    </div>
+
+    <div class="meta">
+      <h1 class="h2">{{ product.name }}</h1>
+
+      <ul class="bullets">
+        {% for b in product.bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+
+      <p class="price">${{ product.price | round(2) }}</p>
+
+      <table class="tiers">
+        <thead><tr><th>Range</th><th>Discount</th></tr></thead>
+        <tbody>
+          {% for r in product.ranges %}
+          <tr><td>{{ r.label }}</td><td>${{ r.price | round(2) }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="qty">
+        <button type="button" data-minus aria-label="Decrease quantity">−</button>
+        <input type="number" min="1" value="1" inputmode="numeric" aria-label="Quantity">
+        <button type="button" data-plus aria-label="Increase quantity">+</button>
+      </div>
+
+      <button class="add-to-cart"
+              data-product-id="{{ product.id }}"
+              data-price="{{ product.price }}">
+        Add To Cart
+      </button>
+
+      <p class="muted small">{{ product.strength }} • {{ product.units }} units</p>
+    </div>
+  </div>
+
+  {# --- Tabs: Chemical Info / Storage / Lab Results --- #}
+  {% if product.chemInfo or product.labResults %}
+  <section class="tabs" data-tabs>
+  <nav class="tablist" role="tablist" aria-label="Product information">
+    {% if product.chemInfo %}
+      <button class="tab is-active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-chem"
+              id="tab-chem">Chemical Information</button>
+    {% endif %}
+    {% if product.labResults %}
+      <button class="tab{% if not product.chemInfo %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if product.chemInfo %}false{% else %}true{% endif %}"
+              aria-controls="panel-labs"
+              id="tab-labs">Lab Results</button>
+    {% endif %}
+  </nav>
+
+  {% if product.chemInfo %}
+  <div class="tabpanel is-active" role="tabpanel" id="panel-chem" aria-labelledby="tab-chem">
+    <table class="kv">
+      <tbody>
+        {% for row in product.chemInfo %}
+        <tr>
+          <th scope="row">{{ row.label }}</th>
+          <td>{{ row.value | safe }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  {% if product.labResults %}
+  <div class="tabpanel{% if not product.chemInfo %} is-active{% endif %}"
+       role="tabpanel" id="panel-labs" aria-labelledby="tab-labs">
+    {% for lr in product.labResults %}
+    <div class="lab-row">
+      {% if lr.thumb %}
+        <a href="{{ lr.fullReportUrl }}"><img class="lab-thumb" src="{{ lr.thumb }}" alt="Lab report thumbnail"></a>
+      {% endif %}
+      <table class="kv">
+        <tbody>
+          {% if lr.dateAdded %}<tr><th scope="row">Date Added</th><td>{{ lr.dateAdded }}</td></tr>{% endif %}
+          {% if lr.labName %}
+            <tr><th scope="row">{{ lr.labName }} Results</th><td>
+              {% if lr.avgPurity %}Avg. Purity: {{ lr.avgPurity }}{% endif %}
+              {% if lr.avgMass %}&nbsp; • Avg. Mass: {{ lr.avgMass }}{% endif %}
+            </td></tr>
+          {% endif %}
+          {% if lr.lot %}<tr><th scope="row">Lot</th><td>{{ lr.lot }}</td></tr>{% endif %}
+          {% if lr.fullReportUrl %}<tr><th scope="row"></th><td><a class="btn" href="{{ lr.fullReportUrl }}">Full Report</a></td></tr>{% endif %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+  {% endif %}
+
+  {# SEO JSON-LD #}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"{{ product.name | escape }}",
+    "image":["{{ product.image }}"],
+    "offers":{"@type":"Offer","priceCurrency":"USD","price":"{{ product.price }}","availability":"https://schema.org/InStock","url":"{{ page.url | url }}"}
+  }
+  </script>
+  <style>
+  .product-grid { display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:start; }
+.price { font-size:1.5rem; font-weight:700; margin:.5rem 0 1rem; }
+.tiers { width:100%; border-collapse:collapse; margin:1rem 0; }
+.tiers th, .tiers td, .kv th, .kv td { border:1px solid #e4e7ec; padding:.6rem .8rem; text-align:left; }
+.kv th { width:32%; background:#fafbfc; font-weight:600; }
+
+.tabs { margin-top:2.5rem; }
+.tablist { display:flex; gap:.5rem; }
+.tab { border:1px solid #d7e5f7; background:#f1f7ff; padding:.5rem .9rem; border-radius:.4rem; cursor:pointer; }
+.tab.is-active { background:#19a7e0; color:#fff; border-color:#19a7e0; }
+.tabpanel { display:none; padding:1rem 0; }
+.tabpanel.is-active { display:block; }
+
+.lab-row { display:grid; grid-template-columns: 140px 1fr; gap:1rem; align-items:start; margin-bottom:1rem; }
+.lab-thumb { width:140px; height:auto; border:1px solid #eee; border-radius:.25rem; }
+.btn { display:inline-block; padding:.45rem .8rem; border-radius:.35rem; background:#19a7e0; color:#fff; text-decoration:none; }
+
+.qty { display:flex; gap:.4rem; align-items:center; margin:.75rem 0 1rem; }
+.qty button { width:2rem; height:2rem; border:1px solid #cfd4dc; border-radius:.3rem; background:#fff; }
+.qty input { width:3.5rem; text-align:center; height:2rem; border:1px solid #cfd4dc; border-radius:.3rem; }
+.add-to-cart { width:100%; height:44px; border:0; border-radius:.4rem; background:#12a9ea; color:#fff; font-weight:600; }
+.muted.small { color:#6b7280; font-size:.9rem; }
+
+@media (max-width: 900px){
+  .product-grid { grid-template-columns:1fr; }
+  .lab-row { grid-template-columns: 1fr; }
+}
+
+  </style>
+  <script src="/assets/js/products.js" defer></script>
+</article>

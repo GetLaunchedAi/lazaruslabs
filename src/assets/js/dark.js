@@ -22,6 +22,7 @@ function detectColourScheme() {
   // check the localstorage for a saved 'theme' variable. if it's there, the user has visited before, so apply the necessary theme choices
   if (localStorage.getItem('theme')) {
     theme = localStorage.getItem('theme');
+    console.log(theme)
   }
   // if it's not there, check to see if the user has applied dark mode preferences themselves in the browser
   else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -34,9 +35,3 @@ function detectColourScheme() {
 
 // run on page load
 detectColourScheme();
-
-// add event listener to the dark mode button toggle
-document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-  // on click, check localstorage for the dark mode value, use to apply the opposite of what's saved
-  localStorage.getItem('theme') === 'light' ? enableDarkMode() : disableDarkMode();
-});

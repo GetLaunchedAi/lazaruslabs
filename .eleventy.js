@@ -83,6 +83,16 @@ eleventyConfig.addWatchTarget("src/products/items"); // ensure watcher sees new 
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
+  eleventyConfig.addFilter("toFixed", function(num, digits) {
+    if (typeof num === "number") {
+      return num.toFixed(digits);
+    }
+    if (!isNaN(num)) {
+      return Number(num).toFixed(digits);
+    }
+    return "0.00";
+  });
+
   return {
     dir: {
       input: 'src',

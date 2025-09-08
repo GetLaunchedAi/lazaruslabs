@@ -162,348 +162,137 @@ eleventyNavigation:
 })();
   </script>
 </section>
-<!-- ============ PRODUCT STRIP ============ -->
-<section class="product-strip">
+{# =========================
+   PRODUCT STRIPS (Eleventy)
+   Requires: src/_data/products.json => global "products"
+   Each product must have: category: "peptides" | "sarms-performance" | "supplies"
+   ========================= #}
+
+{% macro productCard(p) %}
+<article class="card" data-slug="{{ p.slug }}">
+  <div class="media">
+    <img src="{{ p.image }}" alt="{{ p.name }}">
+    <button class="wish" aria-label="Add to wishlist">♡</button>
+
+    {# If product has multiple forms, prompt to choose; else link directly #}
+    {% if p.forms and p.forms.length > 1 %}
+      <button class="cta open-forms" type="button">Choose Form</button>
+      <div class="forms-pop" hidden>
+        {% for f in p.forms %}
+          <a class="form-btn"
+             href="/products/{{ p.slug }}/?form={{ f }}"
+             data-form="{{ f | lower }}">{{ f | capitalize }}</a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <a class="cta" href="/products/{{ p.slug }}/">
+        {% if p.forms and p.forms.length == 1 %}Add To Cart{% else %}View{% endif %}
+      </a>
+    {% endif %}
+  </div>
+  <div class="meta">
+    <h3 class="title">{{ p.name }}</h3>
+    {% if p.price %}<div class="price">${{ p.price | round(2) }}</div>{% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% set categories = [
+  { id: "peptides", title: "Peptides" },
+  { id: "sarms-performance", title: "SARMs & Performance" },
+  { id: "supplies", title: "Supplies" }
+] %}
+
+{# Render a strip for each category #}
+{% for cat in categories %}
+<section class="product-strip" id="strip-{{ cat.id }}">
   <div class="ps-head">
-    <h2>Capsuled Products</h2>
-    <a href="#" class="all-link">All Products</a>
+    <h2>{{ cat.title }}</h2>
+    <a href="/catalog/{{ cat.id }}/" class="all-link">All {{ cat.title }}</a>
   </div>
 
   <div class="ps-rail">
-    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
+    <button class="ps-nav prev" aria-label="Scroll left" data-track="#psTrack-{{ cat.id }}">‹</button>
 
-    <div class="ps-track" id="psTrack">
-      <!-- CARD 1 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-
-          <!-- CTA appears on hover -->
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">GW-501516 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$54.95</div>
-        </div>
-      </article>
-
-      <!-- CARD 2 (Sold out example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$74.99</div>
-        </div>
-      </article>
-
-      <!-- CARD 3 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">RAD-140 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$79.99</div>
-        </div>
-      </article>
-
-      <!-- CARD 4 (Sale price example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">S-23 Capsules | 10mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$39.95</span>
-            <span class="now">$29.50</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 5 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
-          <div class="cats">Ancillaries, Capsules</div>
-          <div class="price">$149.95</div>
-        </div>
-      </article>
-
-      <!-- Duplicate a few to make the rail long -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">LGD-3033 Capsules</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$79.99</span>
-            <span class="now">$59.50</span>
-          </div>
-        </div>
-      </article>
-
+    <div class="ps-track" id="psTrack-{{ cat.id }}">
+      {% for p in products %}
+        {% if p.category == cat.id %}
+          {{ productCard(p) | safe }}
+        {% endif %}
+      {% endfor %}
     </div>
 
-    <button class="ps-nav next" aria-label="Scroll right">›</button>
+    <button class="ps-nav next" aria-label="Scroll right" data-track="#psTrack-{{ cat.id }}">›</button>
   </div>
 
-  <!-- underline accent like screenshot -->
   <div class="ps-underline"></div>
-  <!-- ============ PRODUCT STRIP ============ -->
-<section class="product-strip">
-  <div class="ps-head">
-    <h2>Capsuled Products</h2>
-    <a href="#" class="all-link">All Products</a>
-  </div>
+</section>
+{% endfor %}
 
-  <div class="ps-rail">
-    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
+{# ---- JS: nav + forms pop ---- #}
+<script>
+(function(){
+  // Arrow scrolling (works for all rails via data-track)
+  const btns = document.querySelectorAll('.ps-nav');
+  btns.forEach(btn => {
+    const trackSel = btn.getAttribute('data-track');
+    const track = document.querySelector(trackSel);
+    if (!track) return;
 
-    <div class="ps-track" id="psTrack">
-      <!-- CARD 1 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
+    function updateDisabled(){
+      const max = track.scrollWidth - track.clientWidth - 1;
+      const group = track.closest('.ps-rail');
+      const prev = group.querySelector('.ps-nav.prev');
+      const next = group.querySelector('.ps-nav.next');
+      prev.disabled = track.scrollLeft <= 0;
+      next.disabled = track.scrollLeft >= max;
+    }
+    function stepWidth(){
+      const card = track.querySelector('.card');
+      return card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
+    }
+    btn.addEventListener('click', () => {
+      const dir = btn.classList.contains('prev') ? -1 : 1;
+      track.scrollBy({ left: stepWidth() * dir, behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateDisabled, { passive:true });
+    window.addEventListener('resize', updateDisabled);
+    updateDisabled();
+  });
 
-          <!-- CTA appears on hover -->
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">GW-501516 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$54.95</div>
-        </div>
-      </article>
+  // Forms popover (Choose Form)
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('.open-forms');
+    if (openBtn) {
+      const card = openBtn.closest('.card');
+      const pop = card.querySelector('.forms-pop');
+      const isHidden = pop.hasAttribute('hidden');
+      // close any other open pop
+      document.querySelectorAll('.forms-pop:not([hidden])').forEach(el => el.setAttribute('hidden',''));
+      if (isHidden) pop.removeAttribute('hidden'); else pop.setAttribute('hidden','');
+    } else if (!e.target.closest('.forms-pop')) {
+      // click outside closes
+      document.querySelectorAll('.forms-pop:not([hidden])').forEach(el => el.setAttribute('hidden',''));
+    }
+  });
+})();
+</script>
 
-      <!-- CARD 2 (Sold out example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$74.99</div>
-        </div>
-      </article>
+{# Optional minimal styles for the forms popover—tweak or remove if you already style it #}
+<style>
+.forms-pop{
+  position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+  display:flex; gap:8px; background:#fff; border:1px solid #ece5db; border-radius:10px;
+  padding:8px 10px; box-shadow:0 10px 24px rgba(0,0,0,.12); z-index:5;
+}
+.form-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:86px; height:36px; padding:0 12px; border-radius:999px;
+  background:#111; color:#fff; text-decoration:none; font-weight:700; font-size:14px;
+}
+.form-btn[data-form="liquid"]{ background:#1f7fa6; }
+</style>
 
-      <!-- CARD 3 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">RAD-140 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$79.99</div>
-        </div>
-      </article>
-
-      <!-- CARD 4 (Sale price example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">S-23 Capsules | 10mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$39.95</span>
-            <span class="now">$29.50</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 5 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
-          <div class="cats">Ancillaries, Capsules</div>
-          <div class="price">$149.95</div>
-        </div>
-      </article>
-
-      <!-- Duplicate a few to make the rail long -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">LGD-3033 Capsules</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$79.99</span>
-            <span class="now">$59.50</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <button class="ps-nav next" aria-label="Scroll right">›</button>
-  </div>
-
-  <!-- underline accent like screenshot -->
-  <div class="ps-underline"></div>
-<!-- ============ PRODUCT STRIP ============ -->
-<section class="product-strip">
-  <div class="ps-head">
-    <h2>Capsuled Products</h2>
-    <a href="#" class="all-link">All Products</a>
-  </div>
-
-  <div class="ps-rail">
-    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
-
-    <div class="ps-track" id="psTrack">
-      <!-- CARD 1 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-
-          <!-- CTA appears on hover -->
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">GW-501516 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$54.95</div>
-        </div>
-      </article>
-
-      <!-- CARD 2 (Sold out example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$74.99</div>
-        </div>
-      </article>
-
-      <!-- CARD 3 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
-          <span class="badge oos">SOLD OUT</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">RAD-140 Capsules | 10mg</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">$79.99</div>
-        </div>
-      </article>
-
-      <!-- CARD 4 (Sale price example) -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">S-23 Capsules | 10mg x60</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$39.95</span>
-            <span class="now">$29.50</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 5 -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
-          <div class="cats">Ancillaries, Capsules</div>
-          <div class="price">$149.95</div>
-        </div>
-      </article>
-
-      <!-- Duplicate a few to make the rail long -->
-      <article class="card">
-        <div class="media">
-          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
-          <span class="badge sale">-26%</span>
-          <button class="wish" aria-label="Add to wishlist">♡</button>
-          <a href="#" class="cta">Add To Cart</a>
-        </div>
-        <div class="meta">
-          <h3 class="title">LGD-3033 Capsules</h3>
-          <div class="cats">Capsules, SARM’s</div>
-          <div class="price">
-            <span class="was">$79.99</span>
-            <span class="now">$59.50</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <button class="ps-nav next" aria-label="Scroll right">›</button>
-  </div>
 
   <!-- underline accent like screenshot -->
   <div class="ps-underline"></div>

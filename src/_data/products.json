@@ -1,0 +1,796 @@
+[
+  {
+    "id": "bpc-157",
+    "slug": "bpc-157",
+    "name": "BPC-157",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/bpc-157.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill", "liquid"]
+  },
+  {
+    "id": "wolverine",
+    "slug": "wolverine",
+    "name": "Wolverine",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/wolverine.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "retatrutide",
+    "slug": "retatrutide",
+    "name": "Retatrutide",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/retatrutide.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "glow-pro-stack",
+    "slug": "glow-pro-stack",
+    "name": "Glow Pro Stack",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/glow-pro-stack.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "ghk-cu",
+    "slug": "ghk-cu",
+    "name": "GHK-CU",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/ghk-cu.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "melanotan-2",
+    "slug": "melanotan-2",
+    "name": "Melanotan 2",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/melanotan-2.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "semax",
+    "slug": "semax",
+    "name": "Semax",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/semax.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "semaglutide",
+    "slug": "semaglutide",
+    "name": "Semaglutide",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/semaglutide.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "tesamorelin",
+    "slug": "tesamorelin",
+    "name": "Tesamorelin",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/tesamorelin.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "ipamorelin",
+    "slug": "ipamorelin",
+    "name": "Ipamorelin",
+    "category": "peptides",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/ipamorelin.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+
+  {
+    "id": "rad-140",
+    "slug": "rad-140",
+    "name": "RAD 140",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/rad-140.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "mk-2866-ostarine",
+    "slug": "mk-2866-ostarine",
+    "name": "MK 2866 (Ostarine)",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/mk-2866-ostarine.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "Ostarine; others TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "lgd-4033",
+    "slug": "lgd-4033",
+    "name": "LGD-4033",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/lgd-4033.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "Ligandrol; others TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "mk-677",
+    "slug": "mk-677",
+    "name": "MK 677",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/mk-677.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "Ibutamoren; others TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill", "liquid"]
+  },
+  {
+    "id": "tamoxifen",
+    "slug": "tamoxifen",
+    "name": "Tamoxifen",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/tamoxifen.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "hcg",
+    "slug": "hcg",
+    "name": "HCG",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/hcg.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "enclomiphene",
+    "slug": "enclomiphene",
+    "name": "Enclomiphene",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/enclomiphene.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill", "liquid"]
+  },
+  {
+    "id": "sildenafil",
+    "slug": "sildenafil",
+    "name": "Sildenafil",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/sildenafil.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+  {
+    "id": "tadalafil",
+    "slug": "tadalafil",
+    "name": "Tadalafil",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/tadalafil.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "Cialis (brand); others TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill", "liquid"]
+  },
+  {
+    "id": "l-carnitine",
+    "slug": "l-carnitine",
+    "name": "L-Carnitine",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/l-carnitine.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["liquid"]
+  },
+  {
+    "id": "cock-bomb",
+    "slug": "cock-bomb",
+    "name": "Cock Bomb",
+    "category": "sarms-performance",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent capsule/solution contamination.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/cock-bomb.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "TBD" },
+      { "label": "Storage (Lyophilized)", "value": "Store at -20°C, protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["pill"]
+  },
+
+  {
+    "id": "bac-water",
+    "slug": "bac-water",
+    "name": "Bac Water",
+    "category": "supplies",
+    "price": null,
+    "bullets": [
+      "Batch and lot coded with publicly visible lab reports.",
+      "Less than 10% variance in concentration.",
+      "Formulated and packaged to prevent contamination in storage.",
+      "UV-resistant container to minimize degradation.",
+      "Tamper-proof seal to ensure safety in transit."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/bac-water.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "TBD" },
+      { "label": "PubChem CID", "value": "TBD" },
+      { "label": "Molecular Weight", "value": "TBD" },
+      { "label": "Molecular Formula", "value": "TBD" },
+      { "label": "Synonyms", "value": "Bacteriostatic Water" },
+      { "label": "Storage (Lyophilized)", "value": "Store at room temp; protect from light" }
+    ],
+    "labResults": [],
+    "forms": ["liquid"]
+  },
+  {
+    "id": "reconstitution-kit",
+    "slug": "reconstitution-kit",
+    "name": "Reconstitution Kit",
+    "category": "supplies",
+    "price": null,
+    "bullets": [
+      "Components batch-coded with publicly visible lot details.",
+      "Sterile packaging to prevent contamination.",
+      "Includes UV-resistant containers where applicable.",
+      "Tamper-evident seals ensure integrity in transit.",
+      "Compatible with common research workflows."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/reconstitution-kit.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "—" },
+      { "label": "PubChem CID", "value": "—" },
+      { "label": "Molecular Weight", "value": "—" },
+      { "label": "Molecular Formula", "value": "—" },
+      { "label": "Synonyms", "value": "Reconstitution Kit" },
+      { "label": "Storage (Lyophilized)", "value": "Store components per insert" }
+    ],
+    "labResults": [],
+    "forms": ["unit"]
+  },
+  {
+    "id": "insulin-syringes",
+    "slug": "insulin-syringes",
+    "name": "Insulin Syringes",
+    "category": "supplies",
+    "price": null,
+    "bullets": [
+      "Batch-coded sterile syringes.",
+      "Individually sealed to prevent contamination.",
+      "Clear volume markings for accurate measurement.",
+      "Latex-free components.",
+      "Tamper-evident packaging."
+    ],
+    "ranges": [
+      { "label": "1 - 3", "price": null },
+      { "label": "4 - 6", "price": null },
+      { "label": "7 - 10", "price": null },
+      { "label": "11 - 15", "price": null }
+    ],
+    "strength": null,
+    "units": null,
+    "image": "/img/products/insulin-syringes.png",
+    "chemInfo": [
+      { "label": "Cas Number", "value": "—" },
+      { "label": "PubChem CID", "value": "—" },
+      { "label": "Molecular Weight", "value": "—" },
+      { "label": "Molecular Formula", "value": "—" },
+      { "label": "Synonyms", "value": "Insulin Syringes" },
+      { "label": "Storage (Lyophilized)", "value": "Store at room temperature" }
+    ],
+    "labResults": [],
+    "forms": ["unit"]
+  }
+]
