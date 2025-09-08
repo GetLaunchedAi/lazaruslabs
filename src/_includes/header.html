@@ -3,72 +3,336 @@
 <!-- ============================================ -->
 {% set navPages = collections.all | eleventyNavigation %}
 
-<div id="navigation">
-    <div aria-hidden="true" class="background-color-div">
-        <!--This div is used to overcome a z-index issue where the open
-            #navbar-menu is on top of the #navigation. This bar places itself 
-            the #navbar-menu so that menu appears behind the #navigation
-        -->
+<!-- Utility bar -->
+<div class="utility">
+  <div class="container util-inner">
+    <nav class="util-left">
+      <a href="#">About Us</a>
+      <span class="sep">|</span>
+      <a href="#">Contact Us</a>
+      <span class="sep">|</span>
+      <a href="#">FAQ’s</a>
+      <span class="sep">|</span>
+      <a href="#">Wholesale</a>
+      <span class="sep">|</span>
+      <a href="#">Military Discounts</a>
+    </nav>
+    <nav class="util-right">
+      <a href="mailto:contact@stratelabs.is">Contact@Stratelabs.is</a>
+      <span class="sep">|</span>
+      <a href="#">Login / Register</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Main bar -->
+<div class="mainbar">
+  <div class="container main-inner">
+    <!-- Left: logo + burger -->
+    <div class="left">
+<!-- Replace your current logo block with this -->
+<a class="logo" href="#" aria-label="Lazarus Labs">
+  <img
+    src="https://dummyimage.com/140x44/000/fff&text=Lazarus+Labs"
+    alt="Lazarus Labs"
+    width="140" height="44"
+    style="display:block; height:auto;"
+  />
+</a>
+
+      <button class="burger" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" fill="currentColor"/>
+        </svg>
+      </button>
     </div>
-    <div class="container">
-        <!--Logo - Get SVGs if you can.  I use fiverr to get png's turned into SVGs. Highly recommend it, worth the $20 - get a light and dark version-->
-        <a class="logo" aria-label="click to go to home page" href="/">
-            <!--Light Colored Logo, remove .dark image tag and the .light class if you don't have a dark and light version -->
-            <img class="light" aria-hidden="true" src="/assets/images/logo.jpeg" decoding="async" alt="logo" width="221" height="66">
 
-            <!--Dark Colored Logo-->
-            <img class="dark" aria-hidden="true" src="/assets/images/logo.jpeg" decoding="async" loading="lazy" alt="logo" width="221" height="66">
-        </a>
+    <!-- Center: search -->
+    <form class="search" action="/" method="get">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.71.71l.27.28v.79L20 20.5 21.5 19l-6-5zM10 15a5 5 0 110-10 5 5 0 010 10z" fill="currentColor"/>
+        </svg>
+      </span>
+      <input type="search" name="s" placeholder="Search for products" aria-label="Search">
+      <button class="sbtn" type="submit">Search</button>
+    </form>
 
-        <!--Mobile Nav toggle-->
-        <button class="hamburger-menu" aria-expanded="false" aria-controls="navbar-menu">
-            <!-- <span class="visually-hidden">Menu</span> -->
-            <span aria-hidden="true"></span>
-        </button>
+    <!-- Right: locale + cart -->
+    <div class="right">
+      <div class="locale" id="localeBtn" role="button" aria-haspopup="listbox" aria-expanded="false">
+        <span class="flag" aria-hidden="true">🇺🇸</span>
+        <span class="country">USA</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" class="chev" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
+      </div>
+      <div class="locale-menu" id="localeMenu" role="listbox" tabindex="-1">
+        <button role="option" data-country="USA">🇺🇸 USA</button>
+        <button role="option" data-country="CAN">🇨🇦 Canada</button>
+        <button role="option" data-country="GBR">🇬🇧 UK</button>
+      </div>
 
-        <!--Main Nav-->
-<nav id="navbar-menu" aria-label="main navigation">
-    <ul>
-        {%- for entry in navPages %}
-            <li class="{% if entry.title == 'Services' %}dropdown{% endif %}" id="{{ entry.title }}" >
-                {% if entry.title == 'Services' %}
-                    <a class="dropdown-toggle" role="button" tabindex="0">
-                        {{ entry.title }}
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/vinyl-flooring/">Vinyl Flooring</a></li>
-                        <li><a href="/flooring-installation/">Flooring Installation</a></li>
-                       
-                    </ul>
-                {% else %}
-                    <a 
-                        {% if entry.url == page.url %} class="active" {% endif %}
-                        href="{{ entry.url }}"
-                    >
-                        {{ entry.title }}
-                    </a>
-                {% endif %}
-            </li>
-        {%- endfor %}
-    </ul>
+      <a class="cart" href="#" aria-label="Cart">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M7 4h-2l-1 2v2h2l3.6 7.59-1.35 2.44A1 1 0 0 0 9.1 19h9.4v-2H10.42a.25.25 0 0 1-.22-.37L11 15h6.55a2 2 0 0 0 1.79-1.11l3.58-7.16A1 1 0 0 0 22 5h-15zM7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/>
+        </svg>
+        <span class="badge" id="cartCount">0</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- navbar-only JS (locale + demo cart) -->
+  <script>
+  (function(){
+    const btn = document.getElementById('localeBtn');
+    const menu = document.getElementById('localeMenu');
+    const countryText = btn?.querySelector('.country');
+
+    function closeMenu(){ menu.style.display = 'none'; btn.setAttribute('aria-expanded','false'); }
+    function openMenu(){ menu.style.display = 'block'; btn.setAttribute('aria-expanded','true'); }
+
+    btn?.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const open = menu.style.display === 'block';
+      open ? closeMenu() : openMenu();
+    });
+    document.addEventListener('click', closeMenu);
+
+    menu?.querySelectorAll('button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        countryText.textContent = b.dataset.country === 'USA' ? 'USA'
+          : b.dataset.country === 'CAN' ? 'Canada' : 'UK';
+        closeMenu();
+      });
+    });
+    // Example: drive the cart badge from your logic
+    // document.getElementById('cartCount').textContent = 3;
+  })();
+  </script>
+</div>
+
+<!-- ===== OFF-CANVAS DRAWER (shared by header burger + side FAB) ===== -->
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle">
+  <div class="drawer-panel" role="dialog" aria-modal="true">
+    <div class="drawer-head">
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M18.3 5.7L12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3 10.6 10.6 16.9 4.3z" fill="currentColor"/></svg>
+        <span>Close</span>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="drawer-tabs" role="tablist" aria-label="Main menu tabs">
+      <button class="tab active" role="tab" aria-selected="true" aria-controls="tabCats" id="tabCatsBtn">CATEGORIES</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="tabMenu" id="tabMenuBtn">MENU</button>
+    </div>
+
+    <!-- Panels -->
+    <div class="drawer-body">
+      <!-- Categories -->
+     <div class="tabpanel show" id="tabCats" role="tabpanel" aria-labelledby="tabCatsBtn">
+  <a class="row" data-cat="aliquots"    href="#"><span class="ico">🧪</span><span>Aliquots/Injectables</span></a>
+  <a class="row" data-cat="sarms"       href="#"><span class="ico">🧴</span><span>SARM’s</span></a>
+  <a class="row" data-cat="ancillaries" href="#"><span class="ico">🧰</span><span>Ancillaries</span></a>
+  <a class="row" data-cat="capsules"    href="#"><span class="ico">💊</span><span>Capsules</span></a>
+  <a class="row" data-cat="liquids"     href="#"><span class="ico">🧫</span><span>Liquids</span></a>
+  <a class="row" data-cat="supplies"    href="#"><span class="ico">📦</span><span>Supplies</span></a>
+  <a class="row" data-cat="wholesale"   href="#"><span class="ico">🏷️</span><span>Wholesale</span></a>
+</div>
+
+
+      <!-- Menu -->
+      <div class="tabpanel" id="tabMenu" role="tabpanel" aria-labelledby="tabMenuBtn" hidden>
+        <a class="row" href="#"><span class="ico">🏠</span><span>Home</span></a>
+        <a class="row" href="#"><span class="ico">📰</span><span>Blog</span></a>
+        <a class="row" href="#"><span class="ico">👥</span><span>About Us</span></a>
+        <a class="row" href="#"><span class="ico">✉️</span><span>Contact Us</span></a>
+        <a class="row" href="#"><span class="ico">🎖️</span><span>Military Discounts</span></a>
+      </div>
+    </div>
+    <style>
+        /* highlight a row when opened from the side icons */
+.tabpanel .row.highlight { background:#eefaff; box-shadow:inset 3px 0 0 #20a9d6; font-weight:700; }
+
+    </style>
+  </div>
+  <!-- Backdrop -->
+  <div class="drawer-backdrop" id="drawerBackdrop" tabindex="-1" aria-hidden="true"></div>
+
+  <!-- Drawer JS (exports open/close globally) -->
+<script>
+(function(){
+  const drawer = document.getElementById('drawer');
+  const panel  = drawer.querySelector('.drawer-panel');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const btnBurger = document.querySelector('.burger');
+  const btnClose  = document.getElementById('drawerClose');
+
+  const tabCatsBtn = document.getElementById('tabCatsBtn');
+  const tabMenuBtn = document.getElementById('tabMenuBtn');
+  const tabCats = document.getElementById('tabCats');
+  const tabMenu = document.getElementById('tabMenu');
+
+  function openDrawer(){
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');
+    document.body.classList.add('noscroll');
+    btnClose?.focus();
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('noscroll');
+    btnBurger?.focus();
+  }
+
+  btnBurger?.addEventListener('click', openDrawer);
+  btnClose?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
+
+  function activateTab(which){
+    const isCats = which === 'cats';
+    tabCatsBtn.classList.toggle('active', isCats);
+    tabMenuBtn.classList.toggle('active', !isCats);
+    tabCats.hidden = !isCats;
+    tabMenu.hidden = isCats;
+    tabCatsBtn.setAttribute('aria-selected', String(isCats));
+    tabMenuBtn.setAttribute('aria-selected', String(!isCats));
+  }
+  tabCatsBtn?.addEventListener('click', ()=> activateTab('cats'));
+  tabMenuBtn?.addEventListener('click', ()=> activateTab('menu'));
+  activateTab('cats');
+
+  /* Export for other triggers */
+  window.openMainMenuDrawer  = openDrawer;
+  window.closeMainMenuDrawer = closeDrawer;
+  window._activateCatsTab = () => activateTab('cats');
+})();
+</script>
+
+<script>
+/* Open the drawer on the CATEGORIES tab and highlight a specific row */
+window.showCategoryInDrawer = function(catKey){
+  if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
+  if (typeof window._activateCatsTab === 'function') window._activateCatsTab();
+
+  requestAnimationFrame(()=>{
+    const row = document.querySelector(`#tabCats .row[data-cat="${catKey}"]`);
+    if (!row) return;
+    row.scrollIntoView({ block: 'center' });
+    row.classList.add('highlight');
+    setTimeout(()=> row.classList.remove('highlight'), 900);
+  });
+};
+</script>
+
+</aside>
+
+<!-- ===== SIDE STRIP (outside the drawer) ===== -->
+<aside class="side-strip" aria-label="Quick category nav">
+  <button class="fab" id="sideToggle" aria-label="Open menu">☰</button>
+
+<nav class="side-dots" id="sideDots">
+  <a class="dot" data-cat="aliquots"    aria-label="Aliquots/Injectables"> <span class="ico">🧪</span> </a>
+  <a class="dot" data-cat="sarms"       aria-label="SARM’s">               <span class="ico">🧴</span> </a>
+  <a class="dot" data-cat="ancillaries" aria-label="Ancillaries">          <span class="ico">🧰</span> </a>
+  <a class="dot" data-cat="capsules"    aria-label="Capsules">             <span class="ico">💊</span> </a>
+  <a class="dot" data-cat="liquids"     aria-label="Liquids">              <span class="ico">🧫</span> </a>
+  <a class="dot" data-cat="supplies"    aria-label="Supplies">             <span class="ico">📦</span> </a>
+  <a class="dot" data-cat="wholesale"   aria-label="Wholesale">            <span class="ico">🏷️</span> </a>
 </nav>
 
-        <!--Dark Mode toggle-->
-        <button id="dark-mode-toggle">
-            <!--Moon is an inline SVG so you can edit the color if needed-->
-            <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480" xml:space="preserve"><path d="M459.782 347.328c-4.288-5.28-11.488-7.232-17.824-4.96-17.76 6.368-37.024 9.632-57.312 9.632-97.056 0-176-78.976-176-176 0-58.4 28.832-112.768 77.12-145.472 5.472-3.712 8.096-10.4 6.624-16.832S285.638 2.4 279.078 1.44C271.59.352 264.134 0 256.646 0c-132.352 0-240 107.648-240 240s107.648 240 240 240c84 0 160.416-42.688 204.352-114.176 3.552-5.792 3.04-13.184-1.216-18.496z"/></svg>
-            <img class="sun" aria-hidden="true" src="/assets/svgs/sun.svg" decoding="async" alt="sun" width="15" height="15">
-        </button>
-        <button class="login" onclick="window.location.href='https:\/\/midwest-flooring-suppliers.netlify.app\/admin\/#\/'" st>
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.94C6.03 13.98 9.01 12.9 12 12.9C14.99 12.9 17.97 13.98 18 15.94C16.71 17.92 14.5 19.2 12 19.2Z"/>
-</svg>
-        </button>
-        <button class="snipcart-checkout" style="background-color: transparent; border: none; cursor: pointer; outline: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M351.9 329.506H206.81l-3.072-12.56H368.16l26.63-116.019-217.23-26.04-9.952-58.09h-50.4v21.946h31.894l35.233 191.246a32.927 32.927 0 1 0 36.363 21.462h100.244a32.825 32.825 0 1 0 30.957-21.945zM181.427 197.45l186.51 22.358-17.258 75.195H198.917z" data-name="Shopping Cart"/></svg>
-        </button>
-            <span class="snipcart-items-count"></span>
 
-            <span class="snipcart-total-price"></span>
-    </div>
-</div>
+</aside>
+
+<!-- Minimal CSS for drawer + side strip -->
+<style>
+:root{
+  --header-h: 86px; /* adjust to your navbar height */
+  --panel:#fff; --border:#e9e2d8; --ink:#1f2937; --muted:#8b8f97;
+  --tab-underline:#3aaed3; --blue:#20a9d6; --tile:#fff; --tile-border:#ece5db;
+}
+
+/* ===== Drawer ===== */
+.drawer{ position:fixed; inset:0; z-index:1200; display:grid; grid-template-columns:auto 1fr; pointer-events:none; }
+.drawer.open{ pointer-events:auto; }
+.drawer-backdrop{ background:rgba(0,0,0,.45); opacity:0; transition:opacity .25s ease; }
+.drawer.open .drawer-backdrop{ opacity:1; }
+.drawer-panel{
+  width:min(88vw, 360px); max-width:420px; height:100%;
+  background:var(--panel); box-shadow:0 10px 40px rgba(0,0,0,.18);
+  transform:translateX(-100%); transition:transform .28s ease; display:flex; flex-direction:column;
+}
+.drawer.open .drawer-panel{ transform:none; }
+.drawer-head{ display:flex; align-items:center; min-height:56px; padding:0 16px; border-bottom:1px solid var(--border); }
+.drawer-close{ display:flex; align-items:center; gap:8px; border:0; background:none; cursor:pointer; color:var(--ink); font-size:16px; padding:8px 4px; }
+.drawer-tabs{ display:flex; border-bottom:1px solid var(--border); }
+.tab{ flex:1; padding:14px 16px; border:0; background:#fff; cursor:pointer; color:#4b5563; font-weight:700; border-right:1px solid var(--border); }
+.tab:last-child{ border-right:0; }
+.tab.active{ color:var(--ink); position:relative; }
+.tab.active::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--tab-underline); }
+.drawer-body{ overflow:auto; -webkit-overflow-scrolling:touch; }
+.tabpanel .row{ display:flex; align-items:center; gap:12px; min-height:54px; padding:14px 18px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--border); }
+.tabpanel .row:hover{ background:#f7f5f2; }
+.ico{ width:22px; text-align:center; opacity:.9; }
+body.noscroll{ overflow:hidden; }
+/* Hide the side strip while drawer is open */
+body.noscroll .side-strip{ display:none; }
+
+/* ===== Side strip ===== */
+.side-strip{
+  position: fixed; top: calc(var(--header-h) + 8px); left: 10px; z-index: 1199;
+  display:flex; flex-direction:column; gap:10px;
+}
+.fab{
+  width: 46px; height: 46px; border-radius:999px; border:0; background:var(--blue);
+  color:#fff; font: 800 16px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  display:grid; place-items:center; box-shadow:0 10px 26px rgba(0,0,0,.18); cursor:pointer;
+}
+.side-dots{ display:flex; flex-direction:column; gap:12px; }
+.dot{
+  width:34px; height:34px; display:grid; place-items:center; border-radius:8px;
+  background:var(--tile); border:1px solid var(--tile-border);
+  box-shadow:0 6px 14px rgba(0,0,0,.08); text-decoration:none;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease; position:relative;
+}
+.dot:hover{ transform: translateY(-1px); }
+.dot img{ width:22px; height:22px; object-fit:contain; filter:saturate(.95); }
+.dot.active{ border-color:#bfeaf7; box-shadow:0 0 0 2px #e2f7ff, 0 8px 18px rgba(0,0,0,.10); }
+.dot .tip{
+  position:absolute; left:46px; top:50%; transform:translateY(-50%);
+  background:#111827; color:#fff; padding:6px 9px; border-radius:8px; font-size:12px; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .15s ease; box-shadow:0 8px 18px rgba(0,0,0,.16);
+}
+.dot:hover .tip{ opacity:1; }
+@media (max-width: 900px){ .side-strip{ display:none; } }
+</style>
+
+<!-- Side strip JS: open drawer + scroll-spy -->
+<script>
+/* Side FAB opens the drawer */
+document.getElementById('sideToggle')?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
+  else document.querySelector('.burger')?.click();
+});
+
+/* Hover/tap a tiny icon -> open drawer on CATEGORIES and spotlight that row */
+const sideDots = Array.from(document.querySelectorAll('.side-dots .dot'));
+let hoverTimer;
+
+function triggerShow(cat){
+  if (typeof window.showCategoryInDrawer === 'function') window.showCategoryInDrawer(cat);
+  else if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
+}
+
+sideDots.forEach(dot=>{
+  const cat = dot.dataset.cat;
+
+  // small delay avoids accidental opens when just passing by
+  dot.addEventListener('mouseenter', ()=> { hoverTimer = setTimeout(()=> triggerShow(cat), 120); });
+  dot.addEventListener('mouseleave', ()=> clearTimeout(hoverTimer));
+
+  dot.addEventListener('click', (e)=>{ e.preventDefault(); triggerShow(cat); });
+});
+</script>

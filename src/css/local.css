@@ -1,188 +1,221 @@
 /*-- -------------------------- -->
-<---       Side By Side         -->
+<---        Collection          -->
 <--- -------------------------- -*/
+
 /* Mobile - 360px */
-@media only screen and (min-width: 0em) {
-  #sbs {
-    padding: var(--sectionPadding);
-  }
-  #sbs .cs-container {
-    width: 100%;
-    max-width: 80rem;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    row-gap: 2.5rem;
-  }
-  #sbs .cs-left {
-    /* scaling the font size with the view width */
-    font-size: min(2.31vw, .7em);
-    /* using ems so we can use font size to scale the whole section */
-    width: 39.4375em;
-    height: 39.75em;
-    position: relative;
-  }
-  #sbs .cs-picture {
-    border-radius: 1.5em;
-    /* clips img tag corners */
-    overflow: hidden;
-    position: absolute;
-    display: block;
-  }
-  #sbs .cs-picture img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    /* makes image act like a background image */
-    object-fit: cover;
-  }
-  #sbs .cs-picture1 {
-    width: 32.625em;
-    height: 36.3125em;
-    left: 0;
-    top: 0;
-  }
-  #sbs .cs-picture2 {
-    width: 25.875em;
-    height: 25em;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
-    /* 6px - 12px */
-    border: clamp(0.375em, 1.5vw, 0.75em) solid #ffffff;
-    right: 0;
-    bottom: 0;
-  }
-  #sbs .cs-right {
-    margin: auto;
-    max-width: 33.875rem;
-  }
-  #sbs .cs-topper {
-    font-size: var(--topperFontSize);
-    line-height: 1.2em;
-    text-transform: uppercase;
-    text-align: left;
-    letter-spacing: .1em;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-    display: block;
-  }
-  #sbs .cs-title {
-    font-size: var(--headerFontSize);
-    font-weight: 900;
-    line-height: 1.2em;
-    text-align: left;
-    max-width: 50rem;
-    margin: 0 auto 1rem;
-    color: var(--headerColor);
-    position: relative;
-  }
-  #sbs .cs-text {
-    font-size: var(--bodyFontSize);
-    line-height: 1.5em;
-    text-align: left;
-    width: 100%;
-    max-width: 46.875rem;
-    margin: 0 auto;
-    margin-bottom: 1rem;
-    color: var(--bodyTextColor);
-  }
-  #sbs .cs-text:last-of-type {
-    margin-bottom: 2rem;
-  }
-  #sbs .cs-flex-group {
-    /* 16px - 32px */
-    padding: clamp(1rem, 3vw, 2rem);
-    background-color: #F7F7F7;
-    border-radius: 1rem;
-    position: relative;
-  }
-  #sbs .cs-flex-p {
-    /* 14px - 16px */
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
-    line-height: 1.5em;
-    margin: 0 0 1rem;
-    color: #767676;
-  }
-  #sbs .cs-name {
-    font-size: 1rem;
-    line-height: 1.2em;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin: 0 0 0.25rem;
-    color: var(--headerColor);
-    display: block;
-  }
-  #sbs .cs-job {
-    font-size: 0.875rem;
-    line-height: 1.5em;
-    color: #767676;
-    display: block;
-  }
-  #sbs .cs-quote-icon {
-    /* 60px - 136px */
-    width: clamp(3.75rem, 10vw, 8.5rem);
-    height: auto;
-    position: absolute;
-    bottom: 0rem;
-    /* 16px - 32px */
-    right: clamp(1rem, 4vw, 2rem);
-  }
-  #sbs .button-solid {
-    margin-top: 2rem;
-  }
+@media only screen and (min-width: 0rem) {
+    #collection-1570 {
+        padding: var(--sectionPadding);
+    }
+    #collection-1570 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+        position: relative;
+        z-index: 1;
+    }
+    #collection-1570 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        /* breaks up the parent div so the children are no longer bound by it.  Now the children can be children of the cs-container and allow us to arrnage their order with the cs-card-group */
+        display: contents;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+    #collection-1570 .cs-title {
+        margin: 0;
+    }
+    #collection-1570 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: 9.375rem;
+        padding: 0 1.5rem;
+        background-color: var(--primary);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+        order: 3;
+    }
+    #collection-1570 .cs-button-solid:before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: width .3s;
+    }
+    #collection-1570 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+    #collection-1570 .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        justify-items: center;
+        position: relative;
+        grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr));
+        column-gap: clamp(1rem, 3vw, 1.25rem);
+        row-gap: clamp(1rem, 3vw, 1.5rem);
+        transform-style: preserve-3d;
+    }
+    #collection-1570 .cs-item {
+        width: 100%;
+        max-width: 18.5rem;
+        padding: 1rem;
+        border: 1px solid #E8E8E8;
+    }
+    #collection-1570 .cs-item:hover .cs-picture img {
+        transform: scale(1.05);
+    }
+    #collection-1570 .cs-link {
+        text-decoration: none;
+    }
+    #collection-1570 .cs-image-group {
+        width: auto;
+        height: 18.75rem;
+        margin-bottom: 1.25rem;
+        position: relative;
+    }
+    #collection-1570 .cs-picture {
+        width: 100%;
+        height: 100%;
+        background-color: #f6f6f6;
+        display: block;
+        overflow: hidden;
+    }
+    #collection-1570 .cs-picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform .3s;
+    }
+    #collection-1570 .cs-offer {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        padding: 0.375rem;
+        color: #fff;
+        background: #ff4747;
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+    #collection-1570 .cs-tags {
+        font-size: 1rem;
+        line-height: 1.5em;
+        color: #767676;
+    }
+    #collection-1570 .cs-product {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        font-weight: 700;
+        line-height: 1.2em;
+        margin: 0;
+        color: var(--headerColor);
+    }
+    #collection-1570 .cs-wrapper {
+        margin-top: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #collection-1570 .cs-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #collection-1570 .cs-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.2em;
+        color: var(--primary);
+    }
+    #collection-1570 .cs-old-price {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.2em;
+        text-decoration: line-through;
+        color: #767676;
+    }
+    #collection-1570 .cs-stars {
+        width: 5.75rem;
+        margin-top: 0.25rem;
+        display: flex;
+    }
+    #collection-1570 .cs-buy {
+        max-height: 2.5rem;
+        padding: 0.5rem;
+        background: none;
+        border: 1px solid var(--primary);
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
-/* Desktop - 1024px */
-@media only screen and (min-width: 64em) {
-  #sbs .cs-container {
-    flex-flow: row;
-    justify-content: space-between;
-    gap: 3.25rem;
-  }
-  #sbs .cs-left {
-    font-size: min(1.2vw, 1em);
-    flex: none;
-  }
-  #sbs .cs-right {
-    margin: 0;
-  }
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #collection-1570 .cs-content {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 3rem;
+    }
+    #collection-1570 .cs-item {
+        max-width: none;
+    }
+    #collection-1570 .cs-image-group {
+        height: clamp(12rem, 23vw, 20rem);
+    }
+}
+/* Small Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #collection-1570 .cs-card-group {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 /* Dark Mode */
-@media only screen and (min-width: 0em) {
-  body.dark-mode #sbs .cs-left:before,
-  body.dark-mode #sbs .cs-left:after {
-    background: var(--accent);
-  }
-  body.dark-mode #sbs .cs-picture2 {
-    background-color: var(--dark);
-    /* 6px - 12px */
-    border: clamp(0.375em, 1.5vw, 0.75em) solid var(--dark);
-  }
-  body.dark-mode #sbs .cs-topper {
-    color: var(--primaryLight);
-  }
-  body.dark-mode #sbs .cs-title,
-  body.dark-mode #sbs .cs-text,
-  body.dark-mode #sbs .cs-h3,
-  body.dark-mode #sbs .cs-flex-p,
-  body.dark-mode #sbs .cs-name {
-    color: var(--bodyTextColorWhite);
-  }
-  body.dark-mode #sbs .cs-flex-group {
-    background-color: var(--accent);
-  }
-  body.dark-mode #sbs .cs-job {
-    color: var(--bodyTextColorWhite);
-    opacity: .8;
-  }
-  body.dark-mode #sbs .cs-quote-icon {
-    opacity: .2;
-  }
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #collection-1570 .cs-title,
+    body.dark-mode #collection-1570 .cs-offer,
+    body.dark-mode #collection-1570 .cs-tags,
+    body.dark-mode #collection-1570 .cs-product,
+    body.dark-mode #collection-1570 .cs-price,
+    body.dark-mode #collection-1570 .cs-old-price {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #collection-1570 .cs-item {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode #collection-1570 .cs-item:hover .cs-picture {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode #collection-1570 .cs-picture {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 }
+                                
 /*-- -------------------------- -->
 <---       Side By Side         -->
 <--- -------------------------- -*/
@@ -481,6 +514,172 @@
     color: var(--bodyTextColorWhite);
   }
 }
+
+/* PRODUCT STRIPS */
+:root{
+  --bg-page:#faf7f2;
+  --card:#fff;
+  --border:#e7e1d8;
+  --ink:#111827;
+  --muted:#6b7280;
+  --blue:#2bb5e7;
+  --radius:14px;
+  --container: min(1600px, 95vw);
+}
+
+.product-strip{ background:var(--bg-page); padding:16px 0 10px; }
+.product-strip .ps-head{
+  max-width: var(--container); margin:0 auto 10px; padding:0 16px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.ps-head h2{ font-size:24px; margin:0; color:var(--ink) }
+.all-link{ color:#0a6c8f; text-underline-offset:3px }
+
+.ps-rail{
+  position:relative; max-width: var(--container); margin:0 auto; padding:0 8px;
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px;
+}
+
+.ps-track{
+  display:flex; gap:18px; overflow-x:auto; scroll-behavior:smooth;
+  padding:8px 8px 14px; -webkit-overflow-scrolling:touch;
+}
+.ps-track::-webkit-scrollbar{ height:8px }
+.ps-track::-webkit-scrollbar-thumb{ background:#d7d9dc; border-radius:999px }
+
+.ps-nav{
+  width:36px; height:36px; border-radius:999px; border:1px solid var(--border);
+  background:#fff; box-shadow:0 6px 16px rgba(0,0,0,.07);
+  display:grid; place-items:center; cursor:pointer; font-size:22px; line-height:0;
+  color:#374151;
+}
+.ps-nav:disabled{ opacity:.4; cursor:not-allowed }
+
+.card{
+  flex:0 0 300px; background:var(--card); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden; color:var(--ink);
+  box-shadow:0 10px 24px rgba(0,0,0,.05);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,0,0,.09) }
+
+.media{ position:relative; aspect-ratio: 4/3; background:#f2f4f6; }
+.media img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.badge{
+  position:absolute; left:12px; top:12px; font-size:12px; font-weight:800;
+  color:#fff; padding:6px 10px; border-radius:999px;
+}
+.badge.oos{ background:#6b7280 }
+.badge.sale{ background:var(--blue) }
+
+.wish{
+  position:absolute; right:12px; top:12px; width:34px; height:34px;
+  border-radius:999px; border:1px solid var(--border); background:#fff; color:#475569;
+  display:grid; place-items:center; cursor:pointer;
+}
+
+/* Hover CTA appears over the image bottom */
+.cta{
+  position:absolute; left:12px; right:12px; bottom:12px;
+  background:#1aa2d1; color:#fff; text-align:center; font-weight:700;
+  border-radius:10px; padding:12px 14px; text-decoration:none;
+  opacity:0; transform:translateY(8px); transition:.18s ease;
+  pointer-events:none;
+}
+.card:hover .cta{ opacity:1; transform:translateY(0); pointer-events:auto; }
+
+/* If you want it visible by default on touch screens, force show at small widths */
+@media (max-width: 900px){
+  .cta{ opacity:1; transform:none; pointer-events:auto }
+}
+
+.meta{ padding:14px 14px 16px }
+.title{ font-size:16px; margin:0 0 6px; line-height:1.35 }
+.cats{ color:var(--muted); font-size:13px; margin-bottom:8px }
+.price{ font-weight:700; color:#0b7aa1; font-size:15px }
+.price .was{ color:#9ca3af; text-decoration:line-through; margin-right:8px; font-weight:500 }
+.price .now{ color:#0b7aa1; font-weight:800 }
+
+/* Blue underline accent bar */
+.ps-underline{
+  max-width: var(--container); margin:8px auto 0; height:4px; background:#cfeefa; border-radius:999px;
+}
+
+/* --- 1) Let the strip breathe on big monitors --- */
+:root{
+  /* widen the content cap */
+  --container: min(1680px, 96vw);
+}
+
+/* apply the wider cap */
+.product-strip .ps-head,
+.product-strip .ps-rail,
+.product-strip .ps-underline{
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* optionally make the whole section edge-to-edge */
+.product-strip{
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+/* Bigger cards on desktop so the row fills nicely */
+@media (min-width: 1200px){
+  .ps-track{ gap: 22px; }
+  .card{
+    /* was fixed 300px — this scales with viewport but stays reasonable */
+    flex: 0 0 clamp(280px, 20vw, 360px);
+  }
+}
+
+/* Hide the thin horizontal scrollbar line */
+.ps-track{
+  scrollbar-width: none;          /* Firefox */
+}
+.ps-track::-webkit-scrollbar{     /* WebKit */
+  height: 0;
+}
+
+/* --- 2) Fix portrait product images (no cropping) --- */
+/* Use contain + padding so tall bottles fit the frame */
+.media{
+  aspect-ratio: 3 / 4;            /* portrait frame (works well for dropper bottles) */
+  background: #fff;
+  padding: 10px;                  /* gives breathing room around the bottle */
+}
+.media img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;            /* stop cropping */
+  display: block;
+}
+
+/* If you have some landscape items in this same strip, apply a helper:
+   <article class="card landscape">… */
+.card.landscape .media{
+  aspect-ratio: 4 / 3;
+  padding: 0;
+}
+.card.landscape .media img{
+  object-fit: cover;
+}
+
+/* Optional: center the nav arrows vertically and push them in a bit */
+.ps-rail{
+  grid-template-columns: 48px 1fr 48px;
+}
+.ps-nav{
+  margin-top: -18px;              /* nudge if needed */
+}
+
 /*-- -------------------------- -->
 <---          Reviews           -->
 <--- -------------------------- -*/

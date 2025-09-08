@@ -12,312 +12,527 @@ eleventyNavigation:
 ---
 
 <!-- Enter html code below -->
-
-<!-- ============================================ -->
-<!--                    Hero                      -->
-<!-- ============================================ -->
-
-<section id="hero">
-  <video autoplay muted loop playsinline class="cs-picture">
-    <source
-      src="/images/hero_vid.mp4"
-      type="video/mp4"
-      autoplay
-      muted
-      loop
-      playsinline
-    />
-    Your browser does not support the video tag.
-  </video>
-  <div class="cs-overlay"></div>
-  <div class="cs-container">
-    <div class="cs-flex-group">
-      <span class="cs-topper">Quality. Style. Durability</span>
-      <h1 class="cs-title">Transform Your Space with Premium Flooring</h1>
-      <p class="cs-text">
-        At Midwest Flooring Suppliers, we provide high-quality vinyl, laminate,
-        hardwood, and tile flooring solutions designed to elevate any space.
-        With expert guidance, exceptional materials, and a commitment to
-        excellence, we help you create interiors that are as durable as they are
-        beautiful.
-      </p>
-      <a href="/vinyl-flooring/" class="cs-button-solid">Explore Flooring</a>
-      <a href="/about/" class="cs-button-transparent">
-        <img
-          class="cs-img"
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg"
-          alt="play icon"
-          width="17"
-          height="17"
-        />
-        Learn More
-      </a>
-    </div>
-  </div>
-
-  <!-- Background Image -->
-  <!-- {% image './src/images/bannerimg.png', 'bannerimg', 'cs-picture', 'eager', '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%} -->
-</section>
-
-<!-- ============================================ -->
-<!--                  Services                    -->
-<!-- ============================================ -->
-
-<section id="services" class="services">
-  <!-- Get Icons From flaticon.com -->
-  <div class="card">
-    <picture>
-      <img
-        aria-hidden="true"
-        decoding="async"
-        src="/assets/svgs/service_1.svg"
-        alt="flooring icon"
-        width="48"
-        height="48"
-      />
-    </picture>
-    <h2>Vinyl & Laminate</h2>
-    <p>
-      Upgrade your floors with durable, stylish vinyl and laminate
-      options—enhancing beauty, function, comfort, and value instantly.
-    </p>
-  </div>
-  <div class="card">
-    <picture>
-      <img
-        aria-hidden="true"
-        decoding="async"
-        src="/assets/svgs/service_2.svg"
-        alt="flooring icon"
-        width="48"
-        height="48"
-      />
-    </picture>
-    <h2>Hardwood & Tile</h2>
-    <p>
-      Bring timeless elegance with hardwood or tile flooring that boosts
-      durability, style, and appeal for homes or businesses daily.
-    </p>
-  </div>
-  <div class="card">
-    <picture>
-      <img
-        aria-hidden="true"
-        decoding="async"
-        src="/assets/svgs/service_3.svg"
-        alt="flooring icon"
-        width="48"
-        height="48"
-      />
-    </picture>
-    <h2>Repairs & Installation</h2>
-    <p>
-      Get flawless results through expert installation and repairs that fix
-      uneven floors, damage, or wear in your flooring system.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!--                 Side By Side                 -->
-<!-- ============================================ -->
-
-<section id="sbs">
-  <div class="cs-container">
-    <!-- Left Image Section -->
-    <div class="cs-left">
-      {% image './src/images/about_img_0.png', 'flooring', 'cs-picture
-      cs-picture1', 'lazy'%} {% image './src/images/about_img_1.png',
-      'flooring', 'cs-picture cs-picture2', 'lazy'%}
-    </div>
-    <!-- Right Content Section-->
-    <div class="cs-right">
-      <span class="cs-topper">About Us</span>
-      <h2 class="cs-title">About Midwest Flooring Suppliers</h2>
-      <p class="cs-text">
-        At Midwest Flooring Suppliers, we’re a family-owned business committed
-        to making premium flooring more accessible and affordable. By sourcing
-        directly from manufacturers, we’re able to offer our customers up to 40%
-        savings compared to big-box stores—without compromising on quality or
-        style.
-      </p>
-      <p class="cs-text">
-        We believe in doing things the right way. That’s why all of our
-        installations are handled in-house—never subcontracted—ensuring
-        accountability, consistency, and craftsmanship you can count on. Whether
-        you're updating a single room or managing a large commercial project,
-        our team is here to deliver lasting value.
-      </p>
-      <div class="cs-flex-group">
-        <p class="cs-flex-p">
-          My name is Patrick Bisimwa, founder of Midwest Flooring Suppliers. I
-          started this company to offer honest pricing, personal service, and
-          dependable results. From my early renovation work to leading
-          full-scale installs, I’ve always focused on building trust—and we
-          bring that same mindset to every job we take on.
+<!-- HERO + PERKS CAROUSEL -->
+<section class="site-hero">
+  <div class="hero-wrap">
+    <!-- HERO -->
+    <div class="hero-card">
+      <div class="hero-media" role="img" aria-label="Product display"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">THE LEADER<br/>OF PEPTIDES.</h1>
+        <p class="hero-sub">
+          Lazarus Labs© is the Premium supplier of Peptides, Research Chemicals, and Analytical Compounds. Satisfaction Guaranteed.
         </p>
-        <span class="cs-name">Patrick Bisimwa</span>
-        <span class="cs-job">Owner</span>
-        <img
-          class="cs-quote-icon"
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
-          alt="quote icon"
-          width="136"
-          height="77"
-        />
+        <a href="#catalog" class="hero-cta">Product Catalog</a>
       </div>
-      <a href="/about" class="button-solid">More About Us</a>
+    </div>
+
+    <!-- PERKS CAROUSEL -->
+    <!-- <div class="perks-head">
+      <button class="perk-nav prev" aria-label="Previous perks" title="Previous">
+        &#10094;
+      </button>
+      <button class="perk-nav next" aria-label="Next perks" title="Next">
+        &#10095;
+      </button>
+    </div> -->
+
+    <div class="perks-track" id="perksTrack" tabindex="0" aria-label="Perks carousel">
+      <!-- Each .perk is one slide -->
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 7h18v2H3V7zm2 4h14v8H5v-8zm3-8h8v2H8V3z" fill="currentColor"/></svg>
+        <span>All products</span>
+      </div>
+
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2l7 4v5c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V6l7-4zm0 2.18L7 6.5V11c0 3.86 2.69 7.86 5 9.12 2.31-1.26 5-5.26 5-9.12V6.5l-5-2.32z" fill="currentColor"/></svg>
+        <span>Backup Domain www.lazaruslabs.com</span>
+      </div>
+
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 1a4 4 0 014 4v2h2a3 3 0 013 3v5a6 6 0 01-6 6H9a6 6 0 01-6-6V10a3 3 0 013-3h2V5a4 4 0 014-4zm-2 6h4V5a2 2 0 10-4 0v2z" fill="currentColor"/></svg>
+        <span>24/7 Support</span>
+      </div>
+
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4z" fill="currentColor"/></svg>
+        <span>Lowest Prices in The Industry</span>
+      </div>
+
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 6h18v12H3zM5 8v8h14V8H5zm2 10h10v2H7z" fill="currentColor"/></svg>
+        <span>Free Shipping on all orders $250+</span>
+      </div>
+
+      <!-- Duplicate a couple for smooth looping feel (optional) -->
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 7h18v2H3V7zm2 4h14v8H5v-8zm3-8h8v2H8V3z" fill="currentColor"/></svg>
+        <span>All products</span>
+      </div>
+      <div class="perk pill">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 1a4 4 0 014 4v2h2a3 3 0 013 3v5a6 6 0 01-6 6H9a6 6 0 01-6-6V10a3 3 0 013-3h2V5a4 4 0 014-4zm-2 6h4V5a2 2 0 10-4 0v2z" fill="currentColor"/></svg>
+        <span>24/7 Support</span>
+      </div>
     </div>
   </div>
+  <script>
+   (function(){
+  const track = document.getElementById('perksTrack');
+  if (!track) return;
+
+  // ===== Config =====
+  const PX_PER_SEC = 40;          // ← speed (pixels/second). Tweak to taste.
+  const DUPLICATE_ROWS = 2;       // duplicate the items to make the loop seamless
+
+  // Respect prefers-reduced-motion
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let speed = reduceMotion ? 0 : PX_PER_SEC;
+
+  // Duplicate children so we can scroll through copies and "wrap" without a jump
+  const originals = Array.from(track.children);
+  for (let i = 0; i < DUPLICATE_ROWS; i++) {
+    originals.forEach(node => track.appendChild(node.cloneNode(true)));
+  }
+
+  // Measure one full cycle width = sum width of the ORIGINAL set (not the clones)
+  function getCycleWidth() {
+    return originals.reduce((w, el) => w + el.getBoundingClientRect().width + 12 /*gap*/, 0);
+  }
+
+  // Animation state
+  let rafId = null;
+  let last = performance.now();
+  let offset = 0; // how far we’ve scrolled from the start (px)
+  let cycleWidth = 0;
+
+  function frame(now){
+    const dt = (now - last) / 1000;
+    last = now;
+
+    offset += speed * dt;
+    // wrap seamlessly when we’ve scrolled one original-set width
+    if (cycleWidth && offset >= cycleWidth) offset -= cycleWidth;
+
+    track.scrollLeft = offset;
+    rafId = requestAnimationFrame(frame);
+  }
+
+  // Start after layout
+  function start() {
+    cancelAnimationFrame(rafId);
+    last = performance.now();
+    cycleWidth = getCycleWidth();
+    rafId = requestAnimationFrame(frame);
+  }
+  function stop() { cancelAnimationFrame(rafId); }
+
+  // Pause on hover/focus
+  track.addEventListener('mouseenter', () => { speed = 0; });
+  track.addEventListener('mouseleave', () => { speed = reduceMotion ? 0 : PX_PER_SEC; });
+
+  // Allow manual drag (pointer) to take over temporarily
+  let dragging = false, startX = 0, startLeft = 0;
+  track.addEventListener('pointerdown', (e) => {
+    dragging = true; track.classList.add('dragging');
+    startX = e.clientX; startLeft = track.scrollLeft;
+    speed = 0; // pause while dragging
+    track.setPointerCapture(e.pointerId);
+  });
+  track.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    offset = Math.max(0, startLeft - dx); // keep offset in sync
+    track.scrollLeft = offset;
+  });
+  track.addEventListener('pointerup', () => {
+    dragging = false; track.classList.remove('dragging');
+    speed = reduceMotion ? 0 : PX_PER_SEC;
+  });
+
+  // Recalculate on resize (cards can change width)
+  window.addEventListener('resize', () => {
+    // keep current visual position as a modulo of new cycle width
+    const ratio = cycleWidth ? (offset % cycleWidth) / cycleWidth : 0;
+    cycleWidth = getCycleWidth();
+    offset = ratio * cycleWidth;
+  });
+
+  // Kick off
+  if (!reduceMotion) start();
+})();
+  </script>
 </section>
+<!-- ============ PRODUCT STRIP ============ -->
+<section class="product-strip">
+  <div class="ps-head">
+    <h2>Capsuled Products</h2>
+    <a href="#" class="all-link">All Products</a>
+  </div>
 
-<!-- ============================================ -->
-<!--            Extra Content To Rank             -->
-<!-- ============================================ -->
+  <div class="ps-rail">
+    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
 
-<section id="sbs-r">
-  <div class="cs-container">
-    <!-- Left Image Section -->
-    <div class="cs-left">
-      {% image './src/images/featured_img_0.png', 'flooring', 'cs-picture
-      cs-picture1', 'lazy'%} {% image './src/images/featured_img_1.png',
-      'flooring', 'cs-picture cs-picture2', 'lazy'%}
+    <div class="ps-track" id="psTrack">
+      <!-- CARD 1 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+
+          <!-- CTA appears on hover -->
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">GW-501516 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$54.95</div>
+        </div>
+      </article>
+
+      <!-- CARD 2 (Sold out example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$74.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">RAD-140 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$79.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 4 (Sale price example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">S-23 Capsules | 10mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$39.95</span>
+            <span class="now">$29.50</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
+          <div class="cats">Ancillaries, Capsules</div>
+          <div class="price">$149.95</div>
+        </div>
+      </article>
+
+      <!-- Duplicate a few to make the rail long -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">LGD-3033 Capsules</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$79.99</span>
+            <span class="now">$59.50</span>
+          </div>
+        </div>
+      </article>
+
     </div>
-    <!-- Right Content Section-->
-    <div class="cs-right">
-      <span class="cs-topper">SEO Ranking</span>
-      <h2 class="cs-title">Midwest Flooring Suppliers</h2>
-      <p class="cs-text">
-        At Midwest Flooring Suppliers, we specialize in providing premium
-        flooring solutions that elevate the style, comfort, and durability of
-        your space. From luxury vinyl planks and elegant hardwood to versatile
-        laminate and timeless tile, our team sources and supplies products that
-        match your vision while delivering exceptional value and performance.
-      </p>
-      <p class="cs-text">
-        With over a decade of industry expertise, we bring product knowledge,
-        quality assurance, and customer-focused service to every project.
-        Whether you’re renovating a home, fitting out a commercial space, or
-        completing a large-scale development, we provide flooring options that
-        are built to last and designed to impress.
-        <br />
-        <br />
-        Our product range serves homeowners, contractors, property managers, and
-        designers. Every order is handled with care to ensure precise
-        specifications, reliable delivery, and materials that perform in
-        real-world conditions. From water-resistant vinyl to durable tile and
-        engineered wood, Midwest Flooring Suppliers delivers solutions that
-        stand the test of time.
-        <br />
-        <br />
-        Boost the beauty, functionality, and value of your property—trust
-        Midwest Flooring Suppliers to bring your flooring vision to life with
-        premium products and expert guidance.
-      </p>
-      <a href="/vinyl-flooring/" class="button-solid"
-        >Learn More About Our Services →</a
-      >
+
+    <button class="ps-nav next" aria-label="Scroll right">›</button>
+  </div>
+
+  <!-- underline accent like screenshot -->
+  <div class="ps-underline"></div>
+  <!-- ============ PRODUCT STRIP ============ -->
+<section class="product-strip">
+  <div class="ps-head">
+    <h2>Capsuled Products</h2>
+    <a href="#" class="all-link">All Products</a>
+  </div>
+
+  <div class="ps-rail">
+    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
+
+    <div class="ps-track" id="psTrack">
+      <!-- CARD 1 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+
+          <!-- CTA appears on hover -->
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">GW-501516 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$54.95</div>
+        </div>
+      </article>
+
+      <!-- CARD 2 (Sold out example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$74.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">RAD-140 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$79.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 4 (Sale price example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">S-23 Capsules | 10mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$39.95</span>
+            <span class="now">$29.50</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
+          <div class="cats">Ancillaries, Capsules</div>
+          <div class="price">$149.95</div>
+        </div>
+      </article>
+
+      <!-- Duplicate a few to make the rail long -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">LGD-3033 Capsules</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$79.99</span>
+            <span class="now">$59.50</span>
+          </div>
+        </div>
+      </article>
+
     </div>
+
+    <button class="ps-nav next" aria-label="Scroll right">›</button>
   </div>
-</section>
 
-<!-- ============================================ -->
-<!--                   Reviews                    -->
-<!-- ============================================ -->
-
-<section id="reviews">
-  <div class="cs-container">
-    <span class="cs-topper">Our Reviews</span>
-    <h2 class="cs-title">Words From Our Customers</h2>
-    <p class="cs-text">
-      We take pride in delivering premium flooring products and outstanding
-      customer service — and our clients agree. From luxury vinyl and hardwood
-      to laminate and tile, we’ve helped homeowners, contractors, and businesses
-      transform their spaces with durable, stylish, and expertly supplied
-      flooring. Here’s what customers are saying about working with Midwest
-      Flooring Suppliers.
-    </p>
-    <ul class="cs-card-group">
-      <!-- Review 1 -->
-      <li class="cs-item">
-        <!-- <img class="cs-item-img" aria-hidden="true" loading="lazy" decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile5.png" alt="profile picture" width="80"
-          height="80" /> -->
-        <p class="cs-item-p">
-          Midwest Flooring Suppliers was incredible to work with! They helped me
-          choose the perfect vinyl flooring for my home, and the quality is
-          outstanding. Fast delivery, great prices, and truly helpful advice
-          from start to finish.
-        </p>
-        <span class="cs-reviewer">
-          Sarah L.
-          <span class="cs-desc">Customer</span>
-        </span>
-        <img
-          class="cs-item-stars"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-          alt="stars"
-          width="96"
-          height="16"
-        />
-      </li>
-      <!-- Review 2 -->
-      <li class="cs-item">
-        <!-- <img class="cs-item-img" aria-hidden="true" loading="lazy" decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile-4.png" alt="profile picture" width="80"
-          height="80" /> -->
-        <p class="cs-item-p">
-          I couldn’t be happier with my new hardwood floors! The team made the
-          selection process easy, offered great recommendations, and delivered
-          on time. Excellent customer service and high-quality products — highly
-          recommended.
-        </p>
-        <span class="cs-reviewer">
-          James P.
-          <span class="cs-desc">Customer</span>
-        </span>
-        <img
-          class="cs-item-stars"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-          alt="stars"
-          width="96"
-          height="16"
-        />
-      </li>
-    </ul>
-    <!-- <a aria-label="read more reviews" href="/reviews" class="button-solid">Read More</a> -->
+  <!-- underline accent like screenshot -->
+  <div class="ps-underline"></div>
+<!-- ============ PRODUCT STRIP ============ -->
+<section class="product-strip">
+  <div class="ps-head">
+    <h2>Capsuled Products</h2>
+    <a href="#" class="all-link">All Products</a>
   </div>
-</section>
 
-<!-- ============================================ -->
-<!--             Final Call to Action             -->
-<!-- ============================================ -->
+  <div class="ps-rail">
+    <button class="ps-nav prev" aria-label="Scroll left">‹</button>
 
-<section id="cta">
-  <div class="container">
-    <h2 class="title">
-      Get It Done <br />
-      With Us Today
-    </h2>
-    <p>
-      Big ideas start with a simple conversation. Reach out today and let’s get
-      your project on the books.
-    </p>
-    <a href="/contact/" class="button-solid">Contact Us</a>
+    <div class="ps-track" id="psTrack">
+      <!-- CARD 1 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="GW-501516 Capsules | 10mg">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+
+          <!-- CTA appears on hover -->
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">GW-501516 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$54.95</div>
+        </div>
+      </article>
+
+      <!-- CARD 2 (Sold out example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=800" alt="MK-677 Capsules | 25mg x60">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta" aria-disabled="true">Out of Stock</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">MK-677 Capsules | 25mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$74.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1596040033229-7a6b1a7f5a49?q=80&w=800" alt="RAD-140 Capsules | 10mg">
+          <span class="badge oos">SOLD OUT</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">RAD-140 Capsules | 10mg</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">$79.99</div>
+        </div>
+      </article>
+
+      <!-- CARD 4 (Sale price example) -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=800" alt="S-23 Capsules | 10mg x60">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">S-23 Capsules | 10mg x60</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$39.95</span>
+            <span class="now">$29.50</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1623065429905-74d5e4b7c7d0?q=80&w=800" alt="BPC-157 Capsules | 500mcg">
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">BPC-157 Capsules | 500mcg</h3>
+          <div class="cats">Ancillaries, Capsules</div>
+          <div class="price">$149.95</div>
+        </div>
+      </article>
+
+      <!-- Duplicate a few to make the rail long -->
+      <article class="card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1599058945522-28d584b6b3a9?q=80&w=800" alt="LGD-3033 Capsules">
+          <span class="badge sale">-26%</span>
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <a href="#" class="cta">Add To Cart</a>
+        </div>
+        <div class="meta">
+          <h3 class="title">LGD-3033 Capsules</h3>
+          <div class="cats">Capsules, SARM’s</div>
+          <div class="price">
+            <span class="was">$79.99</span>
+            <span class="now">$59.50</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <button class="ps-nav next" aria-label="Scroll right">›</button>
   </div>
-  {% image './src/images/final_home_img.png', 'vinyl flooring', '', 'lazy',
-  '(max-width: 400px) 400px, (max-width: 850px) 850px, 1920px'%}
-</section>
+
+  <!-- underline accent like screenshot -->
+  <div class="ps-underline"></div>
+  <script>
+    /* Arrow scrolling + disable when at ends */
+(function(){
+  const track = document.getElementById('psTrack');
+  const prev = document.querySelector('.ps-nav.prev');
+  const next = document.querySelector('.ps-nav.next');
+
+  function updateDisabled(){
+    const max = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= max;
+  }
+  function scrollByCards(dir=1){
+    const card = track.querySelector('.card');
+    const step = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
+    track.scrollBy({ left: step * dir, behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', ()=> scrollByCards(-1));
+  next.addEventListener('click', ()=> scrollByCards(1));
+  track.addEventListener('scroll', updateDisabled);
+  window.addEventListener('resize', updateDisabled);
+  updateDisabled();
+})();
+  </script>
+</section>                                
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
