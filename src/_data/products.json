@@ -20,7 +20,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/bpc-157.png",
+    "image": "/images/products/bpc_157.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -86,7 +86,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/retatrutide.png",
+    "image": "/images/products/retatrutide.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
