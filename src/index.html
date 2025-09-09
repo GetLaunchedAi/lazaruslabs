@@ -1,8 +1,8 @@
 ---
 layout: "base.html"
-description: "Midwest Flooring Suppliers offers premium flooring solutions for residential and commercial spaces, with expert support and fast delivery throughout the Midwest."
-metaTitle: "Premium Flooring Solutions | Midwest Flooring Suppliers"
-tagTitle: "Home - Midwest Flooring Experts"
+description: "Lazarus Labs offers premium peptides, research chemicals, and analytical compounds with trusted quality, secure packaging, and fast delivery worldwide."
+metaTitle: "Premium Peptides & Research Chemicals | Lazarus Labs"
+tagTitle: "Home - Lazarus Labs Official"
 preloadImg: "/images/bannerimg.png"
 preloadCSS: "/css/local.css"
 permalink: "/"
@@ -10,6 +10,7 @@ eleventyNavigation:
   key: Home
   order: 100
 ---
+
 
 <!-- Enter html code below -->
 <!-- HERO + PERKS CAROUSEL -->
@@ -167,35 +168,67 @@ eleventyNavigation:
    Requires: src/_data/products.json => global "products"
    Each product must have: category: "peptides" | "sarms-performance" | "supplies"
    ========================= #}
-
 {% macro productCard(p) %}
+{# Precompute flags safely #}
+{% set hasForms = p.forms and (p.forms | length) > 0 %}
+{% set multipleForms = p.forms and (p.forms | length) > 1 %}
+{% set onlyForm = null %}
+{% if hasForms and not multipleForms %}
+  {% set onlyForm = p.forms[0] %}
+{% endif %}
+
 <article class="card" data-slug="{{ p.slug }}">
-  <div class="media">
-    <img src="{{ p.image }}" alt="{{ p.name }}">
+  <div class="media" style="position:relative">
+    <img src="{{ p.image or '/images/placeholder.png' }}" alt="{{ p.name }}">
     <button class="wish" aria-label="Add to wishlist">♡</button>
 
-    {# If product has multiple forms, prompt to choose; else link directly #}
-    {% if p.forms and p.forms.length > 1 %}
-      <button class="cta open-forms" type="button">Choose Form</button>
-      <div class="forms-pop" hidden>
+    {# Always render the container; fill it based on form count #}
+    <div class="forms-row">
+      {% if multipleForms %}
         {% for f in p.forms %}
-          <a class="form-btn"
-             href="/products/{{ p.slug }}/?form={{ f }}"
-             data-form="{{ f | lower }}">{{ f | capitalize }}</a>
+          <a class="form-chip"
+             href="/product/{{ p.slug }}/?form={{ f }}"
+             data-form="{{ f | lower }}">
+            <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
+            <span class="form-chip__label">
+              {% if f == 'pill' %}Pill
+              {% elif f == 'liquid' %}Liquid
+              {% elif f == 'unit' %}Unit
+              {% else %}{{ f | capitalize }}{% endif %}
+            </span>
+          </a>
         {% endfor %}
-      </div>
-    {% else %}
-      <a class="cta" href="/products/{{ p.slug }}/">
-        {% if p.forms and p.forms.length == 1 %}Add To Cart{% else %}View{% endif %}
-      </a>
-    {% endif %}
+      {% else %}
+        {% if onlyForm %}
+          <a class="form-chip"
+             href="/product/{{ p.slug }}/?form={{ onlyForm }}"
+             data-form="{{ onlyForm | lower }}">
+            <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
+            <span class="form-chip__label">
+              {% if onlyForm == 'pill' %}Pill
+              {% elif onlyForm == 'liquid' %}Liquid
+              {% elif onlyForm == 'unit' %}Unit
+              {% else %}{{ onlyForm | capitalize }}{% endif %}
+            </span>
+          </a>
+        {% else %}
+          <a class="form-chip" href="/product/{{ p.slug }}/">
+            <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
+            <span class="form-chip__label">View</span>
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
   </div>
+
   <div class="meta">
     <h3 class="title">{{ p.name }}</h3>
-    {% if p.price %}<div class="price">${{ p.price | round(2) }}</div>{% endif %}
   </div>
 </article>
 {% endmacro %}
+
+
+
 
 {% set categories = [
   { id: "peptides", title: "Peptides" },
@@ -261,21 +294,27 @@ eleventyNavigation:
   });
 
   // Forms popover (Choose Form)
-  document.addEventListener('click', (e) => {
-    const openBtn = e.target.closest('.open-forms');
-    if (openBtn) {
-      const card = openBtn.closest('.card');
-      const pop = card.querySelector('.forms-pop');
-      const isHidden = pop.hasAttribute('hidden');
-      // close any other open pop
-      document.querySelectorAll('.forms-pop:not([hidden])').forEach(el => el.setAttribute('hidden',''));
-      if (isHidden) pop.removeAttribute('hidden'); else pop.setAttribute('hidden','');
-    } else if (!e.target.closest('.forms-pop')) {
-      // click outside closes
-      document.querySelectorAll('.forms-pop:not([hidden])').forEach(el => el.setAttribute('hidden',''));
-    }
+  // Simple localStorage cart stub
+  function getCart(){ try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; } }
+  function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
+
+  // Add-to-cart only exists on single-form items now
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.add-to-cart');
+    if (!btn) return;
+
+    const name = btn.getAttribute('data-name');
+    const slug = btn.getAttribute('data-slug');
+    const form = btn.getAttribute('data-form') || null;
+
+    const cart = getCart();
+    cart.push({ id: slug, slug, name, form, qty: 1 });
+    setCart(cart);
+
+    alert(`Added ${name}${form ? ' ('+form+')' : ''} to cart.`);
+    console.log('Cart:', cart);
   });
-})();
+
 </script>
 
 {# Optional minimal styles for the forms popover—tweak or remove if you already style it #}
@@ -291,6 +330,128 @@ eleventyNavigation:
   background:#111; color:#fff; text-decoration:none; font-weight:700; font-size:14px;
 }
 .form-btn[data-form="liquid"]{ background:#1f7fa6; }
+.card .media { position: relative; }
+
+.forms-row, .single-row{
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:12px; display:flex; align-items:center; gap:10px; z-index:2;
+}
+
+.add-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:36px; padding:0 14px; border-radius:999px;
+  background:#0a62ff; color:#fff; font-weight:700; border:none; cursor:pointer;
+}
+
+.form-chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:86px; height:36px; padding:0 12px; border-radius:999px;
+  background:#111; color:#fff; text-decoration:none; font-weight:700; font-size:14px;
+  border:1px solid rgba(0,0,0,.08);
+}
+.form-chip[data-form="liquid"]{ background:#1f7fa6; }
+
+.card .media::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:64px;
+  background:linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,0));
+  pointer-events:none; z-index:1;
+}
+/* Positioning for the row over the image */
+.card .media { position: relative; }
+.forms-row{
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:12px; display:flex; align-items:center; gap:10px; z-index:2;
+}
+
+/* Optional gradient to keep text readable over light images */
+.card .media::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:64px;
+  background:linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,0));
+  pointer-events:none; z-index:1;
+}
+
+/* Form chip (link) */
+.form-chip{
+  position:relative;
+  display:inline-flex; align-items:center; gap:8px;
+  min-width:98px; height:38px; padding:0 14px; border-radius:999px;
+  background:#111; color:#fff; text-decoration:none; font-weight:700; font-size:14px;
+  border:1px solid rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  will-change: transform;
+}
+.form-chip__icon{
+  display:inline-grid; place-items:center;
+  width:18px; height:18px; line-height:18px;
+  font-weight:900; font-size:14px; border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.form-chip[data-form="liquid"]{ background:#1f7fa6; }
+.form-chip[data-form="unit"]{ background:#525252; }
+
+.form-chip:hover,
+.form-chip:focus-visible{
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+  outline: none;
+}
+
+/* If a global .cta existed before, ensure it doesn't affect chips */
+.form-chip.cta { all: unset; }
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce){
+  .form-chip{ transition:none }
+}
+
+.form-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 98px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* Corner + icon via ::after */
+.form-chip::after {
+  content: "+";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+/* Variants */
+.form-chip[data-form="liquid"] { background: #1f7fa6; }
+.form-chip[data-form="unit"]   { background: #525252; }
+
+/* Hover grow */
+.form-chip:hover,
+.form-chip:focus-visible {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+  outline: none;
+}
+
+
 </style>
 
 

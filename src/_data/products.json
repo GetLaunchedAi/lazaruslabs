@@ -53,7 +53,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/wolverine.png",
+    "image": "/images/products/wolverine.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },

@@ -1,0 +1,111 @@
+---
+layout: "base.html"
+permalink: "/peptides/"
+title: "Peptides"
+---
+
+<style>
+  :root{ --line:#eae7e3; --muted:#6b7280; --card:#fff; --r:16px; --brand:#0a62ff; }
+  .wrap{max-width:1200px;margin:auto;padding:24px}
+  h1{font-size:34px;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 22px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .media{height:190px;display:flex;align-items:center;justify-content:center;background:#f7f8fb}
+  .media img{max-height:170px;max-width:90%;object-fit:contain}
+  .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+  .title{font-weight:700;margin:0;font-size:16px}
+  .meta{font-size:12px;color:var(--muted)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:11px;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#1d4ed8;border:1px solid #dbe3ff;text-decoration:none}
+  .controls{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .select{border:1px solid var(--line);border-radius:10px;padding:6px 8px;font-size:14px;background:#fff}
+  .add{border:none;background:var(--brand);color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+</style>
+
+<div class="wrap">
+  <h1>Peptides</h1>
+  <p class="sub">Browse our peptide products.</p>
+
+  <div class="grid" id="peptidesGrid">
+    {% for p in products %}
+      {% if p.category == "peptides" %}
+        <article class="card" data-id="{{ p.id }}" data-slug="{{ p.slug }}">
+          <a class="media" href="/product/{{ p.slug }}/">
+            <img src="{{ p.image }}" alt="{{ p.name }}">
+          </a>
+          <div class="body">
+            <h3 class="title">{{ p.name }}</h3>
+            <div class="meta">Peptides</div>
+
+            {# Link the chips, NOT the title #}
+            {% if p.forms and p.forms | length %}
+              <div class="chips">
+                {% for f in p.forms %}
+                  <a class="chip" href="/product/{{ p.slug }}/?form={{ f }}">
+                    {% if f == "pill" %}Pill{% elif f == "liquid" %}Liquid{% else %}{{ f | capitalize }}{% endif %}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="controls">
+              {% if p.forms and p.forms | length > 1 %}
+                <select class="select form-select" aria-label="Select form">
+                  {% for f in p.forms %}
+                    <option value="{{ f }}">
+                      {% if f == "pill" %}Pill{% elif f == "liquid" %}Liquid{% else %}{{ f | capitalize }}{% endif %}
+                    </option>
+                  {% endfor %}
+                </select>
+              {% else %}
+                {# single form, store it in a data attr for JS #}
+                {% if p.forms and p.forms | length == 1 %}
+                  <span class="meta" data-single-form="{{ p.forms[0] }}">Form: {% if p.forms[0] == "pill" %}Pill{% elif p.forms[0] == "liquid" %}Liquid{% else %}{{ p.forms[0] | capitalize }}{% endif %}</span>
+                {% endif %}
+              {% endif %}
+              <button class="add">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  // Minimal cart stub — replace with your real cart (Snipcart/Stripe/etc.)
+  function getCart(){ try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; } }
+  function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
+
+  document.querySelectorAll('.card .add').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const card = e.currentTarget.closest('.card');
+      const id = card.dataset.id;
+      const slug = card.dataset.slug;
+      const name = card.querySelector('.title')?.textContent?.trim() || '';
+      let form = null;
+
+      const select = card.querySelector('.form-select');
+      if (select) form = select.value;
+      else {
+        const single = card.querySelector('[data-single-form]');
+        form = single ? single.getAttribute('data-single-form') : null;
+      }
+
+      const item = { id, slug, name, form, qty: 1 };
+      const cart = getCart();
+      cart.push(item);
+      setCart(cart);
+
+      // Simple feedback – replace with your toast/snackbar
+      alert(`Added ${name}${form ? ' ('+form+')' : ''} to cart.`);
+      console.log('Cart:', cart);
+    });
+  });
+</script>

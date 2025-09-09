@@ -1,0 +1,128 @@
+---
+layout: "base.html"
+pagination:
+  data: products
+  size: 1
+  alias: product
+permalink: "/product/{{ product.slug }}/"
+eleventyComputed:
+  title: "{{ product.name }}"
+---
+
+<style>
+  .wrap{max-width:1100px;margin:auto;padding:24px}
+  .product{display:grid;grid-template-columns:420px 1fr;gap:30px}
+  @media (max-width:920px){.product{grid-template-columns:1fr}}
+  .media{background:#f7f8fb;border:1px solid #eae7e3;border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center}
+  .media img{max-width:100%;max-height:420px;object-fit:contain}
+  h1{margin:0 0 8px}
+  .meta{color:#6b7280;font-size:14px;margin-bottom:12px}
+  fieldset{border:1px solid #eae7e3;border-radius:12px;padding:12px;margin:0 0 14px}
+  legend{font-weight:700;padding:0 6px}
+  .opts{display:flex;gap:10px;flex-wrap:wrap}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0}
+  .opt label{display:inline-block;border:1px solid #eae7e3;border-radius:999px;padding:8px 14px;cursor:pointer}
+  .opt input:checked + label{border-color:#0a62ff}
+  .bullets{margin:16px 0 0;padding-left:18px}
+  .chem{margin-top:24px;border-top:1px solid #eae7e3;padding-top:16px}
+  .chem table{width:100%;border-collapse:collapse}
+  .chem td{border-bottom:1px solid #eae7e3;padding:8px 6px}
+  .chem td:first-child{color:#6b7280;width:220px}
+</style>
+
+<div class="wrap">
+  <div class="product">
+    <div class="media">
+      <img src="{{ product.image or '/images/placeholder.png' }}" alt="{{ product.name }}">
+    </div>
+
+    <div>
+      <h1>{{ product.name }}</h1>
+
+      {# Category label without using a set-object #}
+      <div class="meta">
+        {% if product.category == "peptides" %}
+          Peptides
+        {% elif product.category == "sarms-performance" %}
+          SARMS &amp; Performance
+        {% elif product.category == "supplies" %}
+          Supplies
+        {% else %}
+          {{ product.category }}
+        {% endif %}
+      </div>
+
+      {# Simple price-range readout (no custom filters) #}
+      {% set hasAnyPrice = false %}
+      {% if product.ranges %}
+        {% for r in product.ranges %}
+          {% if r.price is defined and r.price != null %}
+            {% set hasAnyPrice = true %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div style="font-weight:800;font-size:20px;margin:10px 0 16px">
+        {% if hasAnyPrice %}
+          {# compute min/max by simple loop #}
+          {% set minPrice = null %}
+          {% set maxPrice = null %}
+          {% for r in product.ranges %}
+            {% if r.price is defined and r.price != null %}
+              {% if minPrice == null or r.price < minPrice %}{% set minPrice = r.price %}{% endif %}
+              {% if maxPrice == null or r.price > maxPrice %}{% set maxPrice = r.price %}{% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if minPrice != null and maxPrice != null %}
+            {% if minPrice == maxPrice %}
+              ${{ (minPrice * 1.0) | round(2) }}
+            {% else %}
+              ${{ (minPrice * 1.0) | round(2) }} – ${{ (maxPrice * 1.0) | round(2) }}
+            {% endif %}
+          {% else %}—{% endif %}
+        {% else %}—{% endif %}
+      </div>
+
+      {% if product.forms and product.forms | length %}
+        <fieldset>
+          <legend>Form</legend>
+          <div class="opts">
+            {% for f in product.forms %}
+              <div class="opt">
+                <input
+                  type="radio"
+                  id="form-{{ f }}"
+                  name="form"
+                  value="{{ f }}"
+                  {% if loop.first %}checked{% endif %}>
+                <label for="form-{{ f }}">
+                  {% if f == "pill" %}Pill{% elif f == "liquid" %}Liquid{% elif f == "unit" %}Unit{% else %}{{ f | capitalize }}{% endif %}
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% endif %}
+
+      {% if product.bullets and product.bullets | length %}
+        <ul class="bullets">
+          {% for b in product.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if product.chemInfo and product.chemInfo | length %}
+        <div class="chem">
+          <h3>Chemical Information</h3>
+          <table>
+            <tbody>
+              {% for row in product.chemInfo %}
+                <tr><td>{{ row.label }}</td><td>{{ row.value }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
