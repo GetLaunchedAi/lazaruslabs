@@ -185,7 +185,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/melanotan-2.png",
+    "image": "/images/products/melanotan_2.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -218,7 +218,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/semax.png",
+    "image": "/images/products/semax.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -251,7 +251,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/semaglutide.png",
+    "image": "/images/products/semaglutide.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
