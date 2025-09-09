@@ -119,7 +119,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/glow-pro-stack.png",
+    "image": "/images/products/glow_pro_stack.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -152,7 +152,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/ghk-cu.png",
+    "image": "/images/products/ghk_cu.webp",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -284,7 +284,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/tesamorelin.png",
+    "image": "/images/products/tesamorelin.jpeg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -317,7 +317,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/ipamorelin.png",
+    "image": "/images/products/ipamorelin.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -351,7 +351,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/rad-140.png",
+    "image": "/images/products/rad_140.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -384,7 +384,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/mk-2866-ostarine.png",
+    "image": "/images/products/mk_2866_ostarine.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -417,7 +417,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/lgd-4033.png",
+    "image": "/images/products/lgd_4033.jpeg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -450,7 +450,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/mk-677.png",
+    "image": "/images/products/mk_677.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -483,7 +483,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/tamoxifen.png",
+    "image": "/images/products/tamoxifen.webp",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -516,7 +516,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/hcg.png",
+    "image": "/images/products/hcg.webp",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -549,7 +549,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/enclomiphene.png",
+    "image": "/images/products/enclomiphene.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -582,7 +582,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/sildenafil.png",
+    "image": "/images/products/sildenafil.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -615,7 +615,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/tadalafil.png",
+    "image": "/images/products/tadalafil.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -648,7 +648,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/l-carnitine.png",
+    "image": "/images/products/l_carnitine.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -681,7 +681,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/cock-bomb.png",
+    "image": "/images/products/cock-bomb.png",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -715,7 +715,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/bac-water.png",
+    "image": "/images/products/bac_water.jpg",
     "chemInfo": [
       { "label": "Cas Number", "value": "TBD" },
       { "label": "PubChem CID", "value": "TBD" },
@@ -748,7 +748,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/reconstitution-kit.png",
+    "image": "/images/products/reconstitution_kit.webp",
     "chemInfo": [
       { "label": "Cas Number", "value": "—" },
       { "label": "PubChem CID", "value": "—" },
@@ -781,7 +781,7 @@
     ],
     "strength": null,
     "units": null,
-    "image": "/img/products/insulin-syringes.png",
+    "image": "/images/products/insulin_syringes.webp",
     "chemInfo": [
       { "label": "Cas Number", "value": "—" },
       { "label": "PubChem CID", "value": "—" },
