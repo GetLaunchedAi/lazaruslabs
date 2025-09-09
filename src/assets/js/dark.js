@@ -34,4 +34,4 @@ function detectColourScheme() {
 }
 
 // run on page load
-detectColourScheme();
+disableDarkMode()

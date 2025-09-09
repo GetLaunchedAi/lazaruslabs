@@ -1,0 +1,118 @@
+---
+layout: "base.html"
+permalink: "/catalog/"
+title: "Catalog"
+---
+
+<style>
+  :root{
+    --card:#fff; --ink:#111; --muted:#6b7280; --line:#eae7e3; --badge:#eef2ff; --brand:#0a62ff; --r:16px;
+  }
+  .wrap{max-width:1200px;margin:auto;padding:24px}
+  h1{font-size:34px;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 22px}
+  h2{font-size:22px;margin:26px 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .media{height:190px;display:flex;align-items:center;justify-content:center;background:#f7f8fb;border-bottom:1px solid var(--line)}
+  .media img{max-height:170px;max-width:90%;object-fit:contain}
+  .body{padding:14px 14px 16px}
+  .title{font-weight:700;margin:0 0 6px;font-size:16px}
+  .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .price{font-weight:700}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .forms{display:flex;gap:6px;flex-wrap:wrap}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;background:var(--badge);color:#1d4ed8;border:1px solid #dbe3ff}
+  .empty{color:var(--muted);font-style:italic}
+  .section-head{display:flex;align-items:baseline;gap:10px}
+  .count{color:var(--muted);font-size:14px}
+</style>
+
+<div class="wrap">
+  <h1>All Products</h1>
+  <p class="sub">Browse by category.</p>
+
+  <section id="peptides">
+    <div class="section-head">
+      <h2>Peptides</h2><span class="count" id="count-peptides"></span>
+    </div>
+    <div class="grid" id="grid-peptides"></div>
+  </section>
+
+  <section id="sarms">
+    <div class="section-head">
+      <h2>SARMS &amp; Performance</h2><span class="count" id="count-sarms"></span>
+    </div>
+    <div class="grid" id="grid-sarms"></div>
+  </section>
+
+  <section id="supplies">
+    <div class="section-head">
+      <h2>Supplies</h2><span class="count" id="count-supplies"></span>
+    </div>
+    <div class="grid" id="grid-supplies"></div>
+  </section>
+</div>
+
+<script>
+  // Raw data from Eleventy
+  const PRODUCTS = {{ products | dump | safe }};
+
+  // Category keys from your JSON
+  const CAT_KEYS = {
+    peptides: 'Peptides',
+    'sarms-performance': 'SARMS & Performance',
+    supplies: 'Supplies'
+  };
+
+  const money = v => (v == null ? "—" : `$${Number(v).toFixed(2)}`);
+  const rangeText = (r) => {
+    if (!Array.isArray(r) || !r.length) return "—";
+    const vals = r.map(x => x && x.price).filter(v => v != null);
+    if (!vals.length) return "—";
+    const min = Math.min(...vals), max = Math.max(...vals);
+    return min === max ? money(min) : `${money(min)} – ${money(max)}`;
+  };
+
+  const formLabel = f => (f === 'pill' ? 'Pill' : f === 'liquid' ? 'Liquid' : 'Unit');
+
+  function card(p){
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <a class="media" href="/product/${p.slug}/">
+        <img src="${p.image || '/images/placeholder.png'}" alt="${p.name || ''}">
+      </a>
+      <div class="body">
+        <h3 class="title"><a href="/product/${p.slug}/">${p.name || ''}</a></h3>
+        <div class="meta">${CAT_KEYS[p.category] || p.category}</div>
+        <div class="row">
+          <div class="price">${rangeText(p.ranges)}</div>
+          <div class="forms">
+            ${(p.forms || []).map(f => `<span class="pill">${formLabel(f)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+    return el;
+  }
+
+  function renderSection(catKey, gridId, countId){
+    const items = PRODUCTS.filter(p => p.category === catKey);
+    const grid = document.getElementById(gridId);
+    const count = document.getElementById(countId);
+    grid.innerHTML = '';
+    items.forEach(p => grid.appendChild(card(p)));
+    count.textContent = items.length ? `(${items.length})` : '';
+    if (!items.length){
+      grid.outerHTML = `<p class="empty">No products found.</p>`;
+    }
+  }
+
+  renderSection('peptides', 'grid-peptides', 'count-peptides');
+  renderSection('sarms-performance', 'grid-sarms', 'count-sarms');
+  renderSection('supplies', 'grid-supplies', 'count-supplies');
+</script>
