@@ -1,19 +1,152 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Content Manager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Netlify Identity (required for Git Gateway auth) -->
-  </head>
-  <body>
-    <!-- Back button -->
-    <a href="/" style="display:inline-block;margin:20px;font-size:16px;text-decoration:none;color:#0366d6;">
-      ← Back to Website
-    </a>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Access</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{
+      --bg:#faf7f2; --card:#fff; --line:#e7e1d8; --ink:#111827; --muted:#6b7280; --brand:#0a62ff;
+    }
+    html,body{height:100%}
+    body{margin:0; background:var(--bg); color:var(--ink); font:14px/1.45 system-ui,-apple-system,Segoe UI,Montserrat,Arial,sans-serif; display:grid; place-items:center}
+    .wrap{width:min(600px,92vw)}
+    .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px 18px; box-shadow:0 10px 30px rgba(0,0,0,.06)}
+    h1{margin:0 0 6px; font-size:20px}
+    p.sub{margin:0 0 16px; color:var(--muted)}
+    .field{display:flex; gap:8px; align-items:center}
+    input[type="password"]{
+      flex:1; height:44px; border:1px solid var(--line); border-radius:12px; padding:0 12px;
+      font:15px/1.2 inherit; outline:none; background:#fff;
+    }
+    input[type="password"]::placeholder{color:#9ca3af}
+    input[type="password"]:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(10,98,255,.15)}
+    button{
+      height:44px; padding:0 14px; border:0; border-radius:12px; cursor:pointer; font-weight:700; color:#fff; background:var(--brand);
+    }
+    .hint{margin-top:10px; color:var(--muted); font-size:12px}
+    .err{margin-top:10px; color:#b91c1c; background:#fef2f2; border:1px solid #fee2e2; padding:8px 10px; border-radius:10px; display:none}
+    .ok{margin-top:10px; color:#065f46; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 10px; border-radius:10px; display:none}
+    .footer{margin-top:14px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:12px}
+    .link{color:var(--brand); text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card" role="dialog" aria-labelledby="ttl" aria-modal="true">
+      <h1 id="ttl">Admin Access</h1>
+      <p class="sub">Paste your access token to continue to the product editor.</p>
 
-    <!-- Netlify Identity widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
-  </body>
+      <form id="gate" class="field" autocomplete="off" onsubmit="return false;">
+        <input id="token" type="password" inputmode="text" autocapitalize="none" autocomplete="off"
+               spellcheck="false" placeholder="Paste token…" aria-label="Access token">
+        <button id="go">Enter</button>
+      </form>
+
+      <div id="msgErr" class="err">Invalid token. Try again.</div>
+      <div id="msgOk" class="ok">Success! Redirecting…</div>
+
+      <div class="footer">
+        <span>Session lasts until you close the tab.</span>
+        <a class="link" href="#" id="logout" hidden>Log out</a>
+      </div>
+      <div class="hint">Tip: you can also open <code>/admin?token=YOUR_TOKEN</code>.</div>
+    </div>
+  </main>
+
+  <script>
+    // ============================================================
+    // CONFIG — set the SHA-256 of your token here.
+    // How to get it: open DevTools console and run:
+    //   const t = 'YOUR_REAL_TOKEN';
+    //   crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(b=>console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')));
+    // Copy the printed hex string into TOKEN_SHA256 below.
+
+    const TOKEN_SHA256 = 'REPLACE_WITH_SHA256_HEX'; // e.g. "2bb80d537b1da3e38bd30361aa855686bde0..."
+
+    // Path to redirect after success:
+    const DEST = '/admin/products.html';
+
+    // Session key (sessionStorage = cleared when tab closes)
+    const KEY = 'adminAuthV1';
+
+    // ============================================================
+    // Utility: SHA-256 hex of a string
+    async function sha256Hex(s){
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+
+    function qs(k, d=window.location.search){
+      const u = new URLSearchParams(d || '');
+      return u.get(k);
+    }
+
+    function setAuthed(){
+      sessionStorage.setItem(KEY, '1:' + TOKEN_SHA256);
+    }
+    function isAuthed(){
+      const v = sessionStorage.getItem(KEY) || '';
+      return v === '1:' + TOKEN_SHA256;
+    }
+    function logout(){
+      sessionStorage.removeItem(KEY);
+      location.href = '/admin';
+    }
+
+    // Auto-redirect if already authenticated
+    if (isAuthed()) {
+      window.location.replace(DEST);
+    }
+
+    // If token is in the URL (?token=...), try it
+    (async () => {
+      const t = qs('token');
+      if (t) {
+        try {
+          const h = await sha256Hex(t);
+          if (h === TOKEN_SHA256) {
+            setAuthed();
+            window.location.replace(DEST);
+          }
+        } catch {}
+      }
+    })();
+
+    // Wire up form
+    const $form = document.getElementById('gate');
+    const $input = document.getElementById('token');
+    const $go = document.getElementById('go');
+    const $err = document.getElementById('msgErr');
+    const $ok  = document.getElementById('msgOk');
+    const $logout = document.getElementById('logout');
+
+    async function submitToken(){
+      $err.style.display = 'none';
+      $ok.style.display = 'none';
+      const val = ($input.value || '').trim();
+      if (!val) { $input.focus(); return; }
+      try{
+        const h = await sha256Hex(val);
+        if (h === TOKEN_SHA256){
+          setAuthed();
+          $ok.style.display = 'block';
+          setTimeout(()=> window.location.replace(DEST), 300);
+        }else{
+          $err.style.display = 'block';
+        }
+      }catch{
+        $err.style.display = 'block';
+      }
+    }
+
+    $form.addEventListener('submit', e => { e.preventDefault(); submitToken(); });
+    $go.addEventListener('click', e => { e.preventDefault(); submitToken(); });
+    $input.addEventListener('keydown', e => { if (e.key === 'Enter') submitToken(); });
+
+    // Show logout link if already authed (e.g., user navigated back)
+    if (isAuthed()) $logout.hidden = false;
+    $logout.addEventListener('click', e => { e.preventDefault(); logout(); });
+  </script>
+</body>
 </html>

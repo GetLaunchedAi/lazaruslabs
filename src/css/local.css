@@ -688,11 +688,11 @@
   transition: transform .15s ease, box-shadow .15s ease;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .card {
     flex: 0 0 150px;
   }
-}
+} */
 
 .card:hover {
   transform: translateY(-2px);
@@ -712,7 +712,7 @@
   display: block;
 }
 
-.badge {
+.snipcart-items-count {
   position: absolute;
   top: -2px;
   right: -2px;
@@ -795,7 +795,9 @@
   margin: 0 0 6px;
   line-height: 1.35
 }
-
+.meta .title {
+  text-align: center;
+}
 .cats {
   color: var(--muted);
   font-size: 13px;

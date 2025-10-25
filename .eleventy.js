@@ -66,7 +66,9 @@ eleventyConfig.addWatchTarget("src/products/items"); // ensure watcher sees new 
   eleventyConfig.addPassthroughCopy('./src/_redirects');
   eleventyConfig.addPassthroughCopy({ './src/robots.txt': '/robots.txt' });
   eleventyConfig.addPassthroughCopy("src/images");
-  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" }); // copies to /admin
+  eleventyConfig.addPassthroughCopy({ "src/_data/products.json": "/products.json" }); // copies to /products.json
+  eleventyConfig.addPassthroughCopy({ "src/cart.html": "/cart.php" }); // copies to /cart.php
+
 
   // open on npm start and watch CSS files for changes - doesn't trigger 11ty rebuild
   eleventyConfig.setBrowserSyncConfig({

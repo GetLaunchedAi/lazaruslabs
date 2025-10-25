@@ -1,0 +1,415 @@
+---
+layout: "base.html"
+permalink: "/catalog/"
+tagTitle: "Catalog"
+eleventyExcludeFromCollections: true
+---
+
+<style>
+  /* same styling as before */
+  .wrap{max-width:1200px;margin:auto;padding:24px}
+  h1{font-size:34px;margin:0 0 12px}
+  .sub{color:#6b7280;margin:0 0 22px}
+
+  .catbar{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px}
+  .catbtn{
+    display:inline-flex;align-items:center;justify-content:center;
+    height:38px;padding:0 14px;border-radius:999px;border:1px solid #dfe3ea;
+    background:#fff;color:#111;font-weight:700;font-size:14px;text-decoration:none;
+    transition:transform .15s; text-transform: capitalize;
+  }
+  .catbtn:hover{transform:scale(1.05)}
+  .catbtn[aria-current="page"]{border-color:#2563eb;color:#2563eb}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .card{border:1px solid #e5e7eb;border-radius:16px;padding:16px;display:flex;flex-direction:column}
+  .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;margin:0 0 12px;background:#f8fafc}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .meta{font-size:12px;color:#6b7280;margin-bottom:8px}
+  .price{font-weight:700;margin:8px 0}
+  .btns{margin-top:auto;display:flex;gap:10px}
+  /* Hover animation and clickable pointer */
+.clickcard {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.clickcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+  /* BLUE buttons */
+  .btn{
+    flex:1;text-align:center;padding:10px;border-radius:8px;font-weight:600;
+    text-decoration:none;color:#fff;background:#2563eb;
+    transition:filter .15s, opacity .15s;
+    display:inline-flex;align-items:center;justify-content:center;
+  }
+  button.btn, a.btn { font-size:14px; line-height:1.1; }
+  .btn:hover{filter:brightness(0.92)}
+  .btn.disabled, .btn[disabled]{opacity:.45;pointer-events:none}
+  a.btn{color:#fff}
+ /* --- Cart Drawer Styling --- */
+.cart-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: 380px; max-width: 90%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  display: flex; flex-direction: column;
+  z-index: 9999;
+}
+.cart-drawer.open { transform: translateX(0); }
+
+.cart-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 20px; border-bottom: 1px solid #e5e7eb;
+}
+.cart-header h3 { margin: 0; font-size: 20px; font-weight: 700; }
+.cart-header button {
+  background: none; border: none; font-size: 28px; cursor: pointer; line-height: 1;
+}
+
+.cart-body {
+  flex: 1; overflow-y: auto; padding: 16px;
+}
+.cart-item {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px;
+}
+.cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+.cart-item .info { flex: 1; }
+.cart-item .info h4 { margin: 0 0 4px; font-size: 15px; }
+.cart-item .info .price { color: #2563eb; font-weight: 700; font-size: 14px; }
+.cart-item .controls {
+  display: flex; align-items: center; gap: 6px; margin-top: 4px;
+}
+.cart-item input.qty {
+  width: 48px; height: 28px;
+  border: 1px solid #ccc; border-radius: 6px;
+  text-align: center; font-weight: 600;
+}
+.cart-item button.del {
+  background: none; border: none; color: #ef4444;
+  font-weight: 700; cursor: pointer; font-size: 14px;
+}
+
+.cart-footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 16px; background: #f9fafb;
+}
+.cart-total {
+  font-weight: 700; font-size: 16px; margin-bottom: 12px;
+}
+.checkout-btn {
+  display: block; width: 100%; text-align: center;
+  background: #2563eb; color: #fff;
+  padding: 12px; border-radius: 8px; text-decoration: none;
+  font-weight: 700; font-size: 15px;
+}
+.checkout-btn:hover { filter: brightness(0.9); }
+
+.cart-empty { text-align: center; padding: 40px 0; color: #6b7280; }
+
+</style>
+<!-- Interactive Slide-in Cart Drawer -->
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button id="closeCart" aria-label="Close cart">×</button>
+  </div>
+
+  <div class="cart-body" id="cartItems"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total" id="cartTotal">Total: $0.00</div>
+    <a href="/cart.php" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>Catalog</h1>
+  <p class="sub">Browse our products</p>
+
+
+  <div class="grid" id="product-grid"></div>
+</div>
+
+<script>
+(function(){
+  const drawer = document.getElementById('cartDrawer');
+  const closeBtn = document.getElementById('closeCart');
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+
+  // === Helper functions ===
+  function getCart(){ try { return JSON.parse(localStorage.getItem('cart'))||[]; } catch { return []; } }
+  function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); window.dispatchEvent(new Event('cart:changed')); }
+  function formatMoney(v){ return '$' + Number(v||0).toFixed(2); }
+
+  // === Your computePriceFromRanges() logic ===
+  function computePriceFromRanges(item) {
+    if (!item.ranges || !item.ranges.length) return Number(item.price);
+    const qty = Number(item.quantity);
+    for (const r of item.ranges) {
+      if (!r || !r.label) continue;
+      const label = String(r.label).trim();
+      const between = label.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+      if (between) {
+        const lo = parseInt(between[1], 10);
+        const hi = parseInt(between[2], 10);
+        if (qty >= lo && qty <= hi) return Number(r.price);
+      }
+      const openEnded = label.match(/^(\d+)\s*(\+|and up)?$/i);
+      if (openEnded) {
+        const lo = parseInt(openEnded[1], 10);
+        if (qty >= lo) return Number(r.price);
+      }
+    }
+    return Number(item.ranges[item.ranges.length - 1].price || item.ranges[0].price);
+  }
+
+  // === Render Cart ===
+  function renderCart(){
+    const cart = getCart();
+    if(!cart.length){
+      itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
+      totalEl.textContent = 'Total: $0.00';
+      return;
+    }
+
+    let total = 0;
+    itemsEl.innerHTML = cart.map(i=>{
+      const qty = Number(i.quantity || 1);
+      const unitPrice = computePriceFromRanges(i);
+      const subtotal = unitPrice * qty;
+      total += subtotal;
+
+      return `
+        <div class="cart-item" data-id="${i.id}">
+          <img src="${i.image||'/images/placeholder.png'}" alt="">
+          <div class="info">
+            <h4>${i.name}</h4>
+            <div class="price">${formatMoney(unitPrice)} each</div>
+            <div class="controls">
+              <input type="number" class="qty" min="1" value="${qty}">
+              <button class="del">Remove</button>
+            </div>
+          </div>
+          <div class="line-total">${formatMoney(subtotal)}</div>
+        </div>`;
+    }).join('');
+
+    totalEl.textContent = 'Total: ' + formatMoney(total);
+  }
+
+  function openCart(){ renderCart(); drawer.classList.add('open'); }
+  function closeCart(){ drawer.classList.remove('open'); }
+
+  closeBtn.addEventListener('click', closeCart);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCart(); });
+
+  // === Quantity change + Delete ===
+  itemsEl.addEventListener('input', e=>{
+    if(!e.target.classList.contains('qty')) return;
+    const itemEl = e.target.closest('.cart-item');
+    const id = itemEl.dataset.id;
+    const newQty = Math.max(1, parseInt(e.target.value) || 1);
+    const cart = getCart();
+    const item = cart.find(x=>String(x.id)===id);
+    if(item){
+      item.quantity = newQty;
+      const newPrice = computePriceFromRanges(item);
+      item.price = newPrice; // update price in cart for persistence
+      saveCart(cart);
+      renderCart();
+    }
+  });
+
+  itemsEl.addEventListener('click', e=>{
+    if(!e.target.classList.contains('del')) return;
+    const id = e.target.closest('.cart-item').dataset.id;
+    const updated = getCart().filter(x=>String(x.id)!==id);
+    saveCart(updated);
+    renderCart();
+  });
+
+  // === Hook into Add-to-Cart ===
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.add-to-cart');
+    if(!btn) return;
+    // wait for your main catalog script to update localStorage first
+    setTimeout(()=>{ openCart(); renderCart(); }, 200);
+  });
+
+  window.addEventListener('cart:changed', renderCart);
+})();
+(function () {
+  const grid = document.getElementById('product-grid');
+  let ALL_PRODUCTS = [];
+
+  /* ---------------- Cart + Pricing Helpers ---------------- */
+  function getCart(){ try { return JSON.parse(localStorage.getItem('cart')) || []; } catch { return []; } }
+  function saveCart(cart){
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('cart:changed'));
+  }
+  function copyRanges(p){
+    return Array.isArray(p.ranges) ? p.ranges.map(r => ({ label: r.label, price: Number(r.price) })) : [];
+  }
+  function priceFromRanges(ranges, qty){
+    if (!Array.isArray(ranges) || !ranges.length) return null;
+    const q = Number(qty)||1;
+    for (const r of ranges){
+      const label = String(r.label||'').trim().replace(/\u2013|\u2014/g,'-');
+      let m = label.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (m){ const lo=+m[1], hi=+m[2]; if (q>=lo && q<=hi) return Number(r.price); continue; }
+      m = label.match(/^(\d+)\s*(\+|and up)$/i);
+      if (m){ const lo=+m[1]; if (q>=lo) return Number(r.price); continue; }
+      m = label.match(/^(\d+)$/);
+      if (m){ if (q===+m[1]) return Number(r.price); }
+    }
+    const last = ranges[ranges.length-1];
+    return Number(last?.price ?? NaN);
+  }
+  function computePriceForQty(p, qty){
+    if (p.price != null && p.price !== '') return Number(p.price);
+    const pr = priceFromRanges(p.ranges, qty);
+    if (Number.isFinite(pr)) return pr;
+    if (Array.isArray(p.prices) && p.prices[0] != null) return Number(p.prices[0]);
+    if (Array.isArray(p.variants) && p.variants[0]?.price != null) return Number(p.variants[0].price);
+    return null;
+  }
+
+  /* ---------------- Utility helpers ---------------- */
+  function normalizePrice(p) {
+    if (p.price != null && p.price !== '') return p.price;
+    if (Array.isArray(p.prices) && p.prices[0] != null) return p.prices[0];
+    if (Array.isArray(p.variants) && p.variants[0]?.price != null) return p.variants[0].price;
+    return null;
+  }
+  function formatPrice(v) {
+    const n = Number(v);
+    if (!isFinite(n)) return v;
+    return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+  }
+  function primaryImage(p) {
+    if (p.image) return p.image;
+    if (Array.isArray(p.images) && p.images.length) return p.images[0];
+    return '';
+  }
+  function productUrl(p) {
+    if (p.slug) return `/product/${encodeURIComponent(p.slug)}`;
+    return `/product/${encodeURIComponent(p.id)}`;
+  }
+  function escapeAttr(v) {
+    return String(v ?? '').replace(/"/g, '&quot;');
+  }
+
+  /* ---------------- Rendering ---------------- */
+  function renderGrid(products) {
+    if (!products.length) {
+      grid.innerHTML = `<p>No products found.</p>`;
+      return;
+    }
+
+    grid.innerHTML = products.map(p => {
+      const img = primaryImage(p);
+      const priceRaw = normalizePrice(p);
+      const priceText = priceRaw == null || priceRaw === '' ? '—' : formatPrice(priceRaw);
+      const desc = p.desc || p.description || '';
+      const url = productUrl(p);
+      const canAdd = priceRaw != null && String(priceRaw).trim() !== '';
+
+      return `
+        <div class="card clickcard" data-url="${url}" tabindex="0">
+          <img class="thumb" src="${img}" alt="${p.name || ''}" loading="lazy" />
+          <h3>${p.name || ''}</h3>
+          <div class="meta">${p.category ? p.category : ''}</div>
+          <div class="price">${priceText}</div>
+          <p>${desc}</p>
+          <div class="btns">
+            ${canAdd
+              ? `<button class="btn add-to-cart" data-id="${escapeAttr(p.id ?? p.slug)}">Add to Cart</button>`
+              : `<button class="btn disabled" disabled title="Price missing">Add to Cart</button>`}
+            <a href="${url}" class="btn">See Full Info</a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /* ---------------- Add-to-Cart ---------------- */
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-cart');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    const p = ALL_PRODUCTS.find(x => (x.id ?? x.slug) == id);
+    if (!p) return;
+
+    const qty = 1;
+    const price = computePriceForQty(p, qty);
+    if (!Number.isFinite(price)) { alert('Price unavailable for this item.'); return; }
+
+    const cart = getCart();
+    const pid = p.id ?? p.slug;
+    const existing = cart.find(i => i.id === pid);
+
+    if (existing) {
+      existing.quantity += qty;
+      if (!existing.ranges || !existing.ranges.length) existing.ranges = copyRanges(p);
+    } else {
+      cart.push({
+        id: pid,
+        name: p.name,
+        price: price,
+        quantity: qty,
+        ranges: copyRanges(p),
+        category: p.category || '',
+        image: p.image || (Array.isArray(p.images) ? p.images[0] : '')
+      });
+    }
+
+    saveCart(cart);
+    btn.style.filter = 'brightness(0.92)';
+    setTimeout(() => btn.style.filter = '', 140);
+  });
+
+  /* ---------------- Card click navigation ---------------- */
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.clickcard');
+    if (!card || e.target.closest('a, button')) return;
+    const url = card.getAttribute('data-url');
+    if (url) window.location.href = url;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const card = e.target.closest('.clickcard');
+    if (!card || e.target.closest('a, button')) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const url = card.getAttribute('data-url');
+      if (url) window.location.href = url;
+    }
+  });
+
+  /* ---------------- Init ---------------- */
+  async function init() {
+    try {
+      const res = await fetch('/products.json', { cache: 'no-store' });
+      const raw = await res.json();
+      ALL_PRODUCTS = Array.isArray(raw) ? raw : (raw.products || []);
+      renderGrid(ALL_PRODUCTS);
+    } catch (e) {
+      console.error('Error loading products:', e);
+      grid.innerHTML = `<p>There was a problem loading products.</p>`;
+    }
+  }
+
+  init();
+})();
+</script>

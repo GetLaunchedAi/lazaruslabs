@@ -17,39 +17,38 @@
     /* 60px - 100px top and bottom */
     --sectionPadding: clamp(3.75em, 7.82vw, 6.25em) 1rem;
   }
-  /* roboto-regular - latin */
-  @font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    src: local(""),
-      url("/assets/fonts/roboto-v29-latin-regular.woff2") format("woff2"),
-      /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url("/assets/fonts/roboto-v29-latin-regular.woff") format("woff");
-
+  /* montserrat-400 - latin */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""),
+    url("/assets/fonts/montserrat-v26-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url("/assets/fonts/montserrat-v26-latin-regular.woff") format("woff");
     /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-700 - latin */
-  @font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 700;
-    src: local(""),
-      url("/assets/fonts/roboto-v29-latin-700.woff2") format("woff2"),
-      /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url("/assets/fonts/roboto-v29-latin-700.woff") format("woff");
+}
 
-    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* roboto-900 - latin */
-  @font-face {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 900;
-    src: local(""),
-      url("/assets/fonts/roboto-v29-latin-900.woff2") format("woff2"),
-      /* Chrome 26+, Opera 23+, Firefox 39+ */
-        url("/assets/fonts/roboto-v29-latin-900.woff") format("woff");
+/* montserrat-700 - latin */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""),
+    url("/assets/fonts/montserrat-v26-latin-700.woff2") format("woff2"),
+    url("/assets/fonts/montserrat-v26-latin-700.woff") format("woff");
+}
+
+/* montserrat-900 - latin */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 900;
+  src: local(""),
+    url("/assets/fonts/montserrat-v26-latin-900.woff2") format("woff2"),
+    url("/assets/fonts/montserrat-v26-latin-900.woff") format("woff");
+}
+
 
     /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
@@ -58,7 +57,7 @@
     margin: 0;
     padding: 0;
     font-size: 100%;
-    font-family: "Roboto", Arial, sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
     color: var(--bodyTextColor);
     overflow-x: hidden;
   }
@@ -199,7 +198,7 @@
 
 /* Left cluster */
 .left{display:flex; align-items:center; gap:10px}
-.logo img{ display:block; max-height:46px; width:auto }
+.mainbar .logo img{max-height: 70px; width:auto }
 .burger{
   border:0; background:transparent; padding:8px; border-radius:8px; cursor:pointer;
 }
@@ -243,7 +242,7 @@
   position:relative; display:grid; place-items:center; text-decoration:none; color:var(--ink);
   width:40px; height:40px; border-radius:999px; background:rgba(119,208,239,.35);
 }
-.badge{
+.snipcart-items-count{
   position:absolute; top:-2px; right:-2px; min-width:18px; width:fit-content;
   border-radius:999px; background:#fff; border:1px solid var(--border);
   display:grid; place-items:center; font-size:12px; font-weight:700; color:var(--ink);
@@ -256,7 +255,6 @@
   .main-inner{ grid-template-columns: 1fr 1fr; }
   .search{ grid-column: 1 / -1; order:3 }
   .right{ justify-content:flex-start }
-  .logo img{ max-height:40px }
 }
 
 /* Colors & radii to match your header */
@@ -440,7 +438,7 @@ body.noscroll{ overflow:hidden; }
     display: inline-block;
     margin: auto;
     width: auto;
-    height: 3.125em;
+    height: 6rem;
     margin-bottom: 1.875em;
     text-align: center;
   }
@@ -448,6 +446,7 @@ body.noscroll{ overflow:hidden; }
     width: auto;
     height: 100%;
     display: block;
+    filter: invert(100%) hue-rotate(180deg);
   }
   #footer .left-section p {
     font-size: 0.875rem;
@@ -580,7 +579,7 @@ body.noscroll{ overflow:hidden; }
   #footer .left-section .logo {
     text-align: left;
     margin-left: 0;
-    height: 4.375rem;
+    height: 10rem;
   }
   #footer .left-section p {
     text-align: left;

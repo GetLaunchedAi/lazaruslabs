@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Product Editor | Lazarus Labs Admin</title>
+<style>
+  :root {
+    --bg:#f9f7f3; --card:#fff; --line:#e7e1d8; --ink:#111827;
+    --muted:#6b7280; --brand:#0a62ff; --accent:#1f7fa6;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--ink);
+  }
+  header {
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 20px;background:#fff;border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+  }
+  h1 { font-size:20px; margin:0; }
+  .right { display:flex; gap:10px; align-items:center; }
+  .pill {
+    color:var(--muted);font-size:13px;text-decoration:none;border:1px solid var(--line);
+    padding:6px 10px;border-radius:999px;transition:.2s;background:#fff;
+  }
+  .pill:hover { border-color:var(--brand); color:var(--brand); }
+  .btn-primary {
+    background:var(--accent);color:#fff;border:none;border-radius:999px;
+    padding:8px 14px;font-weight:700;font-size:14px;cursor:pointer;
+    transition:filter .15s,transform .12s;
+  }
+  .btn-primary:hover { filter:brightness(.95); transform:translateY(-1px); }
+  main { max-width:1100px; margin:22px auto; padding:0 16px; }
+
+  .toolbar {
+    display:grid; grid-template-columns: 1fr 200px 140px; gap:10px; margin:0 0 14px;
+  }
+  .toolbar input[type="search"],
+  .toolbar select {
+    height:42px; padding:0 12px; border:1px solid var(--line); border-radius:10px;
+    background:#fff; font:15px/1.4 inherit; color:var(--ink);
+  }
+  .toolbar input[type="search"]:focus, .toolbar select:focus {
+    border-color:var(--brand); box-shadow:0 0 0 3px rgba(10,98,255,.15); outline:none;
+  }
+
+  .tablewrap { background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;
+               box-shadow:0 6px 22px rgba(0,0,0,.06); }
+  table { width:100%; border-collapse:collapse; }
+  thead { background:#f3f4f6; color:#374151; }
+  th, td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; font-size:14px; }
+  tbody tr { background:#fff; transition: background .15s; }
+  tbody tr:hover { background:#fafafa; }
+  tbody tr[hidden] { display:none; }
+  .thumb { width:56px; height:56px; border-radius:8px; object-fit:cover; border:1px solid #e5e7eb; background:#f8fafc; }
+  .name { font-weight:600; }
+  .slug { color:var(--muted); font-size:12px; }
+  .price { white-space:nowrap; }
+  .actions { display:flex; gap:8px; }
+  .btn {
+    background:var(--accent); color:#fff; padding:6px 12px; border-radius:10px;
+    text-decoration:none; font-weight:700; font-size:13px; display:inline-flex; align-items:center; justify-content:center;
+    transition:filter .15s, transform .12s;
+  }
+  .btn:hover { filter:brightness(.96); transform:translateY(-1px); }
+  .rowlink { cursor:pointer; }
+  .empty { padding:30px; text-align:center; color:var(--muted); }
+
+  .status {
+    position:fixed; bottom:18px; right:20px; padding:10px 14px; background:#111827; color:#fff;
+    border-radius:10px; font-size:13px; box-shadow:0 6px 20px rgba(0,0,0,.2); opacity:0; pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .status.show { opacity:1; }
+  .del-btn {
+  background: #b91c1c !important;
+}
+.del-btn:hover {
+  filter: brightness(.9);
+}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>Product Editor</h1>
+  <div class="right">
+    <span id="count">0 items</span>
+    <a class="pill" href="/admin/logout.php">Log out</a>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Search…" aria-label="Search products">
+    <select id="category"><option value="">All categories</option></select>
+    <button id="addBtn" class="btn-primary">+ Add New</button>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:72px;">Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th style="width:140px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</main>
+
+<div id="status" class="status"></div>
+
+<script>
+  
+(function(){
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const tbody = $('#tbody');
+  const search = $('#search');
+  const category = $('#category');
+  const addBtn = $('#addBtn');
+  const countEl = $('#count');
+  const statusBox = $('#status');
+
+  let PRODUCTS = [];
+
+  const showStatus = (msg, good=true) => {
+    statusBox.textContent = msg;
+    statusBox.style.background = good ? "#1f7fa6" : "#b91c1c";
+    statusBox.classList.add("show");
+    setTimeout(()=>statusBox.classList.remove("show"),1600);
+  };
+
+  const fmtPrice = v => {
+    if (v == null || v === '') return '—';
+    const n = Number(v);
+    return Number.isFinite(n) ? n.toLocaleString(undefined, { style:'currency', currency:'USD' }) : String(v);
+  };
+
+  function buildRow(p){
+    const tr = document.createElement('tr');
+    tr.dataset.slug = p.slug || '';
+    tr.dataset.name = (p.name || '').toLowerCase();
+    tr.dataset.cat  = (p.category || '').toLowerCase();
+    tr.innerHTML = `
+      <td><img class="thumb" src="${p.image || (Array.isArray(p.images)&&p.images[0]) || '/images/placeholder.png'}" alt=""></td>
+      <td><div class="name">${p.name || '(Untitled)'}</div><div class="slug">${p.slug || ''}</div></td>
+      <td>${p.category || '-'}</td>
+      <td class="price">${fmtPrice(p.price)}</td>
+      <td class="actions">
+        <a class="btn" href="/admin/edit.html?slug=${encodeURIComponent(p.slug||'')}">Edit</a>
+        <button class="btn del-btn" data-slug="${p.slug}">Delete</button>
+      </td>
+
+    `;
+    tr.addEventListener('click', e => {
+      if(e.target.closest('a,button')) return;
+      const slug = tr.dataset.slug;
+      if(slug) window.location.href = `/admin/edit.html?slug=${encodeURIComponent(slug)}`;
+    });
+    return tr;
+  }
+
+  function render(products){
+    tbody.innerHTML = '';
+    if(!products.length){
+      tbody.innerHTML = `<tr><td colspan="5" class="empty">No products found.</td></tr>`;
+    }else{
+      const frag = document.createDocumentFragment();
+      products.forEach(p => frag.appendChild(buildRow(p)));
+      tbody.appendChild(frag);
+    }
+    countEl.textContent = `${products.length} item${products.length!==1?'s':''}`;
+  }
+
+  function applyFilters(){
+    const q = search.value.trim().toLowerCase();
+    const cat = category.value.trim().toLowerCase();
+    let visible = 0;
+    $$('tr',tbody).forEach(r=>{
+      if(r.querySelector('.empty')) return;
+      const name=r.dataset.name||'',slug=r.dataset.slug||'',rc=r.dataset.cat||'';
+      const matchText=!q||name.includes(q)||slug.includes(q)||rc.includes(q);
+      const matchCat=!cat||rc===cat;
+      const show=matchText&&matchCat;
+      r.hidden=!show;
+      if(show)visible++;
+    });
+    countEl.textContent=`${visible} item${visible!==1?'s':''}`;
+  }
+
+  function populateCategoryOptions(list){
+    const cats=[...new Set(list.map(p=>(p.category||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+    category.innerHTML=`<option value="">All categories</option>`+cats.map(c=>`<option value="${c.toLowerCase()}">${c}</option>`).join('');
+  }
+
+  async function saveAll(data){
+    try{
+      await fetch('/api/save-products.php',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      });
+      return true;
+    }catch{ return false; }
+  }
+
+  async function addNewProduct(){
+  const baseSlug = "new-product";
+  let slug = baseSlug;
+  let i=1;
+  while(PRODUCTS.some(p=>p.slug===slug)){ slug = baseSlug + "-" + (++i); }
+
+  const newProd = {
+    slug,
+    name: "New Product",
+    category: "",
+    price: "",
+    desc: "",
+    image: "",
+    bullets: [],
+    ranges: [],
+    forms: [],
+    variants: [],
+    active: true
+  };
+
+  PRODUCTS.push(newProd);
+  render(PRODUCTS);
+  showStatus("Creating…");
+
+  try {
+    const res = await fetch('/api/save-products.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(PRODUCTS)
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showStatus("Created ✓");
+      // redirect only after confirming the file was saved
+      window.location.href = `/admin/edit.html?slug=${encodeURIComponent(slug)}`;
+    } else {
+      showStatus("Save failed", false);
+    }
+  } catch (err) {
+    console.error(err);
+    showStatus("Save failed", false);
+  }
+}
+
+  async function init(){
+    try{
+      const res = await fetch('/products.json',{cache:'no-store'});
+      const data = await res.json();
+      PRODUCTS = Array.isArray(data) ? data : (data.products||[]);
+      populateCategoryOptions(PRODUCTS);
+      render(PRODUCTS);
+      showStatus('Loaded ✓');
+    }catch(e){
+      tbody.innerHTML = `<tr><td colspan="5" class="empty">Failed to load products.json</td></tr>`;
+      showStatus('Load failed', false);
+    }
+  }
+
+  search.addEventListener('input', applyFilters);
+  category.addEventListener('change', applyFilters);
+  addBtn.addEventListener('click', addNewProduct);
+  // Handle delete button clicks
+tbody.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.del-btn');
+  if (!btn) return;
+  e.stopPropagation();
+  const slug = btn.dataset.slug;
+  if (!slug) return;
+
+  if (!confirm(`Are you sure you want to delete "${slug}"? This cannot be undone.`)) return;
+
+  // Remove from PRODUCTS array
+  PRODUCTS = PRODUCTS.filter(p => p.slug !== slug);
+  render(PRODUCTS);
+  showStatus('Deleting…');
+
+  try {
+    const res = await fetch('/api/save-products.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(PRODUCTS)
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showStatus('Deleted ✓');
+    } else {
+      showStatus('Delete failed', false);
+    }
+  } catch (err) {
+    console.error(err);
+    showStatus('Delete failed', false);
+  }
+});
+
+  init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+---
+layout: base.html
+title: "Your Cart"
+permalink: "/cart.php"
+---
+
+<style>
+.cart-page {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+.cart-table th, .cart-table td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.cart-table th {
+  font-weight: 700;
+}
+.cart-actions {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+.checkout-btn {
+  background: #10b981;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.checkout-btn:hover {
+  background: #0d9468;
+}
+/* ===== Mini qty control on cart page ===== */
+.qty-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 4px 6px;
+  background: #fafafa;
+}
+
+.qty-mini button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #374151;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 28px;
+  display: grid;
+  place-items: center;
+  transition: background .15s ease, transform .05s ease;
+}
+.qty-mini button:hover { background: #e5e7eb; }
+.qty-mini button:active { transform: translateY(1px); }
+
+.qty-mini input {
+  width: 46px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: 600 14px/28px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding: 0;
+}
+
+/* Remove number input spinners (Chrome/Edge/Safari) */
+.qty-mini input::-webkit-outer-spin-button,
+.qty-mini input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+/* Remove spinners (Firefox) */
+.qty-mini input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+</style>
+
+<div class="cart-page">
+  <h1>Your Cart</h1>
+  <table class="cart-table" id="cartTable">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+<div class="cart-actions">
+  <div id="subtotal" style="font-weight:700;"></div>
+  <div>
+    <button id="clearCartBtn" class="checkout-btn" style="background:#ef4444;margin-right:10px;">Clear Cart</button>
+    <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+  </div>
+</div>
+
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  // Clicks on + / −
+document.getElementById('cartTable').addEventListener('click', (e) => {
+  const dec = e.target.closest('.qty-dec');
+  const inc = e.target.closest('.qty-inc');
+  if (!dec && !inc) return;
+
+  const idx = parseInt((dec || inc).dataset.idx, 10);
+  const cart = getCart();
+  if (!cart[idx]) return;
+
+  let q = Number(cart[idx].quantity) || 1;
+  q = dec ? Math.max(1, q - 1) : q + 1;
+  cart[idx].quantity = q;
+
+  saveCart(cart);
+  renderCart();
+});
+
+// Typing directly into the input: keep it clean & >= 1
+document.getElementById('cartTable').addEventListener('input', (e) => {
+  if (!e.target.classList.contains('qty-input')) return;
+  const idx = parseInt(e.target.dataset.idx, 10);
+  const cart = getCart();
+  if (!cart[idx]) return;
+
+  let val = e.target.value.replace(/[^\d]/g, '');
+  if (val === '') val = '1';
+  cart[idx].quantity = Math.max(1, parseInt(val, 10));
+  saveCart(cart);
+  // Don’t re-render on every keystroke: just normalize the field
+  e.target.value = cart[idx].quantity;
+});
+
+document.getElementById('cartTable').addEventListener('change', (e) => {
+  if (e.target.classList.contains('qty-input')) {
+    renderCart(); // final recalc (price tiers, totals, labels)
+  }
+});
+
+document.getElementById('clearCartBtn').addEventListener('click', () => {
+  if (confirm('Are you sure you want to clear your cart?')) {
+    localStorage.removeItem('cart');
+    renderCart();
+  }
+});
+
+function computePriceFromRanges(item) {
+  console.log(item)
+  console.log(item.ranges)
+  if (!item.ranges || !item.ranges.length) return Number(item.price);
+  const qty = Number(item.quantity);
+
+  for (const r of item.ranges) {
+    if (!r || !r.label) continue;
+    const label = String(r.label).trim();
+
+    // --- Match "1–4" or "1-4"
+    const between = label.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+    if (between) {
+      const lo = parseInt(between[1], 10);
+      const hi = parseInt(between[2], 10);
+      if (qty >= lo && qty <= hi) return Number(r.price);
+    }
+
+    // --- Match "10+" or "10 +" or "10 and up"
+    const openEnded = label.match(/^(\d+)\s*(\+|and up)?$/i);
+    if (openEnded) {
+      const lo = parseInt(openEnded[1], 10);
+      if (qty >= lo) return Number(r.price);
+    }
+  }
+
+  // --- Default to first or last if nothing matched
+  return Number(item.ranges[item.ranges.length - 1].price || item.ranges[0].price);
+}
+
+
+const stripe = Stripe("<?= getenv('STRIPE_PUBLIC_KEY') ?>");
+
+function getCart() { return JSON.parse(localStorage.getItem('cart')) || []; }
+function saveCart(c) { localStorage.setItem('cart', JSON.stringify(c)); }
+
+function renderCart() {
+  const cart = getCart();
+  const tbody = document.querySelector('#cartTable tbody');
+  if (!cart.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Your cart is empty.</td></tr>';
+    document.getElementById('subtotal').textContent = '';
+    document.getElementById('clearCartBtn').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('clearCartBtn').style.display = 'inline-block';
+  let total = 0;
+
+  tbody.innerHTML = cart.map((item, i) => {
+    const newPrice = computePriceFromRanges(item);
+    item.price = newPrice;
+    const lineTotal = newPrice * item.quantity;
+    total += lineTotal;
+
+    // Determine active tier
+    let activeTier = '';
+    if (item.ranges && item.ranges.length) {
+      for (const r of item.ranges) {
+        const label = String(r.label || '').trim();
+
+        const between = label.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+        if (between) {
+          const lo = parseInt(between[1], 10);
+          const hi = parseInt(between[2], 10);
+          if (item.quantity >= lo && item.quantity <= hi) {
+            activeTier = label;
+            break;
+          }
+        }
+
+        const open = label.match(/^(\d+)\s*(\+|and up)?$/i);
+        if (open) {
+          const lo = parseInt(open[1], 10);
+          if (item.quantity >= lo) {
+            activeTier = label;
+          }
+        }
+      }
+    }
+
+    return `
+      <tr>
+        <td>${item.name}</td>
+        <td>
+          <div class="qty-mini">
+            <button class="qty-dec" data-idx="${i}" aria-label="Decrease quantity">−</button>
+            <input class="qty-input" type="number" inputmode="numeric" min="1" value="${item.quantity}" data-idx="${i}">
+            <button class="qty-inc" data-idx="${i}" aria-label="Increase quantity">+</button>
+          </div>
+        </td>
+
+        <td>
+          <div class="price-wrap">
+            <span class="price-value">$${newPrice.toFixed(2)}</span>
+            ${activeTier ? `<div class="tier-label">(${activeTier} tier)</div>` : ''}
+          </div>
+        </td>
+        <td>$${lineTotal.toFixed(2)}</td>
+        <td>
+          <button data-idx="${i}" class="remove-btn"
+                  style="color:red;border:none;background:none;cursor:pointer;font-size:20px;">×</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  document.getElementById('subtotal').textContent = 'Subtotal: $' + total.toFixed(2);
+  saveCart(cart);
+
+  // Add subtle fade-in animation for tier labels
+  const style = document.createElement('style');
+  style.textContent = `
+    .price-wrap { position: relative; }
+    .tier-label {
+      font-size: 12px;
+      color: #6b7280;
+      opacity: 0;
+      transform: translateY(-4px);
+      animation: fadeTier 0.3s forwards;
+    }
+    @keyframes fadeTier {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function updateQty(e) {
+  const idx = e.target.dataset.idx;
+  const val = parseInt(e.target.value, 10);
+  const cart = getCart();
+  if (cart[idx]) {
+    cart[idx].quantity = val;
+  }
+  saveCart(cart);
+  console.log(cart)
+  renderCart();
+  const stripe1 = Stripe("<?= getenv('STRIPE_PUBLIC_KEY') ?>");
+  const stripe2 = Stripe("<?= getenv('STRIPE_SECRET_KEY') ?>");
+
+  console.log(stripe1, stripe2)
+}
+
+function removeItem(e) {
+  const idx = e.target.dataset.idx;
+  const cart = getCart();
+  cart.splice(idx, 1);
+  saveCart(cart);
+  renderCart();
+}
+
+document.getElementById('cartTable').addEventListener('change', e => {
+  if (e.target.classList.contains('qty-input')) updateQty(e);
+});
+document.getElementById('cartTable').addEventListener('click', e => {
+  if (e.target.classList.contains('remove-btn')) removeItem(e);
+});
+
+document.getElementById('checkoutBtn').addEventListener('click', async () => {
+  let cart = getCart();
+  if (!cart.length) return alert('Your cart is empty.');
+
+  // 🔹 Re-apply correct range price before checkout
+  cart = cart.map(item => ({
+    ...item,
+    price: computePriceFromRanges(item)
+  }));
+
+  const res = await fetch('/api/create-checkout-session.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ cart }) // ✅ must match PHP: $body['cart']
+  });
+
+  const data = await res.json();
+  if (data.error) {
+    alert('Error: ' + data.error);
+    return;
+  }
+
+  // Redirect to Stripe Checkout
+  const stripe = Stripe("<?= getenv('STRIPE_PUBLIC_KEY') ?>");
+  stripe.redirectToCheckout({ sessionId: data.id });
+});
+
+renderCart();
+</script>

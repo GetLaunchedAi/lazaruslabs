@@ -1,0 +1,410 @@
+---
+layout: "base.html"
+permalink: "/product/"
+eleventyExcludeFromCollections: true
+---
+
+<style>
+.wrap {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 920px) {
+  .product { grid-template-columns: 1fr; }
+}
+
+.media {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.media img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.priceband {
+  font-weight: 700;
+  font-size: 22px;
+  margin: 8px 0 20px;
+}
+
+.bullets {
+  margin: 24px 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.bullets li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.chem {
+  margin-top: 28px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+.chem h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.chem table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.chem td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 8px;
+}
+.chem td:first-child {
+  color: #6b7280;
+  width: 220px;
+  font-weight: 500;
+}
+
+/* purchase block */
+.qty-add {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.qty-control {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 44px;
+}
+
+.qty-control input {
+  width: 50px;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.qty-btn {
+  background: #f9fafb;
+  border: none;
+  width: 38px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.qty-btn:hover {
+  background: #e5e7eb;
+}
+
+.add-item {
+  flex: 1;
+  background: #00aaff; /* adjust to match your theme */
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  padding: 0 20px;
+  height: 44px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.snipcart-add-item:hover:not(:disabled) {
+  background: #0090dd;
+}
+.snipcart-add-item:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.range-table {
+  margin: 28px 0;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15px;
+}
+.range-table th,
+.range-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+.range-table th {
+  font-weight: 700;
+  color: #444;
+}
+.range-table td:last-child {
+  color: #0a62ff;
+  font-weight: 600;
+}
+.range-table tr.active td {
+  background: #f0f7ff;
+  font-weight: 700;
+  color: #0a62ff;
+}
+.qty-control input::-webkit-outer-spin-button,
+.qty-control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.qty-control input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* future-friendly */
+}
+
+/* Center the number nicely */
+.qty-control input {
+  text-align: center;       /* horizontal */
+  height: 44px;             /* match your control height */
+  line-height: 44px;        /* vertical centering of the numeral */
+  padding: 0;               /* avoid shifting */
+}
+</style>
+
+<div class="wrap" id="pdp-root">
+  <p>Loading…</p>
+  <p>Test</p>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function () {
+  const DATA_URL = '/products.json';
+  const stripe = Stripe("<?= getenv('STRIPE_PUBLIC_KEY') ?>");
+
+  // ---------- helpers ----------
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const getCart = () => JSON.parse(localStorage.getItem('cart') || '[]');
+  const saveCart = (c) => localStorage.setItem('cart', JSON.stringify(c));
+  const categoryLabel = (c) =>
+    c === 'peptides' ? 'Peptides' :
+    c === 'sarms-performance' ? 'SARMS & Performance' :
+    c === 'supplies' ? 'Supplies' : (c||'');
+
+  const slugFromPath = () => {
+    const m = location.pathname.replace(/\/+$/,'').match(/\/product\/([^/]+)$/);
+    return m ? decodeURIComponent(m[1]) : (new URL(location.href)).searchParams.get('slug') || '';
+  };
+
+  // normalize labels so "1-4", "1 – 4", "1–4", "10+" all match
+  const norm = (s) => String(s||'').replace(/\u2013|\u2014/g,'-').replace(/\s+/g,' ').trim();
+
+  function priceForQty(ranges, qty) {
+    if (!Array.isArray(ranges) || !ranges.length) return null;
+    const q = Number(qty)||1;
+    let current = null;
+
+    for (const r of ranges) {
+      const label = norm(r.label);
+      let m = label.match(/^(\d+)\s*-\s*(\d+)$/); // 1-4
+      if (m) { const lo=+m[1], hi=+m[2]; if (q>=lo && q<=hi) return Number(r.price); continue; }
+      m = label.match(/^(\d+)\s*(\+|and up)$/i); // 10+ / 10 and up
+      if (m && q >= +m[1]) current = Number(r.price);
+      m = label.match(/^(\d+)$/); // single number
+      if (m && q === +m[1]) return Number(r.price);
+    }
+    return current ?? Number(ranges[0].price);
+  }
+
+  function activeTierLabel(ranges, qty) {
+    if (!Array.isArray(ranges)) return null;
+    const q = Number(qty)||1;
+    let lastOpen = null;
+
+    for (const r of ranges) {
+      const label = norm(r.label);
+      let m = label.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (m) { const lo=+m[1], hi=+m[2]; if (q>=lo && q<=hi) return r.label; continue; }
+      m = label.match(/^(\d+)\s*(\+|and up)$/i);
+      if (m) { lastOpen = r.label; if (q >= +m[1]) lastOpen = r.label; }
+      m = label.match(/^(\d+)$/);
+      if (m && q === +m[1]) return r.label;
+    }
+    return lastOpen;
+  }
+
+  // ---------- render ----------
+  function render(p) {
+    const root = document.getElementById('pdp-root');
+    if (!p) { root.innerHTML = '<p>Product not found.</p>'; return; }
+
+    const bullets = Array.isArray(p.bullets) ? p.bullets : [];
+    const chem = Array.isArray(p.chemInfo) ? p.chemInfo : [];
+
+    root.innerHTML = `
+      <div class="product">
+        <div class="media">
+          <img src="${esc(p.image || '/images/placeholder.png')}" alt="${esc(p.name)}">
+        </div>
+        <div>
+          <h1>${esc(p.name)}</h1>
+          <div class="meta">${esc(categoryLabel(p.category))}</div>
+          <div class="priceband" id="priceband"></div>
+
+          ${bullets.length ? `<ul class="bullets">${bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>` : ''}
+
+          ${Array.isArray(p.ranges) && p.ranges.length ? `
+            <table class="range-table">
+              <thead><tr><th>RANGE</th><th>PRICE</th></tr></thead>
+              <tbody>
+                ${p.ranges.map(r=>`
+                  <tr data-range="${esc(r.label)}">
+                    <td>${esc(r.label)}</td>
+                    <td>$${Number(r.price).toFixed(2)}</td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>` : ''}
+
+          ${chem.length ? `
+            <div class="chem">
+              <h3>Chemical Information</h3>
+              <table><tbody>
+                ${chem.map(row=>`<tr><td>${esc(row.label)}</td><td>${esc(row.value)}</td></tr>`).join('')}
+              </tbody></table>
+            </div>` : ''}
+
+          <div id="purchase-block">
+            <div class="qty-add">
+              <div class="qty-control" id="qtyWrap">
+                <button type="button" class="qty-btn qty-dec">−</button>
+                <input id="qty" class="qty-input" type="number" min="1" value="1" inputmode="numeric">
+                <button type="button" class="qty-btn qty-inc">+</button>
+              </div>
+              <button id="addBtn" class="add-item">Add To Cart</button>
+              <!-- Optional buy-now button: add it to HTML if you want -->
+              <!-- <button id="buyNowBtn" class="add-item" style="background:#10b981">Buy Now</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // elements
+    const qtyEl = document.getElementById('qty');
+    const priceband = document.getElementById('priceband');
+
+    const computePrice = () => {
+      if (typeof p.price === 'number') return p.price;
+      return priceForQty(p.ranges, Math.max(1, parseInt(qtyEl.value||'1',10)));
+    };
+
+    function updateUI() {
+      const qty = Math.max(1, parseInt(qtyEl.value||'1',10));
+      qtyEl.value = String(qty);
+
+      // live price band
+      const price = computePrice();
+      if (price) priceband.textContent = `$${Number(price).toFixed(2)} per unit`;
+
+      // highlight active tier
+      const active = activeTierLabel(p.ranges, qty);
+      document.querySelectorAll('.range-table tbody tr[data-range]').forEach(tr=>{
+        tr.classList.toggle('active', active && norm(tr.getAttribute('data-range')) === norm(active));
+      });
+    }
+
+    // ----- robust event wiring -----
+    // 1) plus/minus with delegation to avoid overlay issues
+    document.getElementById('purchase-block').addEventListener('click', (e) => {
+      if (e.target.closest('.qty-dec')) {
+        qtyEl.value = String(Math.max(1, parseInt(qtyEl.value||'1',10) - 1));
+        updateUI();
+      }
+      if (e.target.closest('.qty-inc')) {
+        qtyEl.value = String((parseInt(qtyEl.value||'1',10) || 1) + 1);
+        updateUI();
+      }
+      if (e.target.id === 'addBtn') {
+        const qty = Math.max(1, parseInt(qtyEl.value||'1',10));
+        const price = computePrice();
+        const cart = getCart();
+        const existing = cart.find(i => i.id === p.id);
+        if (existing) {
+          existing.quantity += qty;
+          if (!existing.ranges && p.ranges) existing.ranges = p.ranges;
+        } else {
+          cart.push({
+            id: p.id,
+            name: p.name,
+            price,
+            quantity: qty,
+            ranges: Array.isArray(p.ranges) ? [...p.ranges] : [],
+            category: p.category || '',
+            image: p.image || ''
+          });
+        }
+        saveCart(cart);
+        window.dispatchEvent(new Event('cart:changed'));
+        alert('Added to cart!');
+      }
+    });
+
+    // 2) keep input numeric & within bounds
+    qtyEl.addEventListener('input', () => {
+      const digits = (qtyEl.value||'').replace(/[^\d]/g,'');
+      qtyEl.value = digits === '' ? '1' : digits;
+      updateUI();
+    });
+
+    // 3) bind optional Buy Now if present, *without* breaking other wiring
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    if (buyNowBtn) {
+      buyNowBtn.addEventListener('click', async () => {
+        const qty = Math.max(1, parseInt(qtyEl.value||'1',10));
+        const price = computePrice();
+        const res = await fetch('/api/create-checkout-session.php', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ cart: [{ id:p.id, name:p.name, price, quantity: qty }] })
+        });
+        const text = await res.text();
+        let data; try { data = JSON.parse(text); } catch { alert('Server error'); return; }
+        if (!res.ok || data.error) { alert(data.error || 'Server error'); return; }
+        stripe.redirectToCheckout({ sessionId: data.id });
+      });
+    }
+
+    updateUI();
+  }
+
+  // ---------- boot ----------
+  async function init() {
+    const slug = slugFromPath();
+    const root = document.getElementById('pdp-root');
+    if (!slug) { root.innerHTML = '<p>Missing slug.</p>'; return; }
+
+    const res = await fetch(`${DATA_URL}?cb=${Date.now()}`, { cache: 'no-store' });
+    if (!res.ok) { root.innerHTML = '<p>Failed to load product.</p>'; return; }
+    let list = [];
+    try { list = await res.json(); } catch {}
+    render(list.find(p => p && p.slug === slug));
+  }
+
+  init();
+})();
+</script>

@@ -3,335 +3,568 @@
 <!-- ============================================ -->
 {% set navPages = collections.all | eleventyNavigation %}
 
-<!-- Utility bar -->
+<!-- ========== Utility bar ========== -->
 <div class="utility">
   <div class="container util-inner">
-    <nav class="util-left">
+    <nav class="util-left" aria-label="Utility">
       <a href="/about">About Us</a>
-      <span class="sep">|</span>
+      <span class="sep" aria-hidden="true">|</span>
       <a href="/contact">Contact Us</a>
-      <span class="sep">|</span>
-      <a href="#">FAQ’s</a>
-      <span class="sep">|</span>
-      <a href="#">Wholesale</a>
-      <span class="sep">|</span>
-      <a href="#">Military Discounts</a>
+      <span class="sep" aria-hidden="true">|</span>
+      <a href="/faqs">FAQ’s</a>
     </nav>
     <nav class="util-right">
       <a href="mailto:contact@lazaruslabs.com">contact@lazaruslabs.com</a>
-      <span class="sep">|</span>
-      <a href="#">Login / Register</a>
+      <span class="sep" aria-hidden="true">|</span>
+      <a href="/admin/">Admin</a>
     </nav>
   </div>
 </div>
 
-<!-- Main bar -->
-<div class="mainbar">
+<!-- ========== Main bar (logo, search, cart) ========== -->
+<div class="mainbar" role="navigation" aria-label="Primary">
   <div class="container main-inner">
     <!-- Left: logo + burger -->
     <div class="left">
-<!-- Replace your current logo block with this -->
-<a class="logo" href="#" aria-label="Lazarus Labs">
-  <img
-    src="/assets/images/lazaruslabs.png"
-    alt="Lazarus Labs"
-    width="140"
-    style="display:block; height:auto;"
-  />
-</a>
+      <a class="logo" href="/" aria-label="Lazarus Labs">
+        <img src="/assets/images/lazaruslabs.png" alt="Lazarus Labs" width="140" style="display:block;height:auto;">
+      </a>
 
       <button class="burger" aria-label="Open menu">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" fill="currentColor"/>
+          <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" fill="currentColor" />
         </svg>
       </button>
     </div>
 
-    <!-- Center: search -->
-    <form class="search" action="/" method="get">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.71.71l.27.28v.79L20 20.5 21.5 19l-6-5zM10 15a5 5 0 110-10 5 5 0 010 10z" fill="currentColor"/>
-        </svg>
-      </span>
-      <input type="search" name="s" placeholder="Search for products" aria-label="Search">
-      <button class="sbtn" type="submit">Search</button>
-    </form>
+    <!-- Center: product search -->
+    <div>
+      <form class="product-search" role="search" autocomplete="off" onsubmit="return false;">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.71.71l.27.28v.79L20 20.5 21.5 19l-6-5zM10 15a5 5 0 110-10 5 5 0 010 10z"
+              fill="currentColor" />
+          </svg>
+        </span>
+        <div class="sr-only" aria-live="polite"></div>
+        <input id="productSearch" class="ps-input" type="search" name="ps" placeholder="Search for products…"
+          aria-label="Search products" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false"
+          aria-controls="psResults" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+          enterkeyhint="search" inputmode="search">
+        <div id="psResults" class="ps-results" role="listbox" hidden></div>
+      </form>
+    </div>
+    <link rel="stylesheet" href="/css/search.css">
+    <script src="/assets/js/search.js" defer></script>
 
     <!-- Right: locale + cart -->
     <div class="right">
-      <div class="locale" id="localeBtn" role="button" aria-haspopup="listbox" aria-expanded="false">
+      <!-- <div class="locale" id="localeBtn" role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
         <span class="flag" aria-hidden="true">🇺🇸</span>
         <span class="country">USA</span>
-        <svg viewBox="0 0 24 24" width="16" height="16" class="chev" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" class="chev" aria-hidden="true">
+          <path d="M7 10l5 5 5-5z" fill="currentColor" />
+        </svg>
       </div>
       <div class="locale-menu" id="localeMenu" role="listbox" tabindex="-1">
         <button role="option" data-country="USA">🇺🇸 USA</button>
         <button role="option" data-country="CAN">🇨🇦 Canada</button>
         <button role="option" data-country="GBR">🇬🇧 UK</button>
-      </div>
+      </div> -->
 
-      <a class="cart" href="#" aria-label="Cart">
+      <a class="cart" href="/cart.php" aria-label="Cart">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path d="M7 4h-2l-1 2v2h2l3.6 7.59-1.35 2.44A1 1 0 0 0 9.1 19h9.4v-2H10.42a.25.25 0 0 1-.22-.37L11 15h6.55a2 2 0 0 0 1.79-1.11l3.58-7.16A1 1 0 0 0 22 5h-15zM7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/>
+          <path
+            d="M7 4h-2l-1 2v2h2l3.6 7.59-1.35 2.44A1 1 0 0 0 9.1 19h9.4v-2H10.42a.25.25 0 0 1-.22-.37L11 15h6.55a2 2 0 0 0 1.79-1.11l3.58-7.16A1 1 0 0 0 22 5h-15zM7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"
+            fill="currentColor" />
         </svg>
         <span class="badge" id="cartCount">0</span>
       </a>
     </div>
   </div>
 
-  <!-- navbar-only JS (locale + demo cart) -->
+  <!-- Mainbar JS (locale + cart badge) -->
   <script>
-  (function(){
-    const btn = document.getElementById('localeBtn');
-    const menu = document.getElementById('localeMenu');
-    const countryText = btn?.querySelector('.country');
-
-    function closeMenu(){ menu.style.display = 'none'; btn.setAttribute('aria-expanded','false'); }
-    function openMenu(){ menu.style.display = 'block'; btn.setAttribute('aria-expanded','true'); }
-
-    btn?.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const open = menu.style.display === 'block';
-      open ? closeMenu() : openMenu();
-    });
-    document.addEventListener('click', closeMenu);
-
-    menu?.querySelectorAll('button').forEach(b=>{
-      b.addEventListener('click', ()=>{
-        countryText.textContent = b.dataset.country === 'USA' ? 'USA'
-          : b.dataset.country === 'CAN' ? 'Canada' : 'UK';
-        closeMenu();
-      });
-    });
-    // Example: drive the cart badge from your logic
-    // document.getElementById('cartCount').textContent = 3;
-  })();
+    function getCart() { try { return JSON.parse(localStorage.getItem('cart')) || []; } catch { return []; } }
+    function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); window.dispatchEvent(new Event('cart:changed')); }
+    function updateCartBadge() {
+      const el = document.getElementById('cartCount'); if (!el) return;
+      const count = getCart().reduce((n, i) => n + (Number(i.quantity) || 0), 0);
+      el.textContent = String(count);
+      if (count <= 0) el.setAttribute('hidden', ''); else el.removeAttribute('hidden');
+    }
+    document.addEventListener('DOMContentLoaded', updateCartBadge);
+    window.addEventListener('cart:changed', updateCartBadge);
+    window.addEventListener('storage', (e) => { if (e.key === 'cart') updateCartBadge(); });
   </script>
 </div>
 
-<!-- ===== OFF-CANVAS DRAWER (shared by header burger + side FAB) ===== -->
+<!-- ========== Off-canvas drawer (MENU only; IMG icons) ========== -->
 <aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle">
   <div class="drawer-panel" role="dialog" aria-modal="true">
     <div class="drawer-head">
       <button class="drawer-close" id="drawerClose" aria-label="Close menu">
-        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M18.3 5.7L12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3 10.6 10.6 16.9 4.3z" fill="currentColor"/></svg>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path
+            d="M18.3 5.7L12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3 10.6 10.6 16.9 4.3z"
+            fill="currentColor" />
+        </svg>
         <span>Close</span>
       </button>
     </div>
 
-    <!-- Tabs -->
-    <div class="drawer-tabs" role="tablist" aria-label="Main menu tabs">
-      <button class="tab active" role="tab" aria-selected="true" aria-controls="tabCats" id="tabCatsBtn">CATEGORIES</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="tabMenu" id="tabMenuBtn">MENU</button>
+    <div class="drawer-body" role="navigation" aria-label="Main menu">
+      <nav class="menu-list">
+        <a class="row" href="/">
+          <img class="ico-img" src="/assets/icons/home.png" alt="" />
+          <span>Home</span>
+        </a>
+        <a class="row" href="/catalog">
+          <img class="ico-img" src="/assets/icons/cart.png" alt="" />
+          <span>Shop</span>
+        </a>
+        <a class="row" href="/about">
+          <img class="ico-img" src="/assets/icons/people.png" alt="" />
+          <span>About Us</span>
+        </a>
+        <a class="row" href="/contact">
+          <img class="ico-img" src="/assets/icons/mail.png" alt="" />
+          <span>Contact Us</span>
+        </a>
+        <a class="row" href="/faqs">
+          <img class="ico-img" src="/assets/icons/help.png" alt="" />
+          <span>FAQ’s</span>
+        </a>
+        <!-- <a class="row" href="#">
+          <img class="ico-img" src="/assets/icons/medal.png" alt="" />
+          <span>Military Discounts</span>
+        </a> -->
+      </nav>
     </div>
-
-    <!-- Panels -->
-    <div class="drawer-body">
-      <!-- Categories -->
-     <div class="tabpanel show" id="tabCats" role="tabpanel" aria-labelledby="tabCatsBtn">
-  <a class="row" data-cat="aliquots"    href="/sarms-performance"><span class="ico">🧪</span><span>Sarms and Performance</span></a>
-  <a class="row" data-cat="peptides"       href="/peptides"><span class="ico">🧴</span><span>Peptides</span></a>
-  <!-- <a class="row" data-cat="ancillaries" href="#"><span class="ico">🧰</span><span>Ancillaries</span></a> -->
-  <!-- <a class="row" data-cat="capsules"    href="#"><span class="ico">💊</span><span>Capsules</span></a> -->
-  <!-- <a class="row" data-cat="liquids"     href="#"><span class="ico">🧫</span><span>Liquids</span></a> -->
-  <a class="row" data-cat="supplies"    href="/supplies"><span class="ico">📦</span><span>Supplies</span></a>
-  <!-- <a class="row" data-cat="wholesale"   href="#"><span class="ico">🏷️</span><span>Wholesale</span></a> -->
-</div>
-
-
-      <!-- Menu -->
-      <div class="tabpanel" id="tabMenu" role="tabpanel" aria-labelledby="tabMenuBtn" hidden>
-        <a class="row" href="/"><span class="ico">🏠</span><span>Home</span></a>
-        <a class="row" href="/about"><span class="ico">👥</span><span>About Us</span></a>
-        <a class="row" href="/contact"><span class="ico">✉️</span><span>Contact Us</span></a>
-        <a class="row" href="#"><span class="ico">🎖️</span><span>Military Discounts</span></a>
-      </div>
-    </div>
-    <style>
-        /* highlight a row when opened from the side icons */
-.tabpanel .row.highlight { background:#eefaff; box-shadow:inset 3px 0 0 #20a9d6; font-weight:700; }
-
-    </style>
   </div>
-  <!-- Backdrop -->
+
   <div class="drawer-backdrop" id="drawerBackdrop" tabindex="-1" aria-hidden="true"></div>
 
-  <!-- Drawer JS (exports open/close globally) -->
-<script>
-(function(){
-  const drawer = document.getElementById('drawer');
-  const panel  = drawer.querySelector('.drawer-panel');
-  const backdrop = document.getElementById('drawerBackdrop');
-  const btnBurger = document.querySelector('.burger');
-  const btnClose  = document.getElementById('drawerClose');
+  <script>
+    (function () {
+      const drawer = document.getElementById('drawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      const btnBurger = document.querySelector('.burger');
+      const btnClose = document.getElementById('drawerClose');
 
-  const tabCatsBtn = document.getElementById('tabCatsBtn');
-  const tabMenuBtn = document.getElementById('tabMenuBtn');
-  const tabCats = document.getElementById('tabCats');
-  const tabMenu = document.getElementById('tabMenu');
+      function openDrawer() { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('noscroll'); btnClose?.focus(); }
+      function closeDrawer() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); document.body.classList.remove('noscroll'); btnBurger?.focus(); }
 
-  function openDrawer(){
-    drawer.classList.add('open');
-    drawer.setAttribute('aria-hidden','false');
-    document.body.classList.add('noscroll');
-    btnClose?.focus();
-  }
-  function closeDrawer(){
-    drawer.classList.remove('open');
-    drawer.setAttribute('aria-hidden','true');
-    document.body.classList.remove('noscroll');
-    btnBurger?.focus();
-  }
+      btnBurger?.addEventListener('click', openDrawer);
+      btnClose?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
 
-  btnBurger?.addEventListener('click', openDrawer);
-  btnClose?.addEventListener('click', closeDrawer);
-  backdrop?.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
-
-  function activateTab(which){
-    const isCats = which === 'cats';
-    tabCatsBtn.classList.toggle('active', isCats);
-    tabMenuBtn.classList.toggle('active', !isCats);
-    tabCats.hidden = !isCats;
-    tabMenu.hidden = isCats;
-    tabCatsBtn.setAttribute('aria-selected', String(isCats));
-    tabMenuBtn.setAttribute('aria-selected', String(!isCats));
-  }
-  tabCatsBtn?.addEventListener('click', ()=> activateTab('cats'));
-  tabMenuBtn?.addEventListener('click', ()=> activateTab('menu'));
-  activateTab('cats');
-
-  /* Export for other triggers */
-  window.openMainMenuDrawer  = openDrawer;
-  window.closeMainMenuDrawer = closeDrawer;
-  window._activateCatsTab = () => activateTab('cats');
-})();
-</script>
-
-<script>
-/* Open the drawer on the CATEGORIES tab and highlight a specific row */
-window.showCategoryInDrawer = function(catKey){
-  if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
-  if (typeof window._activateCatsTab === 'function') window._activateCatsTab();
-
-  requestAnimationFrame(()=>{
-    const row = document.querySelector(`#tabCats .row[data-cat="${catKey}"]`);
-    if (!row) return;
-    row.scrollIntoView({ block: 'center' });
-    row.classList.add('highlight');
-    setTimeout(()=> row.classList.remove('highlight'), 900);
-  });
-};
-</script>
-
+      // expose helpers
+      window.openMainMenuDrawer = openDrawer;
+      window.closeMainMenuDrawer = closeDrawer;
+    })();
+  </script>
 </aside>
 
-<!-- ===== SIDE STRIP (outside the drawer) ===== -->
-<aside class="side-strip" aria-label="Quick category nav">
+<!-- ========== SIDE STRIP (mirrors MENU; IMG icons; centered) ========== -->
+<aside class="side-strip" aria-label="Quick navigation">
   <button class="fab" id="sideToggle" aria-label="Open menu">☰</button>
 
-<nav class="side-dots" id="sideDots">
-  <a class="dot" data-cat="aliquots"    aria-label="Aliquots/Injectables"> <span class="ico">🧪</span> </a>
-  <a class="dot" data-cat="sarms"       aria-label="SARM’s">               <span class="ico">🧴</span> </a>
-  <!-- <a class="dot" data-cat="ancillaries" aria-label="Ancillaries">          <span class="ico">🧰</span> </a> -->
-  <!-- <a class="dot" data-cat="capsules"    aria-label="Capsules">             <span class="ico">💊</span> </a> -->
-  <!-- <a class="dot" data-cat="liquids"     aria-label="Liquids">              <span class="ico">🧫</span> </a> -->
-  <a class="dot" data-cat="supplies"    aria-label="Supplies">             <span class="ico">📦</span> </a>
-  <!-- <a class="dot" data-cat="wholesale"   aria-label="Wholesale">            <span class="ico">🏷️</span> </a> -->
-</nav>
-
-
+  <nav class="side-dots" id="sideDots">
+    <!-- Replace src values with your actual icon files (PNG/SVG). -->
+    <a class="dot" href="/" aria-label="Home">
+      <img src="/assets/icons/home.png" alt="" />
+      <span class="tip">Home</span>
+    </a>
+    <a class="dot" href="/catalog" aria-label="Shop">
+      <img src="/assets/icons/cart.png" alt="" />
+      <span class="tip">Shop</span>
+    </a>
+    <a class="dot" href="/about" aria-label="About Us">
+      <img src="/assets/icons/people.png" alt="" />
+      <span class="tip">About Us</span>
+    </a>
+    <a class="dot" href="/contact" aria-label="Contact Us">
+      <img src="/assets/icons/mail.png" alt="" />
+      <span class="tip">Contact Us</span>
+    </a>
+    <a class="dot" href="/faqs" aria-label="FAQ’s">
+      <img src="/assets/icons/help.png" alt="" />
+      <span class="tip">FAQ’s</span>
+    </a>
+    <!-- <a class="dot" href="#" aria-label="Military Discounts">
+      <img src="/assets/icons/medal.png" alt="" />
+      <span class="tip">Military Discounts</span>
+    </a> -->
+  </nav>
 </aside>
 
-<!-- Minimal CSS for drawer + side strip -->
+<!-- ========== Styles (drawer + side strip + cart badge) ========== -->
 <style>
-:root{
-  --header-h: 86px; /* adjust to your navbar height */
-  --panel:#fff; --border:#e9e2d8; --ink:#1f2937; --muted:#8b8f97;
-  --tab-underline:#3aaed3; --blue:#20a9d6; --tile:#fff; --tile-border:#ece5db;
-}
+  :root {
+    --header-h: 86px;
+    --panel: #fff;
+    --border: #e9e2d8;
+    --ink: #1f2937;
+    --muted: #8b8f97;
+    --tile: #fff;
+    --tile-border: #ece5db;
+    --blue: #20a9d6;
+  }
 
-/* ===== Drawer ===== */
-.drawer{ position:fixed; inset:0; z-index:1200; display:grid; grid-template-columns:auto 1fr; pointer-events:none; }
-.drawer.open{ pointer-events:auto; }
-.drawer-backdrop{ background:rgba(0,0,0,.45); opacity:0; transition:opacity .25s ease; }
-.drawer.open .drawer-backdrop{ opacity:1; }
-.drawer-panel{
-  width:min(88vw, 360px); max-width:420px; height:100%;
-  background:var(--panel); box-shadow:0 10px 40px rgba(0,0,0,.18);
-  transform:translateX(-100%); transition:transform .28s ease; display:flex; flex-direction:column;
-}
-.drawer.open .drawer-panel{ transform:none; }
-.drawer-head{ display:flex; align-items:center; min-height:56px; padding:0 16px; border-bottom:1px solid var(--border); }
-.drawer-close{ display:flex; align-items:center; gap:8px; border:0; background:none; cursor:pointer; color:var(--ink); font-size:16px; padding:8px 4px; }
-.drawer-tabs{ display:flex; border-bottom:1px solid var(--border); }
-.tab{ flex:1; padding:14px 16px; border:0; background:#fff; cursor:pointer; color:#4b5563; font-weight:700; border-right:1px solid var(--border); }
-.tab:last-child{ border-right:0; }
-.tab.active{ color:var(--ink); position:relative; }
-.tab.active::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--tab-underline); }
-.drawer-body{ overflow:auto; -webkit-overflow-scrolling:touch; }
-.tabpanel .row{ display:flex; align-items:center; gap:12px; min-height:54px; padding:14px 18px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--border); }
-.tabpanel .row:hover{ background:#f7f5f2; }
-.ico{ width:22px; text-align:center; opacity:.9; }
-body.noscroll{ overflow:hidden; }
-/* Hide the side strip while drawer is open */
-body.noscroll .side-strip{ display:none; }
+  /* Utility bar (optional minimal styles) */
+  .utility {
+    background: #f7f5f2;
+    font: 500 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
 
-/* ===== Side strip ===== */
-.side-strip{
-  position: fixed; top: calc(var(--header-h) + 8px); left: 10px; z-index: 1199;
-  display:flex; flex-direction:column; gap:10px;
-}
-.fab{
-  width: 46px; height: 46px; border-radius:999px; border:0; background:var(--blue);
-  color:#fff; font: 800 16px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  display:grid; place-items:center; box-shadow:0 10px 26px rgba(0,0,0,.18); cursor:pointer;
-}
-.side-dots{ display:flex; flex-direction:column; gap:12px; }
-.dot{
-  width:34px; height:34px; display:grid; place-items:center; border-radius:8px;
-  background:var(--tile); border:1px solid var(--tile-border);
-  box-shadow:0 6px 14px rgba(0,0,0,.08); text-decoration:none;
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease; position:relative;
-}
-.dot:hover{ transform: translateY(-1px); }
-.dot img{ width:22px; height:22px; object-fit:contain; filter:saturate(.95); }
-.dot.active{ border-color:#bfeaf7; box-shadow:0 0 0 2px #e2f7ff, 0 8px 18px rgba(0,0,0,.10); }
-.dot .tip{
-  position:absolute; left:46px; top:50%; transform:translateY(-50%);
-  background:#111827; color:#fff; padding:6px 9px; border-radius:8px; font-size:12px; white-space:nowrap;
-  opacity:0; pointer-events:none; transition:opacity .15s ease; box-shadow:0 8px 18px rgba(0,0,0,.16);
-}
-.dot:hover .tip{ opacity:1; }
-@media (max-width: 900px){ .side-strip{ display:none; } }
+  .utility .util-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .utility a {
+    color: #1f2937;
+    text-decoration: none;
+  }
+
+  .utility .sep {
+    color: #8b8f97;
+    margin: 0 8px;
+  }
+
+  /* Main bar container */
+  .mainbar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .mainbar .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .burger {
+    border: 0;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    cursor: pointer;
+  }
+
+  .product-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #ece5db;
+    border-radius: 12px;
+    padding: 8px 10px;
+  }
+
+  .product-search .ps-input {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    font: 500 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: #111827;
+  }
+
+  .product-search .icon {
+    display: grid;
+    place-items: center;
+  }
+
+  .mainbar .right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  .locale {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    border: 1px solid #ece5db;
+    border-radius: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
+  .locale-menu {
+    position: absolute;
+    display: none;
+    background: #fff;
+    border: 1px solid #ece5db;
+    border-radius: 10px;
+    padding: 6px;
+    margin-top: 6px;
+  }
+
+  .locale-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    border: 0;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .locale-menu button:hover {
+    background: #f7f5f2;
+  }
+
+  /* Cart badge tidy */
+  .mainbar .right .cart {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .mainbar .right .cart svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  .mainbar .right .cart .badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #20a9d6;
+    color: #fff;
+    font: 700 11px/16px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+  }
+
+  .mainbar .right .cart .badge[hidden] {
+    display: none;
+  }
+
+  /* Drawer */
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    pointer-events: none;
+  }
+
+  .drawer.open {
+    pointer-events: auto;
+  }
+
+  .drawer-backdrop {
+    background: rgba(0, 0, 0, .45);
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+
+  .drawer.open .drawer-backdrop {
+    opacity: 1;
+  }
+
+  .drawer-panel {
+    width: min(88vw, 360px);
+    max-width: 420px;
+    height: 100%;
+    background: var(--panel);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .18);
+    transform: translateX(-100%);
+    transition: transform .28s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawer.open .drawer-panel {
+    transform: none;
+  }
+
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .drawer-close {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    color: var(--ink);
+    font-size: 16px;
+    padding: 8px 4px;
+  }
+
+  .drawer-body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Drawer menu rows (IMG icons) */
+  .menu-list .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 54px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .menu-list .row:hover {
+    background: #f7f5f2;
+  }
+
+  .menu-list .ico-img {
+    width: 22px;
+    height: 22px;
+    display: block;
+    object-fit: contain;
+    flex: 0 0 22px;
+    filter: saturate(.95);
+    /* optional subtle polish */
+  }
+
+  /* Prevent body scroll when drawer open */
+  body.noscroll {
+    overflow: hidden;
+  }
+
+  /* Side strip */
+  .side-strip {
+    position: fixed;
+    top: calc(var(--header-h) + 8px);
+    left: 10px;
+    z-index: 1199;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .fab {
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--blue);
+    color: #fff;
+    font: 800 18px/1 system-ui, -apple-system, Segoe UI, Montserrat, Arial, sans-serif;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
+    cursor: pointer;
+  }
+
+  .side-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .dot {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--tile);
+    border: 1px solid var(--tile-border);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+    text-decoration: none;
+    position: relative;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+
+  .dot:hover {
+    transform: translateY(-1px);
+  }
+
+  .dot img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  /* perfectly centered icons */
+  .dot .tip {
+    position: absolute;
+    left: 56px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #111827;
+    color: #fff;
+    padding: 6px 9px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .16);
+  }
+
+  .dot:hover .tip {
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .side-strip {
+      display: none;
+    }
+
+    .mainbar .container {
+      grid-template-columns: 1fr auto auto;
+    }
+  }
 </style>
 
-<!-- Side strip JS: open drawer + scroll-spy -->
+<!-- Side strip JS -->
 <script>
-/* Side FAB opens the drawer */
-document.getElementById('sideToggle')?.addEventListener('click', (e)=>{
-  e.preventDefault();
-  if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
-  else document.querySelector('.burger')?.click();
-});
-
-/* Hover/tap a tiny icon -> open drawer on CATEGORIES and spotlight that row */
-const sideDots = Array.from(document.querySelectorAll('.side-dots .dot'));
-let hoverTimer;
-
-function triggerShow(cat){
-  if (typeof window.showCategoryInDrawer === 'function') window.showCategoryInDrawer(cat);
-  else if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
-}
-
-sideDots.forEach(dot=>{
-  const cat = dot.dataset.cat;
-
-  // small delay avoids accidental opens when just passing by
-  dot.addEventListener('mouseenter', ()=> { hoverTimer = setTimeout(()=> triggerShow(cat), 120); });
-  dot.addEventListener('mouseleave', ()=> clearTimeout(hoverTimer));
-
-  dot.addEventListener('click', (e)=>{ e.preventDefault(); triggerShow(cat); });
-});
+  // FAB opens the same MENU drawer
+  document.getElementById('sideToggle')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (typeof window.openMainMenuDrawer === 'function') window.openMainMenuDrawer();
+    else document.querySelector('.burger')?.click();
+  });
 </script>

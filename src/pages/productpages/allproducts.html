@@ -1,0 +1,179 @@
+---
+layout: "base.html"
+permalink: "/catalog3/"
+title: "All Products"
+---
+
+<style>
+  :root{ --line:#eae7e3; --muted:#6b7280; --card:#fff; --r:16px; --brand:#0a62ff; }
+  .wrap{max-width:1200px;margin:auto;padding:24px}
+  h1{font-size:34px;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 22px}
+
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.grid{grid-template-columns:1fr}}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .media{height:190px;display:flex;align-items:center;justify-content:center;background:#f7f8fb}
+  .media img{max-height:170px;max-width:90%;object-fit:contain}
+  .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+  .title{font-weight:700;margin:0;font-size:16px}
+  .meta{font-size:12px;color:var(--muted)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:11px;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#1d4ed8;border:1px solid #dbe3ff;text-decoration:none}
+  .controls{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .select{border:1px solid var(--line);border-radius:10px;padding:6px 8px;font-size:14px;background:#fff}
+  .add{border:none;background:var(--brand);color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+
+  /* Category index */
+  .category-index{padding:0;margin-bottom:18px}
+  .category-index h2{font-size:20px;margin:0 0 10px}
+  .cat-list{list-style:none;padding:0;margin:0;display:flex;gap:10px;flex-wrap:wrap}
+  .cat-list a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:#111;background:#fff}
+  .cat-list a:hover{border-color:#cfd4dc}
+
+  /* In-grid section headers */
+  .section{grid-column:1 / -1;padding:8px 2px 6px;border-top:1px solid var(--line);margin-top:8px}
+  .section-title{margin:10px 0 2px;font-size:18px;font-weight:800}
+  .section-sub{margin:0 0 10px;color:var(--muted);font-size:13px}
+</style>
+
+<div class="wrap">
+  <h1>All Products</h1>
+  <p class="sub">Everything in one place. Use the search bar or filter by category on other pages if you prefer.</p>
+
+  <!-- Category Index (links -> category headers below) -->
+  <section class="category-index wrap">
+    <h2>Shop by Category</h2>
+    <ul class="cat-list">
+      {% set lastcat = "" %}
+      {% for p in products | sort(false, false, "category") %}
+        {% if p.category and p.category != lastcat %}
+          {% set catSlug = ("cat-" + p.category) | slugify %}
+          <li>
+            <a href="#{{ catSlug }}">
+              {% if p.category == "peptides" %}Peptides
+              {% elif p.category == "sarms-performance" %}SARMS &amp; Performance
+              {% elif p.category == "supplies" %}Supplies
+              {% else %}{{ p.category | capitalize }}
+              {% endif %}
+            </a>
+          </li>
+          {% set lastcat = p.category %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+
+  <!-- Product Grid with category headers -->
+  <div class="grid" id="catalogGrid">
+    {% set lastcat = "" %}
+    {% for p in products | sort(false, false, "category") %}
+      {# Insert a full-width category header when category changes #}
+      {% if p.category and p.category != lastcat %}
+        {% set catSlug = ("cat-" + p.category) | slugify %}
+        <div class="section" id="{{ catSlug }}">
+          <h3 class="section-title">
+            {% if p.category == "peptides" %}Peptides
+            {% elif p.category == "sarms-performance" %}SARMS &amp; Performance
+            {% elif p.category == "supplies" %}Supplies
+            {% else %}{{ p.category | capitalize }}
+            {% endif %}
+          </h3>
+          <p class="section-sub">
+            {% if p.category == "peptides" %}
+              Research peptides & analogs for lab use.
+            {% elif p.category == "sarms-performance" %}
+              SARMs &amp; performance research compounds.
+            {% elif p.category == "supplies" %}
+              Vials, syringes, and lab accessories.
+            {% else %}
+              Browse all {{ p.category | capitalize }} items.
+            {% endif %}
+          </p>
+        </div>
+        {% set lastcat = p.category %}
+      {% endif %}
+
+      <article class="card" data-id="{{ p.id }}" data-slug="{{ p.slug }}">
+        <a class="media" href="/product/{{ p.slug }}/">
+          <img src="{{ p.image or '/images/placeholder.png' }}" alt="{{ p.name }}">
+        </a>
+
+        <div class="body">
+          <h4 id="{{ p.name | slugify }}" class="title">{{ p.name }}</h4>
+          <div class="meta">
+            {% if p.category == "peptides" %}Peptides
+            {% elif p.category == "sarms-performance" %}SARMS &amp; Performance
+            {% elif p.category == "supplies" %}Supplies
+            {% else %}{{ p.category | default('') }}
+            {% endif %}
+          </div>
+
+          {% if p.forms and p.forms | length %}
+            <div class="chips">
+              {% for f in p.forms %}
+                <a class="chip" href="/product/{{ p.slug }}/?form={{ f }}">
+                  {% if f == "pill" %}Pill{% elif f == "liquid" %}Liquid{% elif f == "unit" %}Unit{% else %}{{ f | capitalize }}{% endif %}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="controls">
+            {% if p.forms and p.forms | length > 1 %}
+              <select class="select form-select" aria-label="Select form">
+                {% for f in p.forms %}
+                  <option value="{{ f }}">
+                    {% if f == "pill" %}Pill{% elif f == "liquid" %}Liquid{% elif f == "unit" %}Unit{% else %}{{ f | capitalize }}{% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+
+              <button
+                class="snipcart-add-item add"
+                data-item-id="{{ p.id }}"
+                data-item-name="{{ p.name }}"
+                data-item-url="/product/{{ p.slug }}/"
+                data-item-image="{{ p.image or '' }}"
+                data-item-custom1-name="Form"
+                data-item-custom1-options="{{ p.forms | join('|') }}"
+                data-item-custom1-required="true"
+                data-item-quantity="1">
+                Add to cart
+              </button>
+            {% else %}
+              {% if p.forms and p.forms | length == 1 %}
+                <button
+                  class="snipcart-add-item add"
+                  data-item-id="{{ p.id }}"
+                  data-item-name="{{ p.name }}"
+                  data-item-url="/product/{{ p.slug }}/"
+                  data-item-image="{{ p.image or '' }}"
+                  data-item-custom1-name="Form"
+                  data-item-custom1-value="{{ p.forms[0] }}"
+                  data-item-quantity="1">
+                  Add to cart
+                </button>
+              {% else %}
+                <button
+                  class="snipcart-add-item add"
+                  data-item-id="{{ p.id }}"
+                  data-item-name="{{ p.name }}"
+                  data-item-url="/product/{{ p.slug }}/"
+                  data-item-image="{{ p.image or '' }}"
+                  data-item-quantity="1">
+                  Add to cart
+                </button>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</div>

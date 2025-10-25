@@ -1,0 +1,30 @@
+RewriteEngine On
+
+# ===== Admin products gate FIRST (before any -f short-circuit) =====
+# If requesting /admin/products.html and no admin_auth cookie, send to /admin/
+RewriteCond %{REQUEST_URI} ^/admin/products\.html$ [NC]
+RewriteCond %{HTTP:Cookie} !(^|;\s*)admin_auth=1($|;) [NC]
+RewriteRule ^ /admin/ [R=302,L]
+
+# Serve API and static JSON directly, but don't short-circuit the protected page
+RewriteCond %{REQUEST_URI} !^/admin/products\.html$ [NC]
+RewriteCond %{REQUEST_URI} ^/api/ [OR]
+RewriteCond %{REQUEST_URI} \.json$ [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Route /product/<slug>/ to the single template at /product/
+RewriteRule ^product/[^/]+/?$ /product/ [L]
+
+# (your SPA catch-all goes BELOW this line, if you use one)
+# RewriteRule ^ index.php [L]
+
+# keep products.json uncached in browsers/proxies
+<Files "products.json">
+  Header set Cache-Control "no-store, must-revalidate"
+</Files>
+
+# Secrets
+SetEnv ADMIN_TOKEN Lazaruslabs62
+SetEnv STRIPE_SECRET_KEY sk_test_51S6xbQJZR0ISWhIqM7LnIaiB904hkwIJ98CcAjNuI8TLF6lMffkz7YgLVaMc6lCl45hwutKbUJcUFhucDyqsEu6j00laWzCbZb
+SetEnv STRIPE_PUBLIC_KEY pk_test_51S6xbQJZR0ISWhIqOmLt5P9RXuACoOs72y8oWyfalewI16zccNQfFayxI6KEFCOOZNkJYOTDeOacSkZQFJr7Tp0v00Ng4I7lt7

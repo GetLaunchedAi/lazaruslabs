@@ -1,6 +1,6 @@
 ---
 layout: "base.html"
-permalink: "/peptides/"
+permalink: "/catalog/peptides2/"
 title: "Peptides"
 ---
 
@@ -20,7 +20,6 @@ title: "Peptides"
   .body{padding:14px;display:flex;flex-direction:column;gap:8px}
   .title{font-weight:700;margin:0;font-size:16px}
   .meta{font-size:12px;color:var(--muted)}
-  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .chips{display:flex;gap:6px;flex-wrap:wrap}
   .chip{font-size:11px;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#1d4ed8;border:1px solid #dbe3ff;text-decoration:none}
   .controls{display:flex;align-items:center;gap:8px;margin-top:6px}
@@ -39,11 +38,11 @@ title: "Peptides"
           <a class="media" href="/product/{{ p.slug }}/">
             <img src="{{ p.image }}" alt="{{ p.name }}">
           </a>
+
           <div class="body">
             <h3 class="title">{{ p.name }}</h3>
             <div class="meta">Peptides</div>
 
-            {# Link the chips, NOT the title #}
             {% if p.forms and p.forms | length %}
               <div class="chips">
                 {% for f in p.forms %}
@@ -63,13 +62,43 @@ title: "Peptides"
                     </option>
                   {% endfor %}
                 </select>
+                <button
+                  class="snipcart-add-item add"
+                  data-item-id="{{ p.id }}"
+                  data-item-name="{{ p.name }}"
+                  data-item-url="/product/{{ p.slug }}/"
+                  data-item-image="{{ p.image }}"
+                  data-item-custom1-name="Form"
+                  data-item-custom1-options="{{ p.forms | join('|') }}"
+                  data-item-custom1-required="true"
+                  data-item-quantity="1">
+                  Add to cart
+                </button>
               {% else %}
-                {# single form, store it in a data attr for JS #}
                 {% if p.forms and p.forms | length == 1 %}
-                  <span class="meta" data-single-form="{{ p.forms[0] }}">Form: {% if p.forms[0] == "pill" %}Pill{% elif p.forms[0] == "liquid" %}Liquid{% else %}{{ p.forms[0] | capitalize }}{% endif %}</span>
+                  <button
+                    class="snipcart-add-item add"
+                    data-item-id="{{ p.id }}"
+                    data-item-name="{{ p.name }}"
+                    data-item-url="/product/{{ p.slug }}/"
+                    data-item-image="{{ p.image }}"
+                    data-item-custom1-name="Form"
+                    data-item-custom1-value="{{ p.forms[0] }}"
+                    data-item-quantity="1">
+                    Add to cart
+                  </button>
+                {% else %}
+                  <button
+                    class="snipcart-add-item add"
+                    data-item-id="{{ p.id }}"
+                    data-item-name="{{ p.name }}"
+                    data-item-url="/product/{{ p.slug }}/"
+                    data-item-image="{{ p.image }}"
+                    data-item-quantity="1">
+                    Add to cart
+                  </button>
                 {% endif %}
               {% endif %}
-              <button class="add">Add to cart</button>
             </div>
           </div>
         </article>
@@ -77,35 +106,3 @@ title: "Peptides"
     {% endfor %}
   </div>
 </div>
-
-<script>
-  // Minimal cart stub — replace with your real cart (Snipcart/Stripe/etc.)
-  function getCart(){ try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; } }
-  function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
-
-  document.querySelectorAll('.card .add').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const card = e.currentTarget.closest('.card');
-      const id = card.dataset.id;
-      const slug = card.dataset.slug;
-      const name = card.querySelector('.title')?.textContent?.trim() || '';
-      let form = null;
-
-      const select = card.querySelector('.form-select');
-      if (select) form = select.value;
-      else {
-        const single = card.querySelector('[data-single-form]');
-        form = single ? single.getAttribute('data-single-form') : null;
-      }
-
-      const item = { id, slug, name, form, qty: 1 };
-      const cart = getCart();
-      cart.push(item);
-      setCart(cart);
-
-      // Simple feedback – replace with your toast/snackbar
-      alert(`Added ${name}${form ? ' ('+form+')' : ''} to cart.`);
-      console.log('Cart:', cart);
-    });
-  });
-</script>

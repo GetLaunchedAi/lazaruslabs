@@ -1,6 +1,6 @@
 ---
 layout: "base.html"
-permalink: "/sarms-performance/"
+permalink: "/catalog/sarms-performance2/"
 title: "SARMS & Performance"
 ---
 
@@ -43,7 +43,6 @@ title: "SARMS & Performance"
             <h3 class="title">{{ p.name }}</h3>
             <div class="meta">SARMS &amp; Performance</div>
 
-            {# Make the form chips (Pill/Liquid/etc.) the links, not the title #}
             {% if p.forms and p.forms | length %}
               <div class="chips">
                 {% for f in p.forms %}
@@ -63,16 +62,44 @@ title: "SARMS & Performance"
                     </option>
                   {% endfor %}
                 </select>
+
+                <button
+                  class="snipcart-add-item add"
+                  data-item-id="{{ p.id }}"
+                  data-item-name="{{ p.name }}"
+                  data-item-url="/product/{{ p.slug }}/"
+                  data-item-image="{{ p.image }}"
+                  data-item-custom1-name="Form"
+                  data-item-custom1-options="{{ p.forms | join('|') }}"
+                  data-item-custom1-required="true"
+                  data-item-quantity="1">
+                  Add to cart
+                </button>
               {% else %}
                 {% if p.forms and p.forms | length == 1 %}
-                  <span class="meta" data-single-form="{{ p.forms[0] }}">
-                    Form:
-                    {% if p.forms[0] == "pill" %}Pill{% elif p.forms[0] == "liquid" %}Liquid{% else %}{{ p.forms[0] | capitalize }}{% endif %}
-                  </span>
+                  <button
+                    class="snipcart-add-item add"
+                    data-item-id="{{ p.id }}"
+                    data-item-name="{{ p.name }}"
+                    data-item-url="/product/{{ p.slug }}/"
+                    data-item-image="{{ p.image }}"
+                    data-item-custom1-name="Form"
+                    data-item-custom1-value="{{ p.forms[0] }}"
+                    data-item-quantity="1">
+                    Add to cart
+                  </button>
+                {% else %}
+                  <button
+                    class="snipcart-add-item add"
+                    data-item-id="{{ p.id }}"
+                    data-item-name="{{ p.name }}"
+                    data-item-url="/product/{{ p.slug }}/"
+                    data-item-image="{{ p.image }}"
+                    data-item-quantity="1">
+                    Add to cart
+                  </button>
                 {% endif %}
               {% endif %}
-
-              <button class="add">Add to cart</button>
             </div>
           </div>
         </article>
@@ -80,34 +107,3 @@ title: "SARMS & Performance"
     {% endfor %}
   </div>
 </div>
-
-<script>
-  // Minimal cart stub — replace with your real cart integration
-  function getCart(){ try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; } }
-  function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
-
-  document.querySelectorAll('.card .add').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const card = e.currentTarget.closest('.card');
-      const id = card.dataset.id;
-      const slug = card.dataset.slug;
-      const name = card.querySelector('.title')?.textContent?.trim() || '';
-
-      let form = null;
-      const select = card.querySelector('.form-select');
-      if (select) form = select.value;
-      else {
-        const single = card.querySelector('[data-single-form]');
-        form = single ? single.getAttribute('data-single-form') : null;
-      }
-
-      const item = { id, slug, name, form, qty: 1 };
-      const cart = getCart();
-      cart.push(item);
-      setCart(cart);
-
-      alert(`Added ${name}${form ? ' ('+form+')' : ''} to cart.`);
-      console.log('Cart:', cart);
-    });
-  });
-</script>

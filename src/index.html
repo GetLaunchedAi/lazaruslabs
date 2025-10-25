@@ -14,24 +14,44 @@ order: 100
 
 
 <!-- Enter html code below -->
+ <!-- Interactive Slide-in Cart Drawer -->
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button id="closeCart" aria-label="Close cart">×</button>
+  </div>
+
+  <div class="cart-body" id="cartItems"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total" id="cartTotal">Total: $0.00</div>
+    <a href="/cart.php" class="checkout-btn">Checkout</a>
+  </div>
+</div>
 <!-- HERO + PERKS CAROUSEL -->
 <section class="site-hero">
   <div class="hero-wrap">
     <!-- HERO -->
     <div class="hero-card">
-      <div class="hero-media" role="img" aria-label="Product display"></div>
+      <div class="hero-slideshow">
+        <div class="slide" style="background-image:url('/images/hero/heroimg1.png')"></div>
+        <div class="slide" style="background-image:url('/images/hero/heroimg2.png')"></div>
+        <div class="slide" style="background-image:url('/images/hero/heroimg3.png')"></div>
+        <div class="hero-tint"></div>
+      </div>
       <div class="hero-content">
         <h1 class="hero-title">THE LEADER<br />OF PEPTIDES.</h1>
         <p class="hero-sub">
           Lazarus Labs© is the Premium supplier of Peptides, Research Chemicals, and Analytical Compounds. Satisfaction
           Guaranteed.
         </p>
-        <a href="#catalog" class="hero-cta">Product Catalog</a>
+        <a href="/catalog" class="hero-cta">Product Catalog</a>
       </div>
     </div>
-
-    <!-- PERKS CAROUSEL -->
-    <!-- <div class="perks-head">
+  </div>
+  <script src="/assets/js/hero.js"></script>
+  <!-- PERKS CAROUSEL -->
+  <!-- <div class="perks-head">
       <button class="perk-nav prev" aria-label="Previous perks" title="Previous">
         &#10094;
       </button>
@@ -40,65 +60,61 @@ order: 100
       </button>
     </div> -->
 
-    <div class="perks-track" id="perksTrack" tabindex="0" aria-label="Perks carousel">
-      <!-- Each .perk is one slide -->
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M3 7h18v2H3V7zm2 4h14v8H5v-8zm3-8h8v2H8V3z" fill="currentColor" />
-        </svg>
-        <span>All products</span>
-      </div>
+  <div class="perks-track" id="perksTrack" aria-label="Company perks">
+    <div class="perk pill">
+      <!-- Shield icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M12 2l7 4v5c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V6l7-4z" fill="currentColor" />
+      </svg>
+      <span>3rd Party Testing on all Products</span>
+    </div>
 
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path
-            d="M12 2l7 4v5c0 5-3.5 9.74-7 11-3.5-1.26-7-6-7-11V6l7-4zm0 2.18L7 6.5V11c0 3.86 2.69 7.86 5 9.12 2.31-1.26 5-5.26 5-9.12V6.5l-5-2.32z"
-            fill="currentColor" />
-        </svg>
-        <span>Backup Domain www.lazaruslabs.com</span>
-      </div>
+    <div class="perk pill">
+      <!-- Globe/Domain icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 010-16 8 8 0 010 16z" fill="currentColor" />
+      </svg>
+      <span>Backup Domain www.lazaruslabs.com</span>
+    </div>
 
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path
-            d="M12 1a4 4 0 014 4v2h2a3 3 0 013 3v5a6 6 0 01-6 6H9a6 6 0 01-6-6V10a3 3 0 013-3h2V5a4 4 0 014-4zm-2 6h4V5a2 2 0 10-4 0v2z"
-            fill="currentColor" />
-        </svg>
-        <span>24/7 Support</span>
-      </div>
+    <div class="perk pill">
+      <!-- Support icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M12 1a9 9 0 00-9 9v3a9 9 0 0018 0v-3a9 9 0 00-9-9zm0 2a7 7 0 017 7v3a7 7 0 01-14 0v-3a7 7 0 017-7z"
+          fill="currentColor" />
+      </svg>
+      <span>24/7 Support</span>
+    </div>
 
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M12 2l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4z" fill="currentColor" />
-        </svg>
-        <span>Lowest Prices in The Industry</span>
-      </div>
+    <div class="perk pill">
+      <!-- Diamond / Value icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M12 2L1 9l11 13L23 9 12 2z" fill="currentColor" />
+      </svg>
+      <span>Lowest Prices in the Industry</span>
+    </div>
 
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M3 6h18v12H3zM5 8v8h14V8H5zm2 10h10v2H7z" fill="currentColor" />
-        </svg>
-        <span>Free Shipping on all orders $250+</span>
-      </div>
+    <div class="perk pill">
+      <!-- Truck icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M3 6h13v9h5l-2-5h-3V6H3v9h2v2H3v2h3a2 2 0 104 0h6a2 2 0 104 0h3v-4h-4V6H3z" fill="currentColor" />
+      </svg>
+      <span>Free Shipping on Orders $250+</span>
+    </div>
 
-      <!-- Duplicate a couple for smooth looping feel (optional) -->
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M3 7h18v2H3V7zm2 4h14v8H5v-8zm3-8h8v2H8V3z" fill="currentColor" />
-        </svg>
-        <span>All products</span>
-      </div>
-      <div class="perk pill">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path
-            d="M12 1a4 4 0 014 4v2h2a3 3 0 013 3v5a6 6 0 01-6 6H9a6 6 0 01-6-6V10a3 3 0 013-3h2V5a4 4 0 014-4zm-2 6h4V5a2 2 0 10-4 0v2z"
-            fill="currentColor" />
-        </svg>
-        <span>24/7 Support</span>
-      </div>
+    <div class="perk pill">
+      <!-- Credit Card / Checkout icon -->
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm0 2v2h18V7H3zm0 4v6h18v-6H3z"
+          fill="currentColor" />
+      </svg>
+      <span>Fast & Secure Checkout</span>
     </div>
   </div>
+
+  </div>
   <script>
+
     (function () {
       const track = document.getElementById('perksTrack');
       if (!track) return;
@@ -185,103 +201,121 @@ order: 100
     })();
   </script>
 </section>
-{# =========================
-PRODUCT STRIPS (Eleventy)
-Requires: src/_data/products.json => global "products"
-Each product must have: category: "peptides" | "sarms-performance" | "supplies"
-========================= #}
-{% macro productCard(p) %}
-{# Precompute flags safely #}
-{% set hasForms = p.forms and (p.forms | length) > 0 %}
-{% set multipleForms = p.forms and (p.forms | length) > 1 %}
-{% set onlyForm = null %}
-{% if hasForms and not multipleForms %}
-{% set onlyForm = p.forms[0] %}
-{% endif %}
+<!-- Products (runtime-rendered from /products.json) -->
+<section id="products-root"></section>
 
-<article class="card" data-slug="{{ p.slug }}">
-  <div class="media" style="position:relative">
-    <img src="{{ p.image or '/images/placeholder.png' }}" alt="{{ p.name }}">
-    <button class="wish" aria-label="Add to wishlist">♡</button>
+<script>
+(async () => {
+  const root = document.getElementById('products-root');
+  root.innerHTML = '';
 
-    {# Always render the container; fill it based on form count #}
-    <div class="forms-row">
-      {% if multipleForms %}
-      {% for f in p.forms %}
-      <a class="form-chip" href="/product/{{ p.slug }}/?form={{ f }}" data-form="{{ f | lower }}">
-        <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
-        <span class="form-chip__label">
-          {% if f == 'pill' %}Pill
-          {% elif f == 'liquid' %}Liquid
-          {% elif f == 'unit' %}Unit
-          {% else %}{{ f | capitalize }}{% endif %}
-        </span>
-      </a>
-      {% endfor %}
-      {% else %}
-      {% if onlyForm %}
-      <a class="form-chip" href="/product/{{ p.slug }}/?form={{ onlyForm }}" data-form="{{ onlyForm | lower }}">
-        <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
-        <span class="form-chip__label">
-          {% if onlyForm == 'pill' %}Pill
-          {% elif onlyForm == 'liquid' %}Liquid
-          {% elif onlyForm == 'unit' %}Unit
-          {% else %}{{ onlyForm | capitalize }}{% endif %}
-        </span>
-      </a>
-      {% else %}
-      <a class="form-chip" href="/product/{{ p.slug }}/">
-        <!-- <span class="form-chip__icon" aria-hidden="true">+</span> -->
-        <span class="form-chip__label">View</span>
-      </a>
-      {% endif %}
-      {% endif %}
-    </div>
-  </div>
+  const res = await fetch('/products.json?cb=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) {
+    root.innerHTML = '<p>Failed to load products.</p>';
+    return;
+  }
 
-  <div class="meta">
-    <h3 class="title">{{ p.name }}</h3>
-  </div>
-</article>
-{% endmacro %}
+  let products = [];
+  try {
+    products = await res.json();
+  } catch {
+    root.innerHTML = '<p>Invalid products.json</p>';
+    return;
+  }
+  if (!Array.isArray(products)) products = [];
 
+  // === Card builder ===
+  const productCard = (p) => {
+    const url = `/product/${encodeURIComponent(p.slug)}/`;
+    const img = p.image || '/images/placeholder.png';
+    const price = p.price || (p.ranges?.[0]?.price ?? '');
+    const hasPrice = price !== '';
+    return `
+      <article class="card clickcard" tabindex="0" data-url="${url}" data-slug="${p.slug}">
+        <div class="media" style="position:relative">
+          <img src="${img}" alt="${p.name}" loading="lazy">
+          <button class="wish" aria-label="Add to wishlist">♡</button>
+          <div class="forms-row btns">
+            ${
+              hasPrice
+                ? `<button class="btn add-to-cart" data-id="${p.id ?? p.slug}">Add to Cart</button>`
+                : `<button class="btn disabled" disabled title="Price missing">Add to Cart</button>`
+            }
+            <a href="${url}" class="btn">See Full Info</a>
+          </div>
+        </div>
+        <div class="meta">
+          <h3 class="title">${p.name}</h3>
+        </div>
+      </article>`;
+  };
 
+  // === Build single slider ===
+  const cards = products.map(productCard).join('');
+  root.innerHTML = `
+    <section class="product-strip all-products">
+      <div class="ps-head">
+        <h2>All Products</h2>
+      </div>
+      <div class="ps-rail">
+        <button class="ps-nav prev" aria-label="Scroll left" data-track="#psTrackAll">‹</button>
+        <div class="ps-track" id="psTrackAll">
+          ${cards}
+        </div>
+        <button class="ps-nav next" aria-label="Scroll right" data-track="#psTrackAll">›</button>
+      </div>
+      <div class="ps-underline"></div>
+    </section>`;
 
+  // === Card click navigation ===
+  const isInteractive = (el) => !!el.closest('a, button, .btn, input, select, textarea, label');
 
-{% set categories = [
-{ id: "peptides", title: "Peptides" },
-{ id: "sarms-performance", title: "SARMs & Performance" },
-{ id: "supplies", title: "Supplies" }
-] %}
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.clickcard');
+    if (!card || isInteractive(e.target)) return;
+    const url = card.getAttribute('data-url');
+    if (url) window.location.href = url;
+  });
 
-{# Render a strip for each category #}
-{% for cat in categories %}
-<section class="product-strip" id="strip-{{ cat.id }}">
-  <div class="ps-head">
-    <h2>{{ cat.title }}</h2>
-    <a href="/catalog/{{ cat.id }}/" class="all-link">All {{ cat.title }}</a>
-  </div>
+  document.addEventListener('keydown', (e) => {
+    const card = e.target.closest('.clickcard');
+    if (!card || isInteractive(e.target)) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const url = card.getAttribute('data-url');
+      if (url) window.location.href = url;
+    }
+  });
 
-  <div class="ps-rail">
-    <button class="ps-nav prev" aria-label="Scroll left" data-track="#psTrack-{{ cat.id }}">‹</button>
+  // === Scroll button behavior ===
+  const prev = root.querySelector('.ps-nav.prev');
+  const next = root.querySelector('.ps-nav.next');
+  const track = root.querySelector('#psTrackAll');
 
-    <div class="ps-track" id="psTrack-{{ cat.id }}">
-      {% for p in products %}
-      {% if p.category == cat.id %}
-      {{ productCard(p) | safe }}
-      {% endif %}
-      {% endfor %}
-    </div>
+  function updateDisabled() {
+    const max = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= max;
+  }
 
-    <button class="ps-nav next" aria-label="Scroll right" data-track="#psTrack-{{ cat.id }}">›</button>
-  </div>
+  function scrollByCards(dir = 1) {
+    const card = track.querySelector('.card');
+    const step = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
+    track.scrollBy({ left: step * dir, behavior: 'smooth' });
+  }
 
-  <div class="ps-underline"></div>
-</section>
-{% endfor %}
+  prev.addEventListener('click', () => scrollByCards(-1));
+  next.addEventListener('click', () => scrollByCards(1));
+  track.addEventListener('scroll', updateDisabled);
+  window.addEventListener('resize', updateDisabled);
+  updateDisabled();
+})();
+</script>
+
 
 {# ---- JS: nav + forms pop ---- #}
 <script>
+  
   (function () {
     // Arrow scrolling (works for all rails via data-track)
     const btns = document.querySelectorAll('.ps-nav');
@@ -316,27 +350,74 @@ Each product must have: category: "peptides" | "sarms-performance" | "supplies"
     function getCart() { try { return JSON.parse(localStorage.getItem('cart') || '[]'); } catch (e) { return []; } }
     function setCart(c) { localStorage.setItem('cart', JSON.stringify(c)); }
 
-    // Add-to-cart only exists on single-form items now
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.add-to-cart');
-      if (!btn) return;
-
-      const name = btn.getAttribute('data-name');
-      const slug = btn.getAttribute('data-slug');
-      const form = btn.getAttribute('data-form') || null;
-
-      const cart = getCart();
-      cart.push({ id: slug, slug, name, form, qty: 1 });
-      setCart(cart);
-
-      alert(`Added ${name}${form ? ' (' + form + ')' : ''} to cart.`);
-      console.log('Cart:', cart);
-    });
-
+  })();
 </script>
 
 {# Optional minimal styles for the forms popover—tweak or remove if you already style it #}
 <style>
+  .cart-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: 380px; max-width: 90%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  display: flex; flex-direction: column;
+  z-index: 9999;
+}
+.cart-drawer.open { transform: translateX(0); }
+
+.cart-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 20px; border-bottom: 1px solid #e5e7eb;
+}
+.cart-header h3 { margin: 0; font-size: 20px; font-weight: 700; }
+.cart-header button {
+  background: none; border: none; font-size: 28px; cursor: pointer; line-height: 1;
+}
+
+.cart-body {
+  flex: 1; overflow-y: auto; padding: 16px;
+}
+.cart-item {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px;
+}
+.cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+.cart-item .info { flex: 1; }
+.cart-item .info h4 { margin: 0 0 4px; font-size: 15px; }
+.cart-item .info .price { color: #2563eb; font-weight: 700; font-size: 14px; }
+.cart-item .controls {
+  display: flex; align-items: center; gap: 6px; margin-top: 4px;
+}
+.cart-item input.qty {
+  width: 48px; height: 28px;
+  border: 1px solid #ccc; border-radius: 6px;
+  text-align: center; font-weight: 600;
+}
+.cart-item button.del {
+  background: none; border: none; color: #ef4444;
+  font-weight: 700; cursor: pointer; font-size: 14px;
+}
+
+.cart-footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 16px; background: #f9fafb;
+}
+.cart-total {
+  font-weight: 700; font-size: 16px; margin-bottom: 12px;
+}
+.checkout-btn {
+  display: block; width: 100%; text-align: center;
+  background: #2563eb; color: #fff;
+  padding: 12px; border-radius: 8px; text-decoration: none;
+  font-weight: 700; font-size: 15px;
+}
+.checkout-btn:hover { filter: brightness(0.9); }
+
+.cart-empty { text-align: center; padding: 40px 0; color: #6b7280; }
   .forms-pop {
     position: absolute;
     left: 50%;
@@ -426,7 +507,7 @@ Each product must have: category: "peptides" | "sarms-performance" | "supplies"
 
     .forms-row {
       display: flex;
-      flex-direction: column;
+      /* flex-direction: column; */
     }
   }
 
@@ -588,44 +669,387 @@ Each product must have: category: "peptides" | "sarms-performance" | "supplies"
 </style>
 
 
-<!-- underline accent like screenshot -->
-<div class="ps-underline"></div>
+
 <script>
-    /* Arrow scrolling + disable when at ends */
-    (function () {
-      const track = document.getElementById('psTrack');
-      const prev = document.querySelector('.ps-nav.prev');
-      const next = document.querySelector('.ps-nav.next');
+(function(){
+  const drawer = document.getElementById('cartDrawer');
+  const closeBtn = document.getElementById('closeCart');
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
 
-      function updateDisabled() {
-        const max = track.scrollWidth - track.clientWidth - 1;
-        prev.disabled = track.scrollLeft <= 0;
-        next.disabled = track.scrollLeft >= max;
-      }
-      function scrollByCards(dir = 1) {
-        const card = track.querySelector('.card');
-        const step = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
-        track.scrollBy({ left: step * dir, behavior: 'smooth' });
-      }
+  // === Helper functions ===
+  function getCart(){ try { return JSON.parse(localStorage.getItem('cart'))||[]; } catch { return []; } }
+  function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); window.dispatchEvent(new Event('cart:changed')); }
+  function formatMoney(v){ return '$' + Number(v||0).toFixed(2); }
 
-      prev.addEventListener('click', () => scrollByCards(-1));
-      next.addEventListener('click', () => scrollByCards(1));
-      track.addEventListener('scroll', updateDisabled);
-      window.addEventListener('resize', updateDisabled);
-      updateDisabled();
-    })();
+  // === Your computePriceFromRanges() logic ===
+  function computePriceFromRanges(item) {
+    if (!item.ranges || !item.ranges.length) return Number(item.price);
+    console.log(item.name, item.ranges)
+    const qty = Number(item.quantity);
+    for (const r of item.ranges) {
+      if (!r || !r.label) continue;
+      const label = String(r.label).trim();
+      const between = label.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+      if (between) {
+        const lo = parseInt(between[1], 10);
+        const hi = parseInt(between[2], 10);
+        if (qty >= lo && qty <= hi) return Number(r.price);
+      }
+      const openEnded = label.match(/^(\d+)\s*(\+|and up)?$/i);
+      if (openEnded) {
+        const lo = parseInt(openEnded[1], 10);
+        if (qty >= lo) return Number(r.price);
+      }
+    }
+    return Number(item.ranges[item.ranges.length - 1].price || item.ranges[0].price);
+  }
+
+  // === Render Cart ===
+  function renderCart(){
+    const cart = getCart();
+    if(!cart.length){
+      itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
+      totalEl.textContent = 'Total: $0.00';
+      return;
+    }
+    let total = 0;
+    itemsEl.innerHTML = cart.map(i=>{
+      const qty = Number(i.quantity || 1);
+      const unitPrice = computePriceFromRanges(i);
+      const subtotal = unitPrice * qty;
+      total += subtotal;
+
+      return `
+        <div class="cart-item" data-id="${i.id}">
+          <img src="${i.image||'/images/placeholder.png'}" alt="">
+          <div class="info">
+            <h4>${i.name}</h4>
+            <div class="price">${formatMoney(unitPrice)} each</div>
+            <div class="controls">
+              <input type="number" class="qty" min="1" value="${qty}">
+              <button class="del">Remove</button>
+            </div>
+          </div>
+          <div class="line-total">${formatMoney(subtotal)}</div>
+        </div>`;
+    }).join('');
+
+    totalEl.textContent = 'Total: ' + formatMoney(total);
+  }
+
+  function openCart(){ renderCart(); drawer.classList.add('open'); }
+  function closeCart(){ drawer.classList.remove('open'); }
+
+  closeBtn.addEventListener('click', closeCart);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCart(); });
+
+  // === Quantity change + Delete ===
+  itemsEl.addEventListener('input', e=>{
+    if(!e.target.classList.contains('qty')) return;
+    const itemEl = e.target.closest('.cart-item');
+    const id = itemEl.dataset.id;
+    const newQty = Math.max(1, parseInt(e.target.value) || 1);
+    const cart = getCart();
+    const item = cart.find(x=>String(x.id)===id);
+    if(item){
+      item.quantity = newQty;
+      const newPrice = computePriceFromRanges(item);
+      item.price = newPrice; // update price in cart for persistence
+      saveCart(cart);
+      setTimeout(renderCart, 50);
+    }
+  });
+
+  itemsEl.addEventListener('click', e=>{
+    if(!e.target.classList.contains('del')) return;
+    const id = e.target.closest('.cart-item').dataset.id;
+    const updated = getCart().filter(x=>String(x.id)!==id);
+    saveCart(updated);
+    renderCart();
+  });
+
+  // === Hook into Add-to-Cart ===
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.add-to-cart');
+    if(!btn) return;
+    // wait for your main catalog script to update localStorage first
+    setTimeout(()=>{ openCart(); renderCart(); }, 200);
+  });
+
+  window.addEventListener('cart:changed', renderCart);
+})();
+// Add-to-cart behavior (same as catalog)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.add-to-cart');
+  if (!btn) return;
+
+  const id = btn.getAttribute('data-id');
+  fetch('/products.json')
+    .then(res => res.json())
+    .then(products => {
+      const product = products.find(p => (p.id ?? p.slug) == id);
+      if (!product) return alert('Product not found.');
+
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existing = cart.find(i => i.id === id);
+      if (existing) existing.quantity += 1;
+      else cart.push({
+  id,
+  name: product.name,
+  price: product.price,
+  quantity: 1,
+  image: product.image,
+  ranges: product.ranges || [] // ✅ keep the tiered pricing data
+});
+
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.dispatchEvent(new Event('cart:changed'));
+      btn.style.filter = 'brightness(0.9)';
+      setTimeout(() => btn.style.filter = '', 150);
+    });
+});
+
+  /* Arrow scrolling + disable when at ends */
+  (function () {
+    const track = document.getElementById('psTrack');
+    const prev = document.querySelector('.ps-nav.prev');
+    const next = document.querySelector('.ps-nav.next');
+
+    function updateDisabled() {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      prev.disabled = track.scrollLeft <= 0;
+      next.disabled = track.scrollLeft >= max;
+    }
+    function scrollByCards(dir = 1) {
+      const card = track.querySelector('.card');
+      const step = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
+      track.scrollBy({ left: step * dir, behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', () => scrollByCards(-1));
+    next.addEventListener('click', () => scrollByCards(1));
+    track.addEventListener('scroll', updateDisabled);
+    window.addEventListener('resize', updateDisabled);
+    updateDisabled();
+  })();
 </script>
 </section>
+<!-- ===========================
+     Home: About Us (Side-by-Side)
+     =========================== -->
+<section class="about-sbs" id="about">
+  <div class="wrap">
+    <!-- Text -->
+    <div class="col text">
+      <p class="eyebrow">About Lazarus Labs</p>
+      <h2>Leading the way in research compounds & innovation</h2>
+      <p class="lead">
+        We’re dedicated to <strong>purity, reliability, and performance</strong>—supplying the scientific
+        community with consistent, high-quality <strong>peptides, SARMs, injectables, liquids,</strong>
+        and other advanced research compounds. Our focus is transparency and integrity at every step.
+      </p>
+
+      <ul class="bullets">
+        <li>3rd-party testing on all products</li>
+        <li>Fast, secure checkout & 24/7 support</li>
+        <li>Free shipping on orders $250+</li>
+      </ul>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="num">5,000+</span>
+          <span class="label">Research orders fulfilled</span>
+        </div>
+        <div class="stat">
+          <span class="num">10</span>
+          <span class="label">Experienced specialists</span>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn primary" href="/catalog">Shop Now</a>
+        <a class="btn ghost" href="/about">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Media -->
+    <div class="col media">
+      <picture>
+        <!-- Swap this image with a real lab/product photo -->
+        <img src="./images/about-lab.jpg" alt="Lazarus Labs research & quality control" loading="lazy">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clickcard { cursor: pointer; }
+.clickcard:focus { outline: 2px solid #1f7fa6; outline-offset: 2px; border-radius: 14px; }
+
+  /* Replaces .form-chip styles with modern pill-like buttons */
+.btns {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 98px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+}
+
+/* Blue for "Add to Cart" */
+.btn.add-to-cart {
+  background: #1f7fa6;
+  box-shadow: 0 4px 12px rgba(31,127,166,.25);
+}
+
+/* Black for "See Full Info" */
+/* Sleek dark style for "See Full Info" */
+.btn:not(.add-to-cart) {
+  background: #222;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  color: #f9fafb;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Add hover tone shift */
+.btn:not(.add-to-cart):hover,
+.btn:not(.add-to-cart):focus-visible {
+  background: #2f2f2f;
+  box-shadow: 0 10px 20px rgba(0,0,0,.2);
+  transform: translateY(-1px) scale(1.04);
+}
+
+
+/* Hover effects */
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+}
+
+/* Disabled state */
+.btn.disabled,
+.btn[disabled] {
+  opacity: .45;
+  pointer-events: none;
+}
+
+/* Gradient fade at bottom of image for readability */
+.card .media::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: linear-gradient(to top, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Responsive stacking on mobile */
+@media (max-width: 600px) {
+  /* .btns {
+    flex-direction: column;
+  } */
+  .btn {
+    min-width: 80px;
+    height: 40px;
+    font-size: 12px;
+  }
+}
+
+/* ===== About side-by-side ===== */
+.about-sbs{ background: #f9f7f3; }
+.about-sbs .wrap{
+  max-width: 1200px; margin: 0 auto; padding: 56px 24px;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 36px; align-items: center;
+}
+@media (max-width: 980px){
+  .about-sbs .wrap{ grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
+}
+
+/* Text column */
+.about-sbs .eyebrow{
+  letter-spacing: .08em; text-transform: uppercase; font: 700 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #20a9d6; margin: 0 0 8px;
+}
+.about-sbs h2{
+  font: 800 32px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color: #111827; margin: 0 0 12px;
+}
+@media (max-width: 980px){ .about-sbs h2{ font-size: 28px; } }
+.about-sbs .lead{
+  color: #374151; font: 400 16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  margin: 0 0 14px;
+}
+
+/* Bullets */
+.about-sbs .bullets{ list-style: none; padding: 0; margin: 14px 0 18px; display: grid; gap: 10px; }
+.about-sbs .bullets li{
+  position: relative; padding-left: 28px; color: #1f2937; font: 500 15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+.about-sbs .bullets li::before{
+  content: "✔"; position: absolute; left: 0; top: 0; color: #20a9d6; font-weight: 800;
+}
+
+/* Stats */
+.about-sbs .stats{ display: flex; gap: 24px; margin: 6px 0 22px; flex-wrap: wrap; }
+.about-sbs .stat{ background:#fff; border:1px solid #ece5db; border-radius:14px; padding:12px 16px; min-width: 180px; box-shadow: 0 6px 16px rgba(0,0,0,.06); }
+.about-sbs .stat .num{ display:block; font: 800 22px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:#111827; }
+.about-sbs .stat .label{ display:block; color:#6b7280; font: 500 12px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+
+/* CTAs */
+.about-sbs .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+.about-sbs .btn{
+  display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; font:700 14px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.about-sbs .btn.primary{ background:#20a9d6; color:#fff; box-shadow:0 6px 18px rgba(32,169,214,.25); }
+.about-sbs .btn.primary:hover{ transform: translateY(-1px); }
+.about-sbs .btn.ghost{ border:1px solid #d9d9d9; color:#111827; background:#fff; }
+.about-sbs .btn.ghost:hover{ transform: translateY(-1px); }
+
+/* Media column */
+.about-sbs .media{
+  background:#fff; border:1px solid #ece5db; border-radius:18px; padding:10px; box-shadow:0 10px 28px rgba(0,0,0,.08);
+}
+.about-sbs .media img{ display:block; width:100%; height:auto; border-radius:12px; }
+</style>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", (user) => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
 </script>

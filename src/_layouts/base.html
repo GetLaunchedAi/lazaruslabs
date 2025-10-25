@@ -29,19 +29,21 @@
 
         <!-- Preload -->
         <link rel="preload" as="image" href="/assets/logo-light.png">
-        <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-regular.woff2" crossorigin>
-        <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-700.woff2" crossorigin>
+        <!-- <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-regular.woff2" crossorigin>
+        <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-700.woff2" crossorigin> -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="/css/root.css">
         <link rel="stylesheet" href="/css/dark.css">
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.6.0/default/snipcart.css" />
-  <script async src="https://cdn.snipcart.com/themes/v3.6.0/default/snipcart.js"></script>
         <link rel="preload" as="image" href="{{ preloadImg }}"/>
 
         <!-- Loading in page specific CSS sheets from css block -->
         <link rel="stylesheet" href="/css/critical.css"/>
         <link rel="stylesheet" href="{{ preloadCSS }}">
-
+        <link rel="stylesheet" href="/css/search.css">
         <!--Put analytics tag here at the bottom to prevent it from render blocking-->
 
         <!-- For home page, use full title, including location for SEO. Other pages should just include the page name -->
@@ -56,6 +58,7 @@
     <body>
         <!--Screen reader skip main nav-->
         <a class="skip" aria-label="skip to main content" href="#main">Click To Skip To Main Content</a>
+        <script src="https://js.stripe.com/v3/"></script>
 
         {% include "header.html" %}
         <main id="main">{{ content | safe }}</main>
@@ -85,8 +88,6 @@
                 }
             });
         </script>
-        <script>
-   
-</script>
+
     </body>
 </html>

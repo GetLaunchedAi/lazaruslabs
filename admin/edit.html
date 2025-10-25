@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit Product | Lazarus Labs Admin</title>
+<style>
+  :root { --bg:#f9f7f3;--card:#fff;--line:#e7e1d8;--ink:#111827;--muted:#6b7280;--brand:#0a62ff;--accent:#1f7fa6; }
+  body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);}
+  header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#fff;border-bottom:1px solid var(--line);}
+  h1{font-size:20px;margin:0;}
+  .back{color:var(--muted);font-size:13px;text-decoration:none;border:1px solid var(--line);padding:6px 10px;border-radius:8px;transition:.2s;}
+  .back:hover{border-color:var(--brand);color:var(--brand);}
+  main{max-width:850px;margin:24px auto;padding:0 16px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 8px 28px rgba(0,0,0,.06);}
+  h2{margin-top:0;font-size:18px;}
+  .field{margin-bottom:18px;}
+  label{display:block;font-weight:600;margin-bottom:4px;font-size:14px;color:#374151;}
+  input[type=text],input[type=number],textarea{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+    font-size:15px;font-family:inherit;transition:border-color .2s,box-shadow .2s;background:#fff;
+  }
+  input:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(10,98,255,.15);outline:none;}
+  textarea{min-height:100px;resize:vertical;line-height:1.4;}
+
+  .array-item{display:flex;gap:6px;margin-bottom:6px;}
+  .array-item input{flex:1;}
+  .btn-small{background:#eee;border:none;border-radius:6px;padding:0 8px;cursor:pointer;font-size:14px;line-height:1.8;}
+  .btn-small:hover{background:#ddd;}
+
+  .object-block{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px;background:#fafafa;}
+  .object-field{display:flex;gap:6px;margin-bottom:6px;}
+  .object-field input{flex:1;}
+  .block-actions{display:flex;gap:6px;margin-top:6px;}
+
+  .save-row{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;}
+  button{cursor:pointer;padding:10px 16px;border-radius:10px;border:none;font-weight:700;font-size:14px;}
+  .btn-save{background:var(--accent);color:#fff;}
+  .btn-save:hover{filter:brightness(.95);}
+  .btn-cancel{background:#fff;border:1px solid var(--line);color:#111;}
+  .btn-cancel:hover{border-color:var(--accent);color:var(--accent);}
+  .status{position:fixed;bottom:18px;right:20px;padding:10px 14px;background:#111827;color:#fff;border-radius:10px;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .3s ease;}
+  .status.show{opacity:1;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Edit Product</h1>
+  <a href="/admin/products.html" class="back">← Back</a>
+</header>
+
+<main>
+  <div class="card">
+    <h2 id="prodTitle">Loading…</h2>
+    <form id="editForm"></form>
+    <div class="save-row">
+      <button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+      <button type="submit" form="editForm" class="btn-save">Save Changes</button>
+    </div>
+  </div>
+</main>
+
+<div id="status" class="status"></div>
+
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const slug = params.get("slug");
+  const form = document.getElementById("editForm");
+  const titleEl = document.getElementById("prodTitle");
+  const statusBox = document.getElementById("status");
+
+  const DEFAULT_TEMPLATE = {
+    id:"", slug:"", name:"", category:"", price:"",
+    desc:"", image:"", bullets:[], ranges:[], forms:[], variants:[],
+    active:true, inventory:"", tags:[], last_updated:""
+  };
+
+  const showStatus = (msg, ok=true) => {
+    statusBox.textContent = msg;
+    statusBox.style.background = ok ? "#1f7fa6" : "#b91c1c";
+    statusBox.classList.add("show");
+    setTimeout(()=>statusBox.classList.remove("show"), 1800);
+  };
+
+  let PRODUCTS = [];
+  let PRODUCT = null;
+
+  // ---------- UI helpers ----------
+  function makeAddBtn(onclick){
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = "+ Add";
+    b.className = "btn-small";
+    b.addEventListener("click", onclick);
+    return b;
+  }
+
+  function addArrayItem(container, value){
+    const row = document.createElement("div");
+    row.className = "array-item";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = value || "";
+    const del = document.createElement("button");
+    del.type = "button";
+    del.textContent = "🗑";
+    del.className = "btn-small";
+    del.addEventListener("click", ()=> row.remove());
+    row.append(input, del);
+    container.append(row);
+  }
+
+  function addObjectField(block, key, val){
+    const f = document.createElement("div");
+    f.className = "object-field";
+    const k = document.createElement("input");
+    k.type = "text"; k.placeholder = "key"; k.value = key || "";
+    const v = document.createElement("input");
+    v.type = "text"; v.placeholder = "value"; v.value = val != null ? val : "";
+    const del = document.createElement("button");
+    del.type = "button"; del.textContent = "🗑"; del.className = "btn-small";
+    del.addEventListener("click", ()=> f.remove());
+    f.append(k, v, del);
+    const actions = block.querySelector(".block-actions");
+    block.insertBefore(f, actions);
+  }
+
+  function addObjectBlock(container, obj){
+    const block = document.createElement("div");
+    block.className = "object-block";
+
+    // add existing kv pairs
+    Object.entries(obj || {}).forEach(([k, v]) => addObjectField(block, k, v));
+
+    // block action buttons
+    const actions = document.createElement("div");
+    actions.className = "block-actions";
+
+    const addKvBtn = makeAddBtn(()=> addObjectField(block, "", ""));
+    const delBlock = document.createElement("button");
+    delBlock.type = "button";
+    delBlock.textContent = "🗑 Block";
+    delBlock.className = "btn-small";
+    delBlock.addEventListener("click", ()=> block.remove());
+
+    actions.append(addKvBtn, delBlock);
+    block.append(actions);
+    container.append(block);
+  }
+
+  function addField(key, value){
+    const field = document.createElement("div");
+    field.className = "field";
+    const label = document.createElement("label");
+    label.textContent = key;
+    field.append(label);
+
+    // Arrays of strings (e.g., bullets, tags, forms if strings)
+    if (Array.isArray(value) && (value.length === 0 || value.every(v => typeof v === "string"))) {
+      const list = document.createElement("div");
+      list.className = "array-list";
+      const values = value.length ? value : [""];
+      values.forEach(v => addArrayItem(list, v));
+      field.dataset.key = key;
+      field.dataset.type = "string-array";
+      field.append(list, makeAddBtn(()=> addArrayItem(list, "")));
+      form.append(field);
+      return;
+    }
+
+    // Arrays of objects (e.g., ranges, variants if objects)
+    if (Array.isArray(value) && (value.length === 0 || value.every(v => typeof v === "object"))) {
+      const list = document.createElement("div");
+      list.className = "object-list";
+      const values = value.length ? value : [{}];
+      values.forEach(obj => addObjectBlock(list, obj));
+      field.dataset.key = key;
+      field.dataset.type = "object-array";
+      field.append(list, makeAddBtn(()=> addObjectBlock(list, {})));
+      form.append(field);
+      return;
+    }
+
+    // Primitive values
+    let input;
+    if (typeof value === "number") {
+      input = document.createElement("input");
+      input.type = "number"; input.step = "any"; input.value = value;
+    } else if (String(value ?? "").length > 100) {
+      input = document.createElement("textarea");
+      input.value = value || "";
+    } else {
+      input = document.createElement("input");
+      input.type = "text"; input.value = value || "";
+    }
+    input.name = key;
+    field.append(input);
+    form.append(field);
+  }
+
+  // ---------- Load & Render ----------
+  async function init(){
+    try{
+      const res = await fetch("/products.json", { cache: "no-store" });
+      PRODUCTS = await res.json();
+      PRODUCT = PRODUCTS.find(p => p.slug === slug);
+    }catch(e){
+      showStatus("Failed to load", false);
+      return;
+    }
+
+    if (!PRODUCT) {
+      titleEl.textContent = "Product not found";
+      return;
+    }
+
+    // merge defaults so all properties show
+    PRODUCT = Object.assign({}, DEFAULT_TEMPLATE, PRODUCT);
+
+    titleEl.textContent = PRODUCT.name || "(Untitled)";
+    form.innerHTML = "";
+
+    // Build fields for every property
+    Object.entries(PRODUCT).forEach(([k, v]) => addField(k, v));
+
+    // Autofocus name
+    const nameInput = form.querySelector('input[name="name"]');
+    if (nameInput) nameInput.focus();
+  }
+
+  // ---------- Save ----------
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showStatus("Saving…");
+
+    // rebuild PRODUCT from form
+    const updated = {};
+
+    form.querySelectorAll(".field").forEach(section => {
+      const key = section.dataset.key || section.querySelector("input,textarea")?.name;
+      if (!key) return;
+
+      const kind = section.dataset.type;
+
+      if (kind === "string-array") {
+        const values = Array.from(section.querySelectorAll("input[type=text]"))
+          .map(i => i.value.trim()).filter(Boolean);
+        updated[key] = values;
+        return;
+      }
+
+      if (kind === "object-array") {
+        const blocks = Array.from(section.querySelectorAll(".object-block"));
+        const arr = blocks.map(b => {
+          const obj = {};
+          b.querySelectorAll(".object-field").forEach(of => {
+            const kk = of.children[0].value.trim();
+            const vv = of.children[1].value.trim();
+            if (!kk) return;
+            // numeric coercion when appropriate
+            const num = Number(vv);
+            obj[kk] = Number.isFinite(num) && vv !== "" ? num : vv;
+          });
+          return obj;
+        }).filter(o => Object.keys(o).length);
+        updated[key] = arr;
+        return;
+      }
+
+      // primitives
+      const input = section.querySelector("input,textarea");
+      if (!input) return;
+      updated[key] = (input.type === "number") ? Number(input.value) : input.value;
+    });
+
+    // commit into PRODUCTS and save
+    const idx = PRODUCTS.findIndex(p => p.slug === slug);
+    if (idx >= 0) PRODUCTS[idx] = Object.assign({}, PRODUCTS[idx], updated);
+
+    try{
+      const r = await fetch("/api/save-products.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin", 
+        body: JSON.stringify(PRODUCTS)
+      });
+      if (!r.ok) throw new Error("Save failed");
+      showStatus("Saved ✓");
+    }catch(err){
+      console.error(err);
+      showStatus("Save failed", false);
+    }
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>

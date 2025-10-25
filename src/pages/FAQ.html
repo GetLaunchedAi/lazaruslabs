@@ -1,0 +1,278 @@
+---
+layout: "base.html"
+metaTitle: "FAQ’s"
+description: "Answers to common questions about products, orders, and shipping."
+tagTitle: "FAQ’s"
+permalink: "faqs/"
+eleventyNavigation:
+  key: FAQ’s
+  order: 500
+---
+
+<!-- =========================================
+     FAQ PAGE
+     - Tabs + accordions
+     - Accessible (ARIA), keyboard friendly
+     - All styles scoped under .faq
+========================================== -->
+<section class="faq container">
+  <header class="faq__header">
+    <h1>FAQ’s</h1>
+    <nav aria-label="Breadcrumb" class="faq__crumbs">
+      <a href="/">Home</a> / <span>FAQ’s</span>
+    </nav>
+  </header>
+
+  <!-- Tab buttons -->
+  <div class="faq__tabs" role="tablist" aria-label="FAQ Sections">
+    <button class="faq__tab is-active" role="tab" aria-selected="true" aria-controls="panel-general" id="tab-general">
+      <span>General</span>
+      <span class="faq__tab-help" aria-hidden="true">ⓘ</span>
+    </button>
+    <button class="faq__tab" role="tab" aria-selected="false" aria-controls="panel-products" id="tab-products">
+      <span>Products</span>
+      <span class="faq__tab-help" aria-hidden="true">⚙</span>
+    </button>
+    <button class="faq__tab" role="tab" aria-selected="false" aria-controls="panel-orders" id="tab-orders">
+      <span>Orders</span>
+      <span class="faq__tab-help" aria-hidden="true">🧾</span>
+    </button>
+    <button class="faq__tab" role="tab" aria-selected="false" aria-controls="panel-shipping" id="tab-shipping">
+      <span>Shipping</span>
+      <span class="faq__tab-help" aria-hidden="true">🚚</span>
+    </button>
+  </div>
+
+  <div class="faq__layout">
+    <!-- Left: Panels -->
+    <div class="faq__panels">
+      <!-- ========== GENERAL ========== -->
+      <section class="faq__panel is-active" role="tabpanel" id="panel-general" aria-labelledby="tab-general">
+        {% set general = [
+          {q: "About us", a: "We provide analytical compounds, third-party and in-house testing services, and research compound sales."},
+          {q: "Where are we located?", a: "We operate from multiple facilities to serve customers nationally."},
+          {q: "What services and products do we offer?", a: "Analytical compounds of many types, 3rd-party verification, in-house testing, and research compound sales."}
+        ] %}
+        <div class="faq__group">
+          {% for item in general %}
+            <details class="faq__item" {% if loop.first %}open{% endif %}>
+              <summary class="faq__question"><span class="faq__toggle" aria-hidden="true"></span>{{ item.q }}</summary>
+              <div class="faq__answer">
+                <p>{{ item.a }}</p>
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- ========== PRODUCTS ========== -->
+      <section class="faq__panel" role="tabpanel" id="panel-products" aria-labelledby="tab-products" hidden>
+        {% set products = [
+          {q: "How do we verify products?", a: "Every batch is verified by accredited independent labs using techniques like NMR, FTIR, HPLC, LC-MS, GC-MS, TLC, ICP-MS, gravimetry, UV-Vis, titration, melting point, and organoleptics."},
+          {q: "Why is independent third-party testing important?", a: "Equipment and methods vary by product; independent labs provide objective confirmation of identity and purity."},
+          {q: "What is your sourcing process?", a: "We use vetted suppliers and perform incoming QC before release."},
+          {q: "Why does my product look different than last time?", a: "Minor variations in synthesis, excipients, or particle size can affect appearance without affecting quality."},
+          {q: "What is my product’s shelf life?", a: "See the product label; store as directed for best stability."},
+          {q: "How should my product be stored?", a: "Keep sealed, dry, and away from heat and light unless otherwise stated."},
+          {q: "My liquid/solution/product froze — is it ok?", a: "Allow to return to room temperature, mix gently; contact support if crystals persist."},
+          {q: "Powder vs solution — what’s the difference?", a: "Solutions are pre-dissolved for convenience; powders allow custom concentrations."},
+          {q: "How do I reconstitute a peptide?", a: "Use the recommended solvent under sterile conditions; swirl gently, do not shake vigorously."}
+        ] %}
+        <div class="faq__group">
+          {% for item in products %}
+            <details class="faq__item" {% if loop.first %}open{% endif %}>
+              <summary class="faq__question"><span class="faq__toggle" aria-hidden="true"></span>{{ item.q }}</summary>
+              <div class="faq__answer"><p>{{ item.a }}</p></div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- ========== ORDERS ========== -->
+      <section class="faq__panel" role="tabpanel" id="panel-orders" aria-labelledby="tab-orders" hidden>
+        {% set orders = [
+          {q: "Do you have a Refund, Return & Exchange Policy?", a: 'Yes. See our "Refunds, Returns & Exchanges" page for full details.'},
+          {q: "What if I receive a wrong, missing, or defective item?", a: "Contact support within 7 days with your order number and photos if applicable."},
+          {q: "How can I cancel my order?", a: "If it has not shipped, we’ll cancel and refund; otherwise see returns policy."},
+          {q: "I did not receive an order confirmation email?", a: "Check spam/junk and verify the email on file; contact support to resend."}
+        ] %}
+        <div class="faq__group">
+          {% for item in orders %}
+            <details class="faq__item" {% if loop.first %}open{% endif %}>
+              <summary class="faq__question"><span class="faq__toggle" aria-hidden="true"></span>{{ item.q }}</summary>
+              <div class="faq__answer"><p>{{ item.a }}</p></div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- ========== SHIPPING ========== -->
+      <section class="faq__panel" role="tabpanel" id="panel-shipping" aria-labelledby="tab-shipping" hidden>
+        {% set shipping = [
+          {q: "Where do you ship from?", a: "We ship from multiple hubs (e.g., Delaware and Texas) depending on proximity and availability."},
+          {q: "How much does shipping cost?", a: "Rates are shown at checkout and depend on service, weight, and destination."},
+          {q: "Do you offer free shipping?", a: "Promotional free-shipping may be available; see banners or checkout for eligibility."},
+          {q: "Do you ship to PO Boxes?", a: "Some services do; choose an eligible service at checkout."},
+          {q: "Do you ship to Military APO/FPO/DPO addresses?", a: "Yes, via eligible carriers."},
+          {q: "When does my package ship?", a: "Orders typically ship within 1–2 business days."},
+          {q: "Is the packaging discrete?", a: "Yes — plain packaging without product descriptions."},
+          {q: "Will I receive a tracking number?", a: "Yes — emailed when the label is created."},
+          {q: "How can I track my order?", a: "Use the tracking link in your email or your account page."},
+          {q: "Do you ship worldwide?", a: "We ship to many countries; availability is shown at checkout."}
+        ] %}
+        <div class="faq__group">
+          {% for item in shipping %}
+            <details class="faq__item" {% if loop.first %}open{% endif %}>
+              <summary class="faq__question"><span class="faq__toggle" aria-hidden="true"></span>{{ item.q }}</summary>
+              <div class="faq__answer"><p>{{ item.a }}</p></div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+
+    <!-- Right: Optional sidebar (matches your screenshots)
+    <aside class="faq__sidebar">
+      <form class="faq__search" role="search">
+        <label class="sr-only" for="faq-search">Search</label>
+        <input id="faq-search" type="search" placeholder="Search" />
+        <button type="submit">Search</button>
+      </form> -->
+
+<!-- Sidebar: dynamic product categories -->
+<!-- Sidebar: dynamic product categories (robust) -->
+<!-- Sidebar: dynamic product categories from _data/products.json -->
+  <div class="faq__cats">
+        <h3>Product Categories</h3>
+        <ul>
+          <li><a href="/catalog/peptides">Peptides</a></li>
+          <li><a href="/catalog/sarms-performance">SARM’s</a></li>
+          <li><a href="/catalog/supplies">Supplies</a></li>
+        </ul>
+      </div>
+
+
+    </aside>
+  </div>
+</section>
+
+<style>
+  :root{
+    --faq-bg:#fbfbfb;
+    --faq-card:#fff;
+    --faq-text:#0f172a;
+    --faq-muted:#64748b;
+    --faq-blue:#12a3e4;
+    --faq-blue-ghost:#eaf7fe;
+    --faq-border:#e5e7eb;
+    --faq-radius:12px;
+  }
+  .faq.container{max-width:1200px;margin:0 auto;padding:24px;}
+  .faq a{color:inherit}
+  .faq__header h1{margin:.2rem 0 0;font-size:2.25rem;line-height:1.1}
+  .faq__crumbs{color:var(--faq-muted);font-size:.95rem;margin:.25rem 0 1rem}
+  .faq__layout{display:grid;grid-template-columns:1fr 320px;gap:28px}
+  @media (max-width: 1024px){.faq__layout{grid-template-columns:1fr}}
+  /* Tabs */
+  .faq__tabs{display:flex;gap:14px;margin:14px 0 18px;flex-wrap:wrap}
+  .faq__tab{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--faq-blue-ghost);border:1px solid var(--faq-border);
+    padding:10px 16px;border-radius:10px;cursor:pointer;color:#0b5a78;
+    font-weight:600;transition:all .18s ease
+  }
+  .faq__tab:is(:hover,:focus-visible){transform:translateY(-1px)}
+  .faq__tab.is-active{background:var(--faq-blue);color:#fff;border-color:transparent}
+  .faq__tab-help{opacity:.9}
+  /* Panels + items */
+  .faq__panels{display:grid;gap:16px}
+  .faq__panel[hidden]{display:none}
+  .faq__group{background:var(--faq-card);border:1px solid var(--faq-border);border-radius:var(--faq-radius);overflow:hidden}
+  .faq__item + .faq__item{border-top:1px solid var(--faq-border)}
+  .faq__question{
+    list-style:none;padding:14px 16px;background:var(--faq-blue);color:#fff;
+    cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600
+  }
+  .faq__item summary::-webkit-details-marker{display:none}
+  .faq__toggle{
+    width:20px;height:20px;display:inline-grid;place-items:center;
+    border-radius:50%;background:#fff;color:var(--faq-blue);font-weight:800;
+    position:relative;flex:0 0 20px
+  }
+  /* plus / minus */
+  .faq__item:not([open]) .faq__toggle::before{content:"+";transform:translateY(-1px)}
+  .faq__item[open] .faq__toggle::before{content:"–";transform:translateY(-1px)}
+  .faq__answer{padding:14px 16px;background:#fff;color:var(--faq-text)}
+  .faq__answer p{margin:0 0 .8rem}
+  /* Sidebar */
+  .faq__sidebar{position:sticky;top:18px;height:max-content;display:grid;gap:18px}
+  .faq__search{display:flex;gap:8px}
+  .faq__search input{
+    flex:1;border:1px solid var(--faq-border);border-radius:10px;padding:10px 12px;background:#fff
+  }
+  .faq__search button{
+    border:1px solid var(--faq-border);background:var(--faq-blue);color:#fff;border-radius:10px;padding:10px 14px;font-weight:600
+  }
+  .faq__cats{background:var(--faq-card);border:1px solid var(--faq-border);border-radius:var(--faq-radius);padding:16px}
+  .faq__cats h3{margin:.5rem 0 10px}
+  .faq__cats ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+
+<script>
+/* Tabs: one visible panel at a time */
+(function(){
+  const tablist = document.querySelector('.faq__tabs');
+  if(!tablist) return;
+  const tabs   = [...tablist.querySelectorAll('[role="tab"]')];
+  const panels = [...document.querySelectorAll('.faq__panel')];
+
+  function activateTab(tab){
+    tabs.forEach(t=>{
+      const selected = t === tab;
+      t.classList.toggle('is-active', selected);
+      t.setAttribute('aria-selected', selected);
+      const panel = document.getElementById(t.getAttribute('aria-controls'));
+      panel.hidden = !selected;
+      panel.classList.toggle('is-active', selected);
+      // Close all accordions when switching tabs (optional):
+      panel.querySelectorAll('.faq__item').forEach((d,i)=>{
+        d.open = i === 0; // keep first open to match screenshots
+      });
+    });
+  }
+
+  tablist.addEventListener('click', e=>{
+    const btn = e.target.closest('[role="tab"]');
+    if(btn) activateTab(btn);
+  });
+
+  // Keyboard support
+  tablist.addEventListener('keydown', e=>{
+    const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    if(['ArrowRight','ArrowLeft','Home','End'].includes(e.key)){
+      e.preventDefault();
+      let next = i;
+      if(e.key==='ArrowRight') next = (i+1)%tabs.length;
+      if(e.key==='ArrowLeft')  next = (i-1+tabs.length)%tabs.length;
+      if(e.key==='Home') next = 0;
+      if(e.key==='End')  next = tabs.length-1;
+      tabs[next].focus(); activateTab(tabs[next]);
+    }
+  });
+
+  // Accordions: allow only one open at a time within a panel (like your screenshots)
+  document.querySelectorAll('.faq__panel').forEach(panel=>{
+    panel.addEventListener('toggle', e=>{
+      const current = e.target.closest('.faq__item');
+      if(!current || !current.open) return;
+      panel.querySelectorAll('.faq__item').forEach(d => { if(d!==current) d.open = false; });
+    }, true);
+  });
+
+  // Deep link: /faqs/#shipping opens Shipping tab
+  const hash = (location.hash || '').replace('#','').toLowerCase();
+  const map = {general:'tab-general', products:'tab-products', orders:'tab-orders', shipping:'tab-shipping'};
+  if(map[hash]) activateTab(document.getElementById(map[hash]));
+})();
+</script>
